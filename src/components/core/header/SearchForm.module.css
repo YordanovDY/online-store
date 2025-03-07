@@ -1,0 +1,11 @@
+.s-form-hidden {
+    display: none;
+}
+
+.s-form-shown {
+    display: block;
+}
+
+.b-button-hidden {
+    display: none;
+}
