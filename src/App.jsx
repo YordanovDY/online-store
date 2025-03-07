@@ -1,11 +1,19 @@
+import Footer from "./components/core/footer/Footer";
+import Header from "./components/core/header/Header";
+import HomeComponent from "./components/home/HomeComponent";
 
 function App() {
 
     return (
         <>
-            <h1>Online Tech Store</h1>
+          <div className="content d-flex f-direction-column gap-20">
+            <Header />
+            <HomeComponent />
+              {/* <ProductsComponent /> */}
+            <Footer />
+          </div>
         </>
-    )
+      )
 }
 
 export default App
