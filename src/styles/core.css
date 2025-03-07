@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background: #e8f4fd;
+    background: linear-gradient(0deg, #e8f4fd 0%, #e6e6ff 80%);
+    background: -webkit-linear-gradient(0deg, #e8f4fd 0%, #e6e6ff 80%);
+    background: -moz-linear-gradient(0deg, #e8f4fd 0%, #e6e6ff 80%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 34px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 18px;
+}
+
+p,
+label,
+li,
+a,
+.button {
+    font-family: 'Lato', Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px;
+}
+
+.p-1 {
+    font-size: 20px;
+}
+
+.p-2 {
+    font-size: 18px;
+}
+
+.p-3 {
+    font-size: 16px;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-block{
+    display: block;
+}
+
+.d-inline{
+    display: inline;
+}
+
+.d-inline-block{
+    display: inline-block;
+}
+
+.f-wrap {
+    flex-wrap: wrap;
+}
+
+.f-direction-column {
+    flex-direction: column;
+}
+
+.jc-space-between {
+    justify-content: space-between;
+}
+
+.jc-space-around {
+    justify-content: space-around;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.jc-flex-start {
+    justify-content: flex-start;
+}
+
+.jc-flex-end {
+    justify-content: flex-end;
+}
+
+.ai-center {
+    align-items: center;
+}
+
+.ai-flex-start {
+    align-items: flex-start;
+}
+
+.ai-flex-end {
+    align-items: flex-end;
+}
+
+.ai-baseline {
+    align-items: baseline;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-30 {
+    gap: 30px;
+}
+
+.gap-40 {
+    gap: 40px;
+}
+
+.gap-50 {
+    gap: 50px;
+}
+
+.gap-60 {
+    gap: 60px;
+}
+
+.content {
+    max-width: 1500px;
+    background-color: #FFFFFF;
+}
+
+.inner-content{
+    display: flex;
+    justify-content: center;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-30 {
+    padding: 30px;
+}
+
+.padding-40 {
+    padding: 40px;
+}
+
+.padding-50 {
+    padding: 50px;
+}
+
+.padding-60 {
+    padding: 60px;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.ls-none {
+    list-style: none;
+}
