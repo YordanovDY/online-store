@@ -21,7 +21,7 @@ async function requester(method, endpoint, customHeaders, data) {
             throw new Error(error.message);
         }
 
-        return response;
+        return response.json();
 
     } catch (err) {
         throw err;
