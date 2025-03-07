@@ -1,0 +1,37 @@
+.products-nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid gainsboro;
+}
+
+.arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #71bfff;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.arrow-selected {
+    background: radial-gradient(#ffe600 0%, #ffffff 75%);
+}
+
+.products-nav-sorting {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+@media screen and (max-width:470px) {
+    .products-nav{
+        flex-direction: column;
+    }
+
+    .products-nav-sorting{
+        flex-direction: column;
+    }
+}

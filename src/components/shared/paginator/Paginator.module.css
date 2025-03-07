@@ -1,0 +1,33 @@
+.paginator{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    border-radius: 200px 10px 200px 0px;
+    -webkit-border-radius: 200px 10px 200px 0px;
+    -moz-border-radius: 200px 10px 200px 0px;
+
+    background: linear-gradient(90deg, #fcfcfc 0%, #c2c2c2 92%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.paginator-ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.paginator-ul-li {
+    color: #1b00e4;
+    text-decoration: underline;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.paginator-ul-li-current {
+    font-weight: 800;
+    font-size: 20px;
+}
