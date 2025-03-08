@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 
 import ProductsList from "../shared/productsList/ProductsList";
 import CatalogNav from "./CatalogNav";
@@ -11,6 +11,7 @@ export default function CatalogComponent() {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [pagesCount, setPagesCount] = useState(10);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const pageChangeHandler = (chosenPage) => {
         setPage(chosenPage);
@@ -32,25 +33,8 @@ export default function CatalogComponent() {
         setPage(state => state - 1);
     }
 
-    // const options = {
-    //     options: {
-    //         subcategory: '67ab4d938bca21a3b8a19e06'
-    //     }
-    // };
-
     useEffect(() => {
-        // fetch('http://localhost:3030/products/catalog?page=1', {
-        //     method: "GET",
-        //     headers: {
-        //         options: JSON.stringify(options)
-        //     }
-        // })
-        //     .then(res => res.json())
-        //     .then(result => setProducts(result))
-        //     .catch(err => {
-        //         console.error(err.message);
-        //         setProducts([]);
-        //     });
+        setPage(searchParams.get('page'));
 
         productsService.getProducts(subcategoryId, page)
             .then(result => {
@@ -60,7 +44,8 @@ export default function CatalogComponent() {
                 // TODO: Implement error handling
                 console.error(err.message);
             });
-    }, []);
+
+    }, [page, subcategoryId, searchParams]);
 
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
