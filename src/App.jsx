@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router";
 import CatalogComponent from "./components/catalog/CatalogComponent";
 import Footer from "./components/core/footer/Footer";
 import Header from "./components/core/header/Header";
@@ -9,8 +10,12 @@ function App() {
         <>
             <div className="content d-flex f-direction-column gap-20">
                 <Header />
-                {/* <HomeComponent /> */}
-                <CatalogComponent />
+
+                <Routes>
+                    <Route path="/" element={<HomeComponent />} />
+                    <Route path="/catalog/:subcategoryId" element={<CatalogComponent />} />
+                </Routes>
+
                 <Footer />
             </div>
         </>

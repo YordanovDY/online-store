@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Categories from "./Categories";
 import SearchForm from "./SearchForm";
 import styles from './Header.module.css';
@@ -7,6 +8,13 @@ export default function Header() {
         <header className="padding-30 coal-bg pale-blue-c">
             <nav>
                 <ul className={styles['header-nav-ul']}>
+                    <li>
+                    <Link to="/" className="nav-btn">
+                        Home
+                    </Link>
+
+                    </li>
+                    
                     <Categories />
                     <SearchForm />
 

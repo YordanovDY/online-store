@@ -1,3 +1,4 @@
 export function buildOptions(options) {
-    return { options };
+    const optionJson = JSON.stringify({ options: options });
+    return { options: optionJson };
 }

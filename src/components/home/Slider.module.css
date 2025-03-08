@@ -4,6 +4,7 @@
 
 .slides-img {
     width: 100%;
+    max-width: 1447px;
     height: 820px;
     object-fit: cover;
     object-position: center;

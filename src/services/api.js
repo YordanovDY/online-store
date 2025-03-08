@@ -10,7 +10,7 @@ async function requester(method, endpoint, customHeaders, data) {
         option.headers['Content-Type'] = 'application/json';
         option.body = JSON.stringify(data);
     }
-
+    
     // TODO: Append user token
 
     try {

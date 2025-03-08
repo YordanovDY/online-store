@@ -7,7 +7,7 @@ const endpoints = {
 }
 
 async function getProducts(subcategoryId, page) {
-    const options = buildOptions({ subcategory: subcategoryId });
+    const options = buildOptions({ subcategory: subcategoryId });    
     return api.get(endpoints.gProducts(page), options);
 }
 
