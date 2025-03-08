@@ -3,14 +3,14 @@ const hostname = 'http://localhost:3030';
 async function requester(method, endpoint, customHeaders, data) {
     const option = {
         method,
-        headers: { ...customHeaders }
+        headers: { ...customHeaders },
     };
 
     if (data) {
         option.headers['Content-Type'] = 'application/json';
         option.body = JSON.stringify(data);
     }
-    
+
     // TODO: Append user token
 
     try {
@@ -21,7 +21,12 @@ async function requester(method, endpoint, customHeaders, data) {
             throw new Error(error.message);
         }
 
-        return response.json();
+        if (response.status === 204) {
+            return response;
+
+        } else {
+            return response.json();
+        }
 
     } catch (err) {
         throw err;
