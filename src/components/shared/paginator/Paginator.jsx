@@ -1,6 +1,8 @@
+import LoadingSpinner from '../loadingSpinner/LoadingSpinner';
 import styles from './Paginator.module.css';
 
 export default function Paginator({
+    isLoading,
     pagesCount,
     currentPage,
     onPageChange,
@@ -13,31 +15,35 @@ export default function Paginator({
 
     return (
         <div className={styles['paginator']}>
-            <ul className={styles['paginator-ul']}>
-                <li
-                    className={styles['paginator-ul-li']}
-                    onClick={onPageDown}
-                >
-                    <i className="fa-solid fa-circle-chevron-left" />
-                </li>
-
-                {getPages().map(page =>
+            {isLoading
+                ? <LoadingSpinner />
+                : <ul className={styles['paginator-ul']}>
                     <li
-                        key={page}
-                        onClick={() => onPageChange(page)}
-                        className={page === currentPage
-                            ? styles['paginator-ul-li-current']
-                            : styles['paginator-ul-li']}
-                    >{page}</li>
+                        className={styles['paginator-ul-li']}
+                        onClick={onPageDown}
+                    >
+                        <i className="fa-solid fa-circle-chevron-left" />
+                    </li>
 
-                )}
-                <li
-                    className={styles['paginator-ul-li']}
-                    onClick={onPageUp}
-                >
-                    <i className="fa-solid fa-circle-chevron-right" />
-                </li>
-            </ul>
+                    {getPages().map(page =>
+                        <li
+                            key={page}
+                            onClick={() => onPageChange(page)}
+                            className={page === currentPage
+                                ? styles['paginator-ul-li-current']
+                                : styles['paginator-ul-li']}
+                        >{page}</li>
+
+                    )}
+                    <li
+                        className={styles['paginator-ul-li']}
+                        onClick={onPageUp}
+                    >
+                        <i className="fa-solid fa-circle-chevron-right" />
+                    </li>
+                </ul>
+            }
+
         </div>
     );
 }
