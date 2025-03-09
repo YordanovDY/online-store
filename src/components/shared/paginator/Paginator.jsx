@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import LoadingSpinner from '../loadingSpinner/LoadingSpinner';
 import styles from './Paginator.module.css';
 
@@ -5,9 +6,7 @@ export default function Paginator({
     isLoading,
     pagesCount,
     currentPage,
-    onPageChange,
-    onPageUp,
-    onPageDown,
+    subcategoryId
 }) {
     const getPages = () => {
         return new Array(pagesCount).fill(0).map((_, index) => index + 1);
@@ -18,29 +17,39 @@ export default function Paginator({
             {isLoading
                 ? <LoadingSpinner />
                 : <ul className={styles['paginator-ul']}>
-                    <li
-                        className={styles['paginator-ul-li']}
-                        onClick={onPageDown}
-                    >
-                        <i className="fa-solid fa-circle-chevron-left" />
-                    </li>
+                    {
+                        currentPage > 1 && <li>
+
+                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}?page=${currentPage - 1}`}>
+                                <i className="fa-solid fa-circle-chevron-left" />
+                            </Link>
+                        </li>
+                    }
+
 
                     {getPages().map(page =>
-                        <li
-                            key={page}
-                            onClick={() => onPageChange(page)}
-                            className={page === currentPage
-                                ? styles['paginator-ul-li-current']
-                                : styles['paginator-ul-li']}
-                        >{page}</li>
+                        <li key={page}>
+                            <Link
+                                to={`/catalog/${subcategoryId}?page=${page}`}
+                                className={page === currentPage
+                                    ? styles['paginator-ul-li-link-current']
+                                    : styles['paginator-ul-li-link']}
+                            >
+                                {page}
+                            </Link>
+                        </li>
 
                     )}
-                    <li
-                        className={styles['paginator-ul-li']}
-                        onClick={onPageUp}
-                    >
-                        <i className="fa-solid fa-circle-chevron-right" />
-                    </li>
+
+                    {
+                        pagesCount > currentPage && <li>
+
+                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}?page=${currentPage + 1}`}>
+                                <i className="fa-solid fa-circle-chevron-right" />
+                            </Link>
+                        </li>
+                    }
+
                 </ul>
             }
 

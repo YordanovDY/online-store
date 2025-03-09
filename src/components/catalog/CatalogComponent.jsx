@@ -15,26 +15,6 @@ export default function CatalogComponent() {
     const [isProductLoading, setIsProductLoading] = useState(true);
     const [isPaginatorLoading, setIsPaginatorLoading] = useState(true);
 
-    const pageChangeHandler = (chosenPage) => {
-        setPage(chosenPage);
-    }
-
-    const pageUpHandler = () => {
-        if (page >= pagesCount) {
-            return;
-        }
-
-        setPage(state => state + 1);
-    }
-
-    const pageDownHandler = () => {
-        if (page <= 1) {
-            return;
-        }
-
-        setPage(state => state - 1);
-    }
-
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
@@ -94,9 +74,7 @@ export default function CatalogComponent() {
                 isLoading={isPaginatorLoading}
                 currentPage={page}
                 pagesCount={pagesCount}
-                onPageChange={pageChangeHandler}
-                onPageUp={pageUpHandler}
-                onPageDown={pageDownHandler}
+                subcategoryId={subcategoryId}
             />
         </section>
     )

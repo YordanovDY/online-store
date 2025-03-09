@@ -1,4 +1,4 @@
-.paginator{
+.paginator {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -18,7 +18,7 @@
     gap: 30px;
 }
 
-.paginator-ul-li {
+.paginator-ul-li-link {
     color: #1b00e4;
     text-decoration: underline;
     border-radius: 50%;
@@ -27,7 +27,7 @@
     font-size: 20px;
 }
 
-.paginator-ul-li-current {
+.paginator-ul-li-link-current {
     font-weight: 800;
     font-size: 20px;
 }
