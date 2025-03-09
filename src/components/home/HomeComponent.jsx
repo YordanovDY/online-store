@@ -5,6 +5,7 @@ import productsService from "../../services/productService";
 
 export default function HomeComponent() {
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -12,6 +13,7 @@ export default function HomeComponent() {
 
         productsService.getLatestProducts(signal)
             .then(result => {
+                setIsLoading(false)
                 setProducts(result);
             })
             .catch(err => {
@@ -31,7 +33,7 @@ export default function HomeComponent() {
         <>
             <main className="padding-20 d-flex f-direction-column gap-50">
                 <Slider />
-                <ProductsList title="Latest Products" products={products} />
+                <ProductsList title="Latest Products" products={products} isLoading={isLoading} />
                 {/* <ProductsList title="Best Selling" /> */}
             </main>
 

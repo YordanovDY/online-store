@@ -12,6 +12,7 @@ export default function CatalogComponent() {
     const [page, setPage] = useState(1);
     const [pagesCount, setPagesCount] = useState(10);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     const pageChangeHandler = (chosenPage) => {
         setPage(chosenPage);
@@ -39,6 +40,7 @@ export default function CatalogComponent() {
 
         productsService.getProducts(subcategoryId, page, signal)
             .then(result => {
+                setIsLoading(false)
                 setProducts(result);
             })
             .catch(err => {
@@ -63,7 +65,7 @@ export default function CatalogComponent() {
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
             <CatalogNav />
-            <ProductsList title="Laptops" products={products} />
+            <ProductsList title="Laptops" products={products} isLoading={isLoading} />
             <Paginator
                 currentPage={page}
                 pagesCount={pagesCount}
