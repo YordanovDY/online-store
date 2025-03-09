@@ -36,9 +36,9 @@ async function requester(method, endpoint, signal, customHeaders, data) {
 }
 
 const get = (endpoint, signal, customHeaders = {}) => requester('GET', endpoint, signal, customHeaders);
-const post = (endpoint, data, customHeaders = {}) => requester('POST', endpoint, customHeaders, data);
-const put = (endpoint, data, customHeaders = {}) => requester('PUT', endpoint, customHeaders, data);
-const del = (endpoint, customHeaders = {}) => requester('DELETE', endpoint, customHeaders);
+const post = (endpoint, data, signal, customHeaders = {}) => requester('POST', endpoint, signal, customHeaders, data);
+const put = (endpoint, data, signal, customHeaders = {}) => requester('PUT', endpoint, signal, customHeaders, data);
+const del = (endpoint, signal, customHeaders = {}) => requester('DELETE', endpoint, signal, customHeaders);
 
 const api = {
     get,
