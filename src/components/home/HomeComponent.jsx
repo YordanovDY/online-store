@@ -7,14 +7,24 @@ export default function HomeComponent() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        productsService.getLatestProducts()
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        productsService.getLatestProducts(signal)
             .then(result => {
                 setProducts(result);
             })
             .catch(err => {
                 // TODO: Implement error handling
-                console.error(err.message);
+                
+                if (err.name !== 'AbortError') {
+                    console.error(err.message);
+                }
             });
+
+        return () => {
+            abortController.abort();
+        }
     }, []);
 
     return (

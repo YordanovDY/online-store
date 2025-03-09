@@ -6,13 +6,13 @@ const endpoints = {
     gLatest: () => '/products/latest'
 }
 
-async function getProducts(subcategoryId, page) {
-    const options = buildOptions({ subcategory: subcategoryId });    
-    return api.get(endpoints.gProducts(page), options);
+async function getProducts(subcategoryId, page, signal) {
+    const options = buildOptions({ subcategory: subcategoryId });
+    return api.get(endpoints.gProducts(page), signal, options);
 }
 
-async function getLatestProducts() {
-    return api.get(endpoints.gLatest());
+async function getLatestProducts(signal) {
+    return api.get(endpoints.gLatest(), signal);
 }
 
 

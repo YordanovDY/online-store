@@ -4,8 +4,8 @@ const endpoints = {
     gCategories: () => '/categories'
 }
 
-function getCategories() {
-    return api.get(endpoints.gCategories());
+function getCategories(signal) {
+    return api.get(endpoints.gCategories(), signal);
 }
 
 const categoriesService = {

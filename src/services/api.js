@@ -1,9 +1,10 @@
 const hostname = 'http://localhost:3030';
 
-async function requester(method, endpoint, customHeaders, data) {
+async function requester(method, endpoint, signal, customHeaders, data) {
     const option = {
         method,
         headers: { ...customHeaders },
+        signal
     };
 
     if (data) {
@@ -34,7 +35,7 @@ async function requester(method, endpoint, customHeaders, data) {
 
 }
 
-const get = (endpoint, customHeaders = {}) => requester('GET', endpoint, customHeaders);
+const get = (endpoint, signal, customHeaders = {}) => requester('GET', endpoint, signal, customHeaders);
 const post = (endpoint, data, customHeaders = {}) => requester('POST', endpoint, customHeaders, data);
 const put = (endpoint, data, customHeaders = {}) => requester('PUT', endpoint, customHeaders, data);
 const del = (endpoint, customHeaders = {}) => requester('DELETE', endpoint, customHeaders);

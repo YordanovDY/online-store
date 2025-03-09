@@ -34,18 +34,31 @@ export default function CatalogComponent() {
     }
 
     useEffect(() => {
-        setPage(searchParams.get('page'));
+        const abortController = new AbortController();
+        const signal = abortController.signal;
 
-        productsService.getProducts(subcategoryId, page)
+        productsService.getProducts(subcategoryId, page, signal)
             .then(result => {
                 setProducts(result);
             })
             .catch(err => {
                 // TODO: Implement error handling
-                console.error(err.message);
+
+                if (err.name !== "AbortError") {
+                    console.error(err.message);
+                }
             });
 
-    }, [page, subcategoryId, searchParams]);
+        return () => {
+            abortController.abort();
+        }
+    }, [subcategoryId, page,]);
+
+    useEffect(() => {
+        const newPage = Number(searchParams.get("page")) || 1;
+        setPage(newPage);
+        
+    }, [searchParams])
 
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">

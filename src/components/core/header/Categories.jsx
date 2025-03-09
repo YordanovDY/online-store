@@ -6,14 +6,24 @@ export default function Categories() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        categoriesService.getCategories()
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        categoriesService.getCategories(signal)
             .then(result => {
                 setCategories(result)
             })
             .catch(err => {
                 // TODO: Implement error handling
-                console.error(err.message);
+
+                if (err.name !== 'AbortError') {
+                    console.error(err.message);
+                }
             })
+
+        return () => {
+            abortController.abort();
+        }
     }, [])
     return (
         <li className="relative">
