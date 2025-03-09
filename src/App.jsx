@@ -3,6 +3,7 @@ import CatalogComponent from "./components/catalog/CatalogComponent";
 import Footer from "./components/core/footer/Footer";
 import Header from "./components/core/header/Header";
 import HomeComponent from "./components/home/HomeComponent";
+import NotFoundComponent from "./components/notFound/NotFoundComponent";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomeComponent />} />
                     <Route path="/catalog/:subcategoryId" element={<CatalogComponent />} />
+                    <Route path="*" element={<NotFoundComponent />} />
                 </Routes>
 
                 <Footer />
