@@ -9,12 +9,13 @@ export default function Header() {
             <nav>
                 <ul className={styles['header-nav-ul']}>
                     <li>
-                    <Link to="/" className="nav-btn">
-                        Home
-                    </Link>
+                        <Link to="/" className="nav-btn">
+                            <i class="fa-solid fa-house" />
+                            <span>Home</span>
+                        </Link>
 
                     </li>
-                    
+
                     <Categories />
                     <SearchForm />
 
@@ -31,7 +32,13 @@ export default function Header() {
                             <span>Login</span>
                         </Link>
                     </li>
-                    
+
+                    <li>
+                        <Link className="cart-btn" to="/my-cart">
+                            <i class="fa-solid fa-cart-shopping" />
+                        </Link>
+                    </li>
+
                 </ul>
             </nav>
         </header>

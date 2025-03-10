@@ -65,15 +65,27 @@
 }
 
 .nav-btn,
-.categories-nav-btn>a {
+.categories-nav-btn>Link {
     display: flex;
     gap: 10px;
     align-items: baseline;
 }
 
+.cart-btn {
+    padding: 20px;
+    color: #0039b5;
+    background-color: #E8F4FD;
+    border-radius: 50%;
+}
+
 .nav-btn:hover,
 .social-media-btn:hover {
     color: #ffcc00;
+}
+
+.cart-btn:hover {
+    color: #ffcc00;
+    background-color: white;
 }
 
 .h-link {
