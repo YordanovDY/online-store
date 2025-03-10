@@ -12,7 +12,7 @@ export default function BasicForm({
                 <h2 className={styles['form-header']}>{title}</h2>
 
                 {inputsArray.map(input =>
-                    <div className={styles['field-border']}>
+                    <div key={input.name} className={styles['field-border']}>
                         <div className={styles['field']}>
                             <label className={styles['label']} htmlFor={input.name}>{input.label}</label>
                             <input
