@@ -96,15 +96,15 @@ a,
     display: flex;
 }
 
-.d-block{
+.d-block {
     display: block;
 }
 
-.d-inline{
+.d-inline {
     display: inline;
 }
 
-.d-inline-block{
+.d-inline-block {
     display: inline-block;
 }
 
@@ -177,11 +177,11 @@ a,
 }
 
 .content {
-    max-width: 1500px;
+    width: 1500px;
     background-color: #FFFFFF;
 }
 
-.inner-content{
+.inner-content {
     display: flex;
     justify-content: center;
 }
@@ -220,4 +220,11 @@ a,
 
 .ls-none {
     list-style: none;
+}
+
+@media screen and (max-width:1500px) {
+    .content {
+        max-width: 1500px;
+        width: unset;
+    }
 }
