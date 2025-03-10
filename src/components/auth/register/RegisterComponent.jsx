@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-import styles from './RegisterComponent.module.css';
 import BasicForm from '../../shared/basicForm/BasicForm';
 export default function RegisterComponent() {
 
@@ -11,7 +10,7 @@ export default function RegisterComponent() {
 
    const navToLoginPageEl = <p>Already have an account? <Link className="hyperlink" to="/login">Login here.</Link></p>
    return (
-      <section className={styles['login-section']}>
+      <section>
          <BasicForm
             title="Register"
             inputsArray={inputs}
