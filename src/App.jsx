@@ -6,6 +6,7 @@ import HomeComponent from "./components/home/HomeComponent";
 import NotFoundComponent from "./components/notFound/NotFoundComponent";
 import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
+import CartComponent from "./components/cart/CartComponent";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/catalog/:subcategoryId" element={<CatalogComponent />} />
                     <Route path="/login" element={<LoginComponent />} />
                     <Route path="/register" element={<RegisterComponent />} />
+                    <Route path="/my-cart" element={<CartComponent />} />
                     <Route path="*" element={<NotFoundComponent />} />
                 </Routes>
 

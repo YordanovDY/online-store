@@ -14,7 +14,7 @@
     justify-content: center;
     padding: 20px;
     min-width: inherit;
-    height: 74.1vh;
+    min-height: 74.1vh;
 }
 
 @media screen and (max-width: 1500px) {
