@@ -26,10 +26,10 @@ export default function Header() {
                     </li>
 
                     <li>
-                        <a className="nav-btn" href="#">
+                        <Link className="nav-btn" to="/login">
                             <i className="fa-solid fa-right-to-bracket"></i>
                             <span>Login</span>
-                        </a>
+                        </Link>
                     </li>
                     
                 </ul>
