@@ -7,6 +7,7 @@ import NotFoundComponent from "./components/not-found/NotFoundComponent";
 import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";
+import ProductDetailsComponent from "./components/product-details/ProductDetailsComponent";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/login" element={<LoginComponent />} />
                     <Route path="/register" element={<RegisterComponent />} />
                     <Route path="/my-cart" element={<CartComponent />} />
+                    <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
                     <Route path="*" element={<NotFoundComponent />} />
                 </Routes>
 

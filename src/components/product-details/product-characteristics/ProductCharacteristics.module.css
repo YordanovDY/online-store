@@ -1,0 +1,35 @@
+.characteristics-container{
+    display: flex ;
+    padding: 20px;
+}
+
+.items-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #afdbff;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    padding: 20px;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #afdbff;
+    width: 100%;
+}
+
+.price-item-key {
+    background-color: #E8F4FD;
+    padding: 10px 0 10px 20px;
+    flex: 0 0 50%;
+}
+
+.price-item-value {
+    padding: 10px;
+    flex: 0 0 50%;
+}

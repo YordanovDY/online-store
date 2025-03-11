@@ -1,6 +1,7 @@
+import { Link } from 'react-router';
 import styles from './ProductsListItem.module.css';
 
-export default function ProductsListItem({ imageUrl, name, price }) {
+export default function ProductsListItem({ imageUrl, name, price, productId }) {
 
     const onErrorHandler = (e) => {
         e.currentTarget.src = '/images/no-image.png'
@@ -8,11 +9,11 @@ export default function ProductsListItem({ imageUrl, name, price }) {
 
     return (
         <li>
-            <a href="#" className={styles['product-item']}>
+            <Link to={`/products/${productId}/details`} className={styles['product-item']}>
                 <img className={styles['product-item-img']} src={imageUrl} onError={onErrorHandler} />
                 <h4 className={styles['product-item-title']}>{name}</h4>
-                <p className={styles['product-item-price']}>{price}$</p>
-            </a>
+                <p className="product-price">{price}$</p>
+            </Link>
         </li>
     )
 }

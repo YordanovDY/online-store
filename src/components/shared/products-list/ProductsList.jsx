@@ -22,6 +22,7 @@ export default function ProductsList({ title, products, isLoading }) {
                                 imageUrl={product.imageUrl}
                                 name={product.name}
                                 price={product.price}
+                                productId={product._id}
                             />)
                     }
                 </ul>
