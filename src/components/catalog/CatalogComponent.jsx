@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router";
 
-import ProductsList from "../shared/productsList/ProductsList";
-import CatalogNav from "./CatalogNav";
+import ProductsList from "../shared/products-list/ProductsList";
+import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
 import productsService from "../../services/productService";
 

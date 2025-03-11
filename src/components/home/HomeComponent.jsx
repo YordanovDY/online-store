@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ProductsList from "../shared/productsList/ProductsList";
-import Slider from "./Slider";
+import ProductsList from "../shared/products-list/ProductsList";
+import Slider from "./slider/Slider";
 import productsService from "../../services/productService";
 
 export default function HomeComponent() {

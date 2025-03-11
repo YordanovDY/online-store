@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import LoadingSpinner from '../loadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 import styles from './Paginator.module.css';
 
 export default function Paginator({

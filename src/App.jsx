@@ -3,7 +3,7 @@ import CatalogComponent from "./components/catalog/CatalogComponent";
 import Footer from "./components/core/footer/Footer";
 import Header from "./components/core/header/Header";
 import HomeComponent from "./components/home/HomeComponent";
-import NotFoundComponent from "./components/notFound/NotFoundComponent";
+import NotFoundComponent from "./components/not-found/NotFoundComponent";
 import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";

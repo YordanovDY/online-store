@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import styles from './LoginComponent.module.css';
-import BasicForm from '../../shared/basicForm/BasicForm';
+import BasicForm from '../../shared/basic-form/BasicForm';
 export default function LoginComponent() {
    const inputs = [
       { name: 'email', label: 'Email', type: 'text', placeholder: 'john.doe@gmail.com' },

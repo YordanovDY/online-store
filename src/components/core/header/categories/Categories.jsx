@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import categoriesService from "../../../services/categoryService"
+import categoriesService from "../../../../services/categoryService"
 import CategoriesItem from "./CategoriesItem";
 
 export default function Categories() {

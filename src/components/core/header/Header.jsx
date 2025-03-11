@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import Categories from "./Categories";
-import SearchForm from "./SearchForm";
+import Categories from "./categories/Categories";
+import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
                 <ul className={styles['header-nav-ul']}>
                     <li>
                         <Link to="/" className="nav-btn">
-                            <i class="fa-solid fa-house" />
+                            <i className="fa-solid fa-house" />
                             <span>Home</span>
                         </Link>
 
@@ -35,7 +35,7 @@ export default function Header() {
 
                     <li>
                         <Link className="cart-btn" to="/my-cart">
-                            <i class="fa-solid fa-cart-shopping" />
+                            <i className="fa-solid fa-cart-shopping" />
                         </Link>
                     </li>
 
