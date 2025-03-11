@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from "react-router";
 import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
-import productsService from "../../services/productService";
+import { getPages, getProducts } from "./CatalogService";
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
@@ -19,7 +19,7 @@ export default function CatalogComponent() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        productsService.getPages(subcategoryId, signal)
+        getPages(subcategoryId, signal)
             .then(result => {
                 setIsPaginatorLoading(false);
                 setPagesCount(result);
@@ -42,7 +42,7 @@ export default function CatalogComponent() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        productsService.getProducts(subcategoryId, page, signal)
+        getProducts(subcategoryId, page, signal)
             .then(result => {
                 setIsProductLoading(false);
                 setProducts(result);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import categoriesService from "../../../../services/categoryService"
+import { getCategories } from "./CategoryService";
 import CategoriesItem from "./CategoriesItem";
 
 export default function Categories() {
@@ -9,7 +9,7 @@ export default function Categories() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        categoriesService.getCategories(signal)
+        getCategories(signal)
             .then(result => {
                 setCategories(result)
             })

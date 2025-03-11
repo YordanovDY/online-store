@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductsList from "../shared/products-list/ProductsList";
 import Slider from "./slider/Slider";
-import productsService from "../../services/productService";
+import { getLatestProducts } from "./HomeService";
 
 export default function HomeComponent() {
     const [products, setProducts] = useState([]);
@@ -11,7 +11,7 @@ export default function HomeComponent() {
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        productsService.getLatestProducts(signal)
+        getLatestProducts(signal)
             .then(result => {
                 setIsLoading(false)
                 setProducts(result);
