@@ -81,6 +81,7 @@
 .nav-btn:hover,
 .social-media-btn:hover {
     color: #ffcc00;
+    cursor: pointer;
 }
 
 .cart-btn:hover {

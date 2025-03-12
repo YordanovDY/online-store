@@ -28,10 +28,10 @@ export default function Categories() {
     return (
         <li className="relative">
             <div className="categories-nav-btn">
-                <a href="#">
+                <span className="nav-btn">
                     <i className="fa-solid fa-bars"></i>
                     <span>Categories</span>
-                </a>
+                </span>
                 <ul
                     className="cat-dropdown absolute light-gray-bg coal-c padding-20 d-flex f-direction-column gap-20 ls-none">
                     {categories.map(category =>

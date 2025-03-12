@@ -19,7 +19,7 @@ function App() {
 
                 <Routes>
                     <Route path="/" element={<HomeComponent />} />
-                    <Route path="/catalog/:subcategoryId" element={<CatalogComponent />} />
+                    <Route path="/catalog/:subcategoryId/subcategory" element={<CatalogComponent />} />
                     <Route path="/login" element={<LoginComponent />} />
                     <Route path="/register" element={<RegisterComponent />} />
                     <Route path="/my-cart" element={<CartComponent />} />
