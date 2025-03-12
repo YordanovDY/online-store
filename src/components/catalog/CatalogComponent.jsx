@@ -4,16 +4,38 @@ import { useParams, useSearchParams } from "react-router";
 import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
-import { getPages, getProducts } from "./CatalogService";
+import { getPages, getProducts, getSubcategory } from "./CatalogService";
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
+    const [subcategoryName, setSubcategoryName] = useState('');
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [pagesCount, setPagesCount] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
     const [isProductLoading, setIsProductLoading] = useState(true);
     const [isPaginatorLoading, setIsPaginatorLoading] = useState(true);
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        getSubcategory(subcategoryId, signal)
+            .then(result => {
+                setSubcategoryName(result.name);
+            })
+            .catch(err => {
+                if (err.name !== "AbortError") {
+                    console.error(err.message);
+                }
+
+                // TODO: Implement error handling
+            });
+
+        return () => {
+            abortController.abort();
+        }
+    }, [subcategoryId]);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -69,7 +91,7 @@ export default function CatalogComponent() {
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
             <CatalogNav />
-            <ProductsList title="Laptops" products={products} isLoading={isProductLoading} />
+            <ProductsList title={subcategoryName} products={products} isLoading={isProductLoading} />
             <Paginator
                 isLoading={isPaginatorLoading}
                 currentPage={page}
