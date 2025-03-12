@@ -8,6 +8,7 @@ import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";
 import ProductDetailsComponent from "./components/product-details/ProductDetailsComponent";
+import ProductCreate from "./components/product-create/ProductCreate";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/register" element={<RegisterComponent />} />
                     <Route path="/my-cart" element={<CartComponent />} />
                     <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
+                    <Route path="/products/create" element={<ProductCreate />} />
                     <Route path="*" element={<NotFoundComponent />} />
                 </Routes>
 

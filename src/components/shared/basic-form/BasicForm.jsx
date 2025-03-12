@@ -15,13 +15,25 @@ export default function BasicForm({
                     <div key={input.name} className={styles['field-border']}>
                         <div className={styles['field']}>
                             <label className={styles['label']} htmlFor={input.name}>{input.label}</label>
-                            <input
-                                id={input.name}
-                                type={input.type}
-                                name={input.name}
-                                placeholder={input.placeholder}
-                                className="fancy-input-dark"
-                            />
+                            {
+                                input.type === 'textarea'
+                                    ? <textarea
+                                        id={input.name}
+                                        name={input.name}
+                                        placeholder={input.placeholder}
+                                        rows="6"
+                                        className="fancy-input-dark"
+                                    />
+                                    : <input
+                                        id={input.name}
+                                        type={input.type}
+                                        name={input.name}
+                                        placeholder={input.placeholder}
+                                        className="fancy-input-dark"
+                                    />
+
+                            }
+
                         </div>
                     </div>
                 )}
