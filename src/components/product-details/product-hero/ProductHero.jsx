@@ -14,6 +14,7 @@ export default function ProductHero({ brand, name, imageUrl, quantity, price }) 
             </picture>
             <h2>{name}</h2>
             <p className="product-price">{price}$</p>
+            {quantity <= 10 && <p className="qty-warning poller-one">Only <span className="qty">{quantity}</span> more left</p>}
         </aside>
     );
 }

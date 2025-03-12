@@ -4,6 +4,15 @@
     padding: 20px;
 }
 
+.qty-warning{
+    color: #e42600;
+}
+
+.qty{
+    text-decoration: underline;
+    font-size: larger;
+}
+
 @media screen and (max-width: 780px) {
     .flex-container {
         flex-direction: column;
