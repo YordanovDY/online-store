@@ -4,10 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import ProductHero from './product-hero/ProductHero';
 import ProductDescription from './product-description/ProductDescription';
 import ProductCharacteristics from './product-characteristics/ProductCharacteristics';
-import { getProductDetails } from '../../services/commonServices';
-
 import useFetch from '../../hooks/useFetch';
-import LoadingSpinner from '../shared/loading-spinner/LoadingSpinner';
 
 export default function ProductDetailsComponent() {
     const { productId } = useParams();
@@ -58,33 +55,5 @@ export default function ProductDetailsComponent() {
                 pending={pending}
             />
         </section>
-
-        // <section>
-        //     {pending
-        //         ? <LoadingSpinner />
-
-        //         : <>
-        //             <div className="flex-container">
-        //                 <ProductHero
-        //                     brand={product.brand}
-        //                     name={product.name}
-        //                     imageUrl={product.imageUrl}
-        //                     price={product.price}
-        //                     quantity={product.quantity}
-        //                 />
-
-        //                 <ProductDescription
-        //                     description={product.description}
-        //                 />
-
-        //             </div>
-
-        //             <ProductCharacteristics
-        //                 characteristicsArr={product.characteristics}
-        //             />
-        //         </>
-        //     }
-
-        // </section>
     );
 }
