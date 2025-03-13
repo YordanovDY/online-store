@@ -4,83 +4,51 @@ import { useParams, useSearchParams } from "react-router";
 import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
-import { getPages, getProducts, getSubcategory } from "./CatalogService";
+import useFetch from "../../hooks/useFetch";
+import { buildOptions } from "../../utils/optionsUtil";
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
-    const [subcategoryName, setSubcategoryName] = useState('');
-    const [products, setProducts] = useState([]);
-    const [page, setPage] = useState(1);
-    const [pagesCount, setPagesCount] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
-    const [isProductLoading, setIsProductLoading] = useState(true);
-    const [isPaginatorLoading, setIsPaginatorLoading] = useState(true);
+    const [page, setPage] = useState(1);
+
+    const PRODUCTS_URL = `/products/catalog?page=${page}`;
+
+    const options = buildOptions({ subcategory: subcategoryId });
+    const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, [], options);
+
+    const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
+    const [pendingSubcategory, subcategory, subcategoryError] = useFetch(SUBCATEGORY_URL, {});
+
+    const [subcategoryName, setSubcategoryName] = useState('');
+
+    const PAGES_URL = '/products/catalog/pages';
+
+    const [pendingPagesCount, pagesCount, pagesCountError] = useFetch(PAGES_URL, 1, options);
 
     useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        getSubcategory(subcategoryId, signal)
-            .then(result => {
-                setSubcategoryName(result.name);
-            })
-            .catch(err => {
-                if (err.name !== "AbortError") {
-                    console.error(err.message);
-                }
-
-                // TODO: Implement error handling
-            });
-
-        return () => {
-            abortController.abort();
+        if (productsError) {
+            console.error(productsError);
+            // TODO: Implement error handling
         }
-    }, [subcategoryId]);
+    }, [productsError, page]);
 
     useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        getPages(subcategoryId, signal)
-            .then(result => {
-                setIsPaginatorLoading(false);
-                setPagesCount(result);
-            })
-            .catch(err => {
-                // TODO: Implement error handling
-
-                if (err.name !== "AbortError") {
-                    console.error(err.message);
-                }
-            });
-
-        return () => {
-            abortController.abort();
+        if (subcategoryError) {
+            console.error(subcategoryError);
+            // TODO: Implement error handling
+            return;
         }
 
-    }, [subcategoryId]);
+        setSubcategoryName(subcategory.name);
+    }, [subcategory, subcategoryError]);
 
     useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        getProducts(subcategoryId, page, signal)
-            .then(result => {
-                setIsProductLoading(false);
-                setProducts(result);
-            })
-            .catch(err => {
-                // TODO: Implement error handling
-
-                if (err.name !== "AbortError") {
-                    console.error(err.message);
-                }
-            });
-
-        return () => {
-            abortController.abort();
+        if (pagesCountError) {
+            console.error(pagesCountError);
+            // TODO: Implement error handling
         }
-    }, [subcategoryId, page]);
+    }, [pagesCountError]);
 
     useEffect(() => {
         const newPage = Number(searchParams.get("page")) || 1;
@@ -91,9 +59,9 @@ export default function CatalogComponent() {
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
             <CatalogNav />
-            <ProductsList title={subcategoryName} products={products} isLoading={isProductLoading} />
+            <ProductsList title={subcategoryName} products={products} isLoading={pendingProducts} />
             <Paginator
-                isLoading={isPaginatorLoading}
+                isLoading={pendingPagesCount}
                 currentPage={page}
                 pagesCount={pagesCount}
                 subcategoryId={subcategoryId}
