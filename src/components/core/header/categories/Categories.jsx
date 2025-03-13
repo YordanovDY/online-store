@@ -1,30 +1,19 @@
-import { useEffect, useState } from "react"
-import { getCategories } from "./CategoryService";
+import { useEffect } from "react"
 import CategoriesItem from "./CategoriesItem";
+import useFetch from "../../../../hooks/useFetch";
 
 export default function Categories() {
-    const [categories, setCategories] = useState([]);
+    const CATEGORIES_URL = '/categories';
+
+    const [pending, categories, error] = useFetch(CATEGORIES_URL, []);
 
     useEffect(() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-
-        getCategories(signal)
-            .then(result => {
-                setCategories(result)
-            })
-            .catch(err => {
-                // TODO: Implement error handling
-
-                if (err.name !== 'AbortError') {
-                    console.error(err.message);
-                }
-            })
-
-        return () => {
-            abortController.abort();
+        if (error) {
+            console.error(error);
+            // TODO: Implement error handling
         }
-    }, [])
+    }, [error]);
+
     return (
         <li className="relative">
             <div className="categories-nav-btn">
@@ -32,16 +21,21 @@ export default function Categories() {
                     <i className="fa-solid fa-bars"></i>
                     <span>Categories</span>
                 </span>
-                <ul
-                    className="cat-dropdown absolute light-gray-bg coal-c padding-20 d-flex f-direction-column gap-20 ls-none">
-                    {categories.map(category =>
-                        <CategoriesItem
-                            key={category._id}
-                            name={category.name}
-                            subcategories={category.subcategories}
-                        />
-                    )}
-                </ul>
+                {
+                    !pending &&
+
+                    <ul
+                        className="cat-dropdown absolute light-gray-bg coal-c padding-20 d-flex f-direction-column gap-20 ls-none">
+                        {categories.map(category =>
+                            <CategoriesItem
+                                key={category._id}
+                                name={category.name}
+                                subcategories={category.subcategories}
+                            />
+                        )}
+                    </ul>
+                }
+
             </div>
         </li>
     )
