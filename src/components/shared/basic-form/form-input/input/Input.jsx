@@ -1,6 +1,5 @@
 // const Input = (input) => 
-
-import Checkbox from "./Checkbox/Checkbox"
+import Checkbox from "./checkbox/Checkbox";
 
 export default function Input({ input }) {
     switch (input.type) {

@@ -1,5 +1,5 @@
 import styles from './BasicForm.module.css';
-import Input from './Input';
+import FormInput from './form-input/FormInput';
 
 export default function BasicForm({
     title,
@@ -9,14 +9,7 @@ export default function BasicForm({
     additionalFieldset,
     hasMainFieldset = false
 }) {
-    const mainInputs = inputsArray.map(input =>
-        <div key={input.name} className={styles['field-border']}>
-            <div className={styles['field']}>
-                <label className={styles['label']} htmlFor={input.name}>{input.label}</label>
-                <Input input={input} />
-            </div>
-        </div>
-    )
+    const mainInputs = inputsArray.map(input => <FormInput key={input.name} input={input} />)
 
     return (
         <div className={styles['form-section']}>
@@ -34,14 +27,7 @@ export default function BasicForm({
                 {additionalFieldset &&
                     <fieldset className={styles['fieldset']}>
                         <h4 className={styles['char-header']}>Characteristics</h4>
-                        {additionalFieldset.map(input =>
-                            <div key={input.name} className={styles['field-border']}>
-                                <div className={styles['field']}>
-                                    <label className={styles['label']} htmlFor={input.name}>{input.label}</label>
-                                    <Input input={input} />
-                                </div>
-                            </div>
-                        )}
+                        {additionalFieldset.map(input => <FormInput key={input.name} input={input} />)}
                     </fieldset>
                 }
 
