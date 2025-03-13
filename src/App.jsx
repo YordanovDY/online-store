@@ -18,13 +18,13 @@ function App() {
                 <Header />
 
                 <Routes>
-                    <Route path="/" element={<HomeComponent />} />
+                    <Route index element={<HomeComponent />} />
                     <Route path="/catalog/:subcategoryId/subcategory" element={<CatalogComponent />} />
                     <Route path="/login" element={<LoginComponent />} />
                     <Route path="/register" element={<RegisterComponent />} />
                     <Route path="/my-cart" element={<CartComponent />} />
                     <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
-                    <Route path="/products/create" element={<ProductCreate />} />
+                    <Route path="/products/create/:subcategoryId" element={<ProductCreate />} />
                     <Route path="*" element={<NotFoundComponent />} />
                 </Routes>
 
