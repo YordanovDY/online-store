@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './ProductsList.module.css';
-import ProductsListItem from './ProductsListItem';
+import ProductsListItem from './products-list-item/ProductsListItem'; 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';
 
 export default function ProductsList({ title, products, isLoading }) {
