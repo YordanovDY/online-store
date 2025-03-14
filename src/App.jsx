@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router";
 import CatalogComponent from "./components/catalog/CatalogComponent";
 import Footer from "./components/core/footer/Footer";
@@ -9,11 +10,18 @@ import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";
 import ProductDetailsComponent from "./components/product-details/ProductDetailsComponent";
 import ProductCreate from "./components/product-create/ProductCreate";
+import { UserContext } from "./contexts/UserContext";
 
 function App() {
 
+    const [user, setUser] = useState(null);
+
+    const loginUser = (userData) => {
+        setUser(userData);
+    }
+
     return (
-        <>
+        <UserContext.Provider value={{ user, loginUser }}>
             <div className="content d-flex f-direction-column gap-20">
                 <Header />
 
@@ -30,7 +38,7 @@ function App() {
 
                 <Footer />
             </div>
-        </>
+        </UserContext.Provider>
     )
 }
 
