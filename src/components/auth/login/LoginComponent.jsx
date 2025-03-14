@@ -3,12 +3,12 @@ import { useContext } from 'react';
 import styles from './LoginComponent.module.css';
 import BasicForm from '../../shared/basic-form/BasicForm';
 import useMutate from '../../../hooks/useMutate';
-import { getCurrentUser } from './LoginService';
+import { getCurrentUser } from '../../../services/commonServices';
 import { UserContext } from '../../../contexts/UserContext';
 
 export default function LoginComponent() {
     const { responseData, mutate, pending, error } = useMutate('/auth/login', 'POST');
-    const { loginUser } = useContext(UserContext);
+    const { onSuccessLogin } = useContext(UserContext);
     const navigate = useNavigate();
 
     const inputs = [
@@ -22,7 +22,7 @@ export default function LoginComponent() {
         const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
         await mutate(inputData);
         const user = await getCurrentUser();
-        loginUser(user);
+        onSuccessLogin();
         navigate('/');
     }
     //! -----------DUMMY LOGIN------------
@@ -36,7 +36,6 @@ export default function LoginComponent() {
                 buttonText="Login"
                 handler={loginHandler}
             />
-            {pending ? <p>Pending...</p> : <p>{JSON.stringify(responseData)}</p>}
         </section>
     );
 }
