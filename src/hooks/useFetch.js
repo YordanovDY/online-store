@@ -11,7 +11,11 @@ export default function useFetch(url, defaultState = {}, additionalHeaders = {})
         const abortController = new AbortController();
         const signal = abortController.signal;
 
-        const options = { signal, headers: { ...additionalHeaders } };
+        const options = {
+            signal,
+            headers: { ...additionalHeaders },
+            credentials: 'include',
+        };
 
         setPending(true);
 

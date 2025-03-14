@@ -4,8 +4,12 @@ async function requester(method, endpoint, signal, customHeaders, data) {
     const option = {
         method,
         headers: { ...customHeaders },
-        signal
+        credentials: 'include',
     };
+
+    if (signal) {
+        option.signal = signal;
+    }
 
     if (data) {
         option.headers['Content-Type'] = 'application/json';
