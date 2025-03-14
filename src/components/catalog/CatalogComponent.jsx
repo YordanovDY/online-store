@@ -5,26 +5,23 @@ import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
 import useFetch from "../../hooks/useFetch";
-import { buildOptions } from "../../utils/optionsUtil";
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
 
-    const PRODUCTS_URL = `/products/catalog?page=${page}`;
-
-    const options = buildOptions({ subcategory: subcategoryId });
-    const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, [], options);
+    const PRODUCTS_URL = `/products/catalog/${subcategoryId}/products?page=${page}`;
+    const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, []);
 
     const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
     const [pendingSubcategory, subcategory, subcategoryError] = useFetch(SUBCATEGORY_URL, {});
 
     const [subcategoryName, setSubcategoryName] = useState('');
 
-    const PAGES_URL = '/products/catalog/pages';
+    const PAGES_URL = `/products/catalog/${subcategoryId}/pages`;
 
-    const [pendingPagesCount, pagesCount, pagesCountError] = useFetch(PAGES_URL, 1, options);
+    const [pendingPagesCount, pagesCount, pagesCountError] = useFetch(PAGES_URL, 1);
 
     useEffect(() => {
         if (productsError) {
