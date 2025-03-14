@@ -6,6 +6,7 @@ export default function BasicForm({
     inputsArray,
     additionalElement,
     buttonText,
+    handler,
     additionalFieldset,
     hasMainFieldset = false
 }) {
@@ -13,7 +14,7 @@ export default function BasicForm({
 
     return (
         <div className={styles['form-section']}>
-            <form className={styles['form']}>
+            <form action={handler} className={styles['form']}>
                 <h2 className={styles['form-header']}>{title}</h2>
                 {hasMainFieldset
                     ? <fieldset className={styles['fieldset']}>

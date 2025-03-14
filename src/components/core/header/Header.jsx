@@ -26,18 +26,18 @@ export default function Header() {
                         </a>
                     </li>
 
-                    {/* <li>
+                    <li>
                         <Link className="nav-btn" to="/login">
                             <i className="fa-solid fa-right-to-bracket"></i>
                             <span>Login</span>
                         </Link>
-                    </li> */}
+                    </li>
 
-                    <li>
+                    {/* <li>
                         <Link className="cart-btn" to="/my-cart">
                             <i className="fa-solid fa-cart-shopping" />
                         </Link>
-                    </li>
+                    </li> */}
 
                 </ul>
             </nav>
