@@ -6,6 +6,17 @@
     flex-wrap: wrap;
 }
 
+.email-label {
+    position: absolute;
+    background-color: #0039b5;
+    color: #E8F4FD;
+    font-family: "Poller One", serif;
+    bottom: -32px;
+    right: 42px;
+    border-radius: 10px 10px 80px 80px;
+    padding: 4px 18px;
+}
+
 @media screen and (max-width: 610px) {
     .header-nav-ul {
         flex-direction: column;

@@ -19,7 +19,7 @@ function App() {
     const [requireRender, setRequireRender] = useState(true);
     const [pending, user, error] = useFetch('/auth/user', null);
 
-    // TODO: Get user data on each re-render
+    // TODO: Get user data on each re-render;
 
     useEffect(() => {
         if(pending){

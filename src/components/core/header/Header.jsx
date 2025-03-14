@@ -7,9 +7,9 @@ import { UserContext } from "../../../contexts/UserContext";
 
 export default function Header() {
     const { user } = useContext(UserContext);
-
+    
     return (
-        <header className="padding-30 coal-bg pale-blue-c">
+        <header className="padding-30 coal-bg pale-blue-c relative">
             <nav>
                 <ul className={styles['header-nav-ul']}>
                     <li>
@@ -47,6 +47,8 @@ export default function Header() {
 
                 </ul>
             </nav>
+            {user && <span className={styles['email-label']}>{user.result.user.email}</span>}
+            
         </header>
     )
 }
