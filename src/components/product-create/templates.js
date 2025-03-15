@@ -1,38 +1,38 @@
-const laptop = [
-    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 16 GB' },
-    { name: 'HDD', label: 'HDD', type: 'text', placeholder: 'eg. 512 GB SSD' },
-    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Intel Core i7-10750H' },
-    { name: 'GPU', label: 'GPU', type: 'text', placeholder: 'eg. Nvidia GTX 1650 Ti' },
-    { name: 'Operating System', label: 'Operating System', type: 'text', placeholder: 'eg. Windows 11' },
-    { name: 'Battery', label: 'Battery', type: 'text', placeholder: 'eg. 86Wh' },
-    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 15.6-inch' },
+const laptop = (values) => [
+    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 16 GB', value: values?.['RAM'] || '' },
+    { name: 'HDD', label: 'HDD', type: 'text', placeholder: 'eg. 512 GB SSD', value: values?.['HDD'] },
+    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Intel Core i7-10750H', value: values?.['CPU'] || '' },
+    { name: 'GPU', label: 'GPU', type: 'text', placeholder: 'eg. Nvidia GTX 1650 Ti', value: values?.['GPU'] || '' },
+    { name: 'Operating System', label: 'Operating System', type: 'text', placeholder: 'eg. Windows 11', value: values?.['Operating System'] || '' },
+    { name: 'Battery', label: 'Battery', type: 'text', placeholder: 'eg. 86Wh', value: values?.['Battery'] || '' },
+    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 15.6-inch', value: values?.['Display Size'] || '' },
 ]
 
-const pc = [
-    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 32 GB' },
-    { name: 'HDD', label: 'HDD', type: 'text', placeholder: 'eg. 1 TB HDD' },
-    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Intel Core i7-10750H' },
-    { name: 'GPU', label: 'GPU', type: 'text', placeholder: 'eg. Nvidia GTX 1650 Ti' },
-    { name: 'Operating System', label: 'Operating System', type: 'text', placeholder: 'eg. Windows 10 Pro' },
+const pc = (values) => [
+    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 32 GB', value: values?.['RAM'] || '' },
+    { name: 'HDD', label: 'HDD', type: 'text', placeholder: 'eg. 1 TB HDD', value: values?.['HDD'] || '' },
+    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Intel Core i7-10750H', value: values?.['CPU'] || '' },
+    { name: 'GPU', label: 'GPU', type: 'text', placeholder: 'eg. Nvidia GTX 1650 Ti', value: values?.['GPU'] || '' },
+    { name: 'Operating System', label: 'Operating System', type: 'text', placeholder: 'eg. Windows 10 Pro', value: values?.['Operating System'] || '' },
 ]
 
-const tv = [
-    { name: 'Screen Technology', label: 'Screen Technology', type: 'text', placeholder: 'eg. LED TV' },
-    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 50-inch' },
-    { name: 'Resolution', label: 'Resolution', type: 'text', placeholder: 'eg. 4K ULTRA HD 3840 x 2160' },
-    { name: 'Picture Motion', label: 'Picture Motion', type: 'text', placeholder: 'eg. 60 Hz' },
-    { name: 'Smart TV', label: 'Smart TV', type: 'checkbox' },
+const tv = (values) => [
+    { name: 'Screen Technology', label: 'Screen Technology', type: 'text', placeholder: 'eg. LED TV', value: values?.['Screen Technology'] || '' },
+    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 50-inch', value: values?.['Display Size'] || '' },
+    { name: 'Resolution', label: 'Resolution', type: 'text', placeholder: 'eg. 4K ULTRA HD 3840 x 2160', value: values?.['Resolution'] || '' },
+    { name: 'Picture Motion', label: 'Picture Motion', type: 'text', placeholder: 'eg. 60 Hz', value: values?.['Picture Motion'] || '' },
+    { name: 'Smart TV', label: 'Smart TV', type: 'checkbox', checked: values?.['Smart TV'] || false },
 ]
 
-const smartphoneOrTablet = [
-    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Huawei Kirin 8000' },
-    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 12 GB' },
-    { name: 'Internal Memory', label: 'Internal Memory', type: 'text', placeholder: 'eg. 256 GB' },
-    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 6.7-inch' },
-    { name: 'Front Camera Resolution', label: 'Front Camera Resolution', type: 'text', placeholder: 'eg. 60 MP' },
-    { name: 'Rear Camera Resolution', label: 'Rear Camera Resolution', type: 'text', placeholder: 'eg. 50+8 MP' },
-    { name: 'Battery', label: 'Battery', type: 'text', placeholder: 'eg. 5000 mAh' },
-    { name: 'Fingerprint', label: 'Fingerprint', type: 'checkbox' },
+const smartphoneOrTablet = (values) => [
+    { name: 'CPU', label: 'CPU', type: 'text', placeholder: 'eg. Huawei Kirin 8000', value: values?.['CPU'] || '' },
+    { name: 'RAM', label: 'RAM', type: 'text', placeholder: 'eg. 12 GB', value: values?.['RAM'] || '' },
+    { name: 'Internal Memory', label: 'Internal Memory', type: 'text', placeholder: 'eg. 256 GB', value: values?.['Internal Memory'] || '' },
+    { name: 'Display Size', label: 'Display Size', type: 'text', placeholder: 'eg. 6.7-inch', value: values?.['Display Size'] || '' },
+    { name: 'Front Camera Resolution', label: 'Front Camera Resolution', type: 'text', placeholder: 'eg. 60 MP', value: values?.['Front Camera Resolution'] || '' },
+    { name: 'Rear Camera Resolution', label: 'Rear Camera Resolution', type: 'text', placeholder: 'eg. 50+8 MP', value: values?.['Rear Camera Resolution'] || '' },
+    { name: 'Battery', label: 'Battery', type: 'text', placeholder: 'eg. 5000 mAh', value: values?.['Battery'] || '' },
+    { name: 'Fingerprint', label: 'Fingerprint', type: 'checkbox', checked: values?.['Smart TV'] || false },
 ]
 
 // TODO: Refrigerators and Freezers, Ovens, Washing Machines

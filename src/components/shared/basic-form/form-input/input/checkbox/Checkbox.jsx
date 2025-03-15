@@ -1,9 +1,13 @@
+import { useContext } from 'react';
 import './Checkbox.css';
+import { InputContext } from '../../../../../../contexts/InputContext';
 
-export default function Checkbox({name, label}) {
+export default function Checkbox({ name, label, checked }) {
+    const { changeHandler } = useContext(InputContext);
+
     return (
         <div className="checkbox-wrapper-28">
-            <input id="tmp-28" type="checkbox" name={name} className="promoted-input-checkbox" />
+            <input onChange={changeHandler} id="tmp-28" type="checkbox" name={name} className="promoted-input-checkbox" checked={checked} />
             <svg>
                 <use xlinkHref="#checkmark-28" />
             </svg>

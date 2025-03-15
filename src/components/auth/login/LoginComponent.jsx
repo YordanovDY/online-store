@@ -18,7 +18,9 @@ export default function LoginComponent() {
     const navToRegisterPageEl = <p>Don't have an account? <Link className="hyperlink" to="/register">Register here.</Link></p>
 
     //! DUMMY LOGIN (DELETE AFTER TESTING)
-    const loginHandler = async () => {
+    const loginHandler = async (e) => {
+        e.preventDefault();
+        
         // Customer
         // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
 
@@ -42,7 +44,7 @@ export default function LoginComponent() {
                 inputsArray={inputs}
                 additionalElement={navToRegisterPageEl}
                 buttonText="Login"
-                handler={loginHandler}
+                submitHandler={loginHandler}
             />
         </section>
     );
