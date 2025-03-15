@@ -19,7 +19,15 @@ export default function LoginComponent() {
 
     //! DUMMY LOGIN (DELETE AFTER TESTING)
     const loginHandler = async () => {
-        const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
+        // Customer
+        // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
+
+        // Store Manager
+        const inputData = { email: 'chocho@abv.bg', password: '1234' }
+
+        // Admin
+        // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
+
         await mutate(inputData);
         const user = await getCurrentUser();
         onSuccessLogin();

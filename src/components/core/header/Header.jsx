@@ -2,12 +2,22 @@ import { Link } from "react-router";
 import Categories from "./categories/Categories";
 import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/UserContext";
+import ROLES from "../../../constants/roles";
 
 export default function Header() {
     const { user } = useContext(UserContext);
-    
+    const [emailLabelStyle, setEmailLabelStyle] = useState(styles['email-label']);
+
+    useEffect(() => {
+        if (!user) {
+            return;
+        }
+
+        setEmailLabelStyle(state => state + ' ' + styles[ROLES[user.result.user.role].toLowerCase()]);
+    }, [user]);
+
     return (
         <header className="padding-30 coal-bg pale-blue-c relative">
             <nav>
@@ -47,8 +57,8 @@ export default function Header() {
 
                 </ul>
             </nav>
-            {user && <span className={styles['email-label']}>{user.result.user.email}</span>}
-            
+            {user && <span className={emailLabelStyle}>{user.result.user.email}</span>}
+
         </header>
     )
 }

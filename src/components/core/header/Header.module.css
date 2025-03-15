@@ -8,13 +8,31 @@
 
 .email-label {
     position: absolute;
-    background-color: #0039b5;
-    color: #E8F4FD;
     font-family: "Poller One", serif;
     bottom: -32px;
     right: 42px;
     border-radius: 10px 10px 80px 80px;
     padding: 4px 18px;
+}
+
+.customer{
+    color: #0039b5;
+    border: 1px solid #0039b5;
+}
+
+.store_manager{
+    background-color: #0039b5;
+    color: #E8F4FD;
+}
+
+.supplier{
+    background-color: #00680a;
+    color: #E8F4FD;
+}
+
+.admin{
+    background-color: #830000;
+    color: #E8F4FD;
 }
 
 @media screen and (max-width: 610px) {
