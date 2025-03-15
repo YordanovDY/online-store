@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import BasicForm from "../shared/basic-form/BasicForm";
@@ -14,8 +14,9 @@ export default function ProductCreate() {
     const [pending, subcategory, error] = useFetch(SUBCATEGORY_URL, {});
     const [subcategoryName, setSubcategoryName] = useState('');
     const [charInputs, setCharInputs] = useState([]);
+    const navigate = useNavigate();
 
-    // const { responseData, mutate, pendingMutate, errorMutate } = useMutate('/products/catalog', 'POST');
+    const { mutate } = useMutate('/products/catalog', 'POST');
 
     const inputs = [
         { name: 'brand', label: 'Brand', type: 'text', placeholder: 'eg. Lenovo', value: '' },
@@ -56,10 +57,24 @@ export default function ProductCreate() {
     }, [charInputs]);
 
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+        const { brand, name, imageUrl, quantity, price, description, ...chars } = values;
+        const characteristicsArr = Object.entries(chars);
 
-        console.log(values);
+        let characteristics = [];
+        for (const [char, value] of characteristicsArr) {
+            characteristics.push({ char, value });
+        }
+
+        const payload = { brand, name: `${brand} ${name}`, imageUrl, quantity: Number(quantity), price: Number(price), description, characteristics, subcategory: subcategoryId };
+
+        try {
+            await mutate(payload);
+            navigate(`/catalog/${subcategoryId}/subcategory?page=1`)
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     return (
