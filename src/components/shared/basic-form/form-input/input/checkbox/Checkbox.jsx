@@ -7,11 +7,11 @@ export default function Checkbox({ name, label, checked }) {
 
     return (
         <div className="checkbox-wrapper-28">
-            <input onChange={changeHandler} id="tmp-28" type="checkbox" name={name} className="promoted-input-checkbox" checked={checked} />
+            <input onChange={changeHandler} id={name} type="checkbox" name={name} className="promoted-input-checkbox" checked={checked} />
             <svg>
                 <use xlinkHref="#checkmark-28" />
             </svg>
-            <label htmlFor="tmp-28">{label}</label>
+            <label htmlFor={name}>{label}</label>
             <svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
                 <symbol id="checkmark-28" viewBox="0 0 24 24">
                     <path
