@@ -3,11 +3,14 @@ import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
 import { UserContext } from '../../../contexts/UserContext';
 import { auth } from '../../../constants/roles';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import OverlayModal from '../../shared/overlay/OverlayModal';
+import useMutate from '../../../hooks/useMutate';
 
-export default function ProductDescription({ description, creator, pending }) {
+export default function ProductDescription({ description, creator, pending, productId }) {
     const { user } = useContext(UserContext);
+    const { mutate } = useMutate(`/products/catalog/${productId}`, 'DELETE');
+    const navigate = useNavigate();
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -17,6 +20,11 @@ export default function ProductDescription({ description, creator, pending }) {
 
     const openDeleteModal = () => {
         setIsDeleteModalOpen(true);
+    }
+
+    const deleteHandler = async () => {
+        await mutate();
+        navigate('/');
     }
 
     const controlButtons =
@@ -75,7 +83,7 @@ export default function ProductDescription({ description, creator, pending }) {
                 title="Delete Product"
                 message="Are you sure you want to delete this product from the catalog?"
                 actionButtonName="Delete"
-                handler={() => console.log('On delete')}
+                handler={deleteHandler}
             />
         </article>
     );

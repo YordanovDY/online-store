@@ -47,6 +47,7 @@ export default function ProductDetailsComponent() {
                     description={product.description}
                     creator={product.creator}
                     pending={pending}
+                    productId={product._id}
                 />
 
             </div>
