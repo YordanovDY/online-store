@@ -45,6 +45,7 @@ export default function ProductDetailsComponent() {
 
                 <ProductDescription
                     description={product.description}
+                    creator={product.creator}
                     pending={pending}
                 />
 

@@ -4,7 +4,7 @@ import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/UserContext";
-import ROLES from "../../../constants/roles";
+import { ROLES } from "../../../constants/roles";
 
 export default function Header() {
     const { user } = useContext(UserContext);
@@ -15,7 +15,7 @@ export default function Header() {
             return;
         }
 
-        setEmailLabelStyle(state => state + ' ' + styles[ROLES[user.result.user.role].toLowerCase()]);
+        setEmailLabelStyle(state => state + ' ' + styles[ROLES[user.role].toLowerCase()]);
     }, [user]);
 
     return (
@@ -57,7 +57,7 @@ export default function Header() {
 
                 </ul>
             </nav>
-            {user && <span className={emailLabelStyle}>{user.result.user.email}</span>}
+            {user && <span className={emailLabelStyle}>{user.email}</span>}
 
         </header>
     )

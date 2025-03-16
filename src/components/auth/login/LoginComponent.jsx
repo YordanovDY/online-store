@@ -29,10 +29,10 @@ export default function LoginComponent() {
         // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
 
         // Store Manager
-        const inputData = { email: 'chocho@abv.bg', password: '1234' }
+        // const inputData = { email: 'chocho@abv.bg', password: '1234' }
 
         // Admin
-        // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
+        const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
 
         await mutate(inputData);
         // const user = await getCurrentUser();

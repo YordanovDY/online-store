@@ -8,8 +8,8 @@ export default function PriceItemValue({ value }) {
             {booleanValue === null
                 ? value
                 : booleanValue === 'true'
-                    ? <i class="fa-solid fa-circle-check boolean-value b-true" />
-                    : <i class="fa-solid fa-circle-xmark boolean-value b-false" />
+                    ? <i className="fa-solid fa-circle-check boolean-value b-true" />
+                    : <i className="fa-solid fa-circle-xmark boolean-value b-false" />
             }
         </div>
     );

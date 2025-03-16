@@ -1,7 +1,27 @@
+import { useContext } from 'react';
 import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
+import { UserContext } from '../../../contexts/UserContext';
+import { auth } from '../../../constants/roles';
 
-export default function ProductDescription({ description, pending }) {
+export default function ProductDescription({ description, creator, pending }) {
+    const { user } = useContext(UserContext);
+
+    const controlButtons =
+        auth.isOwner(user?.id, creator) || auth.isAdmin(user?.role)
+            ? <div className="d-flex gap-20">
+                <a className="button btn-secondary" href="#">
+                    Update
+                </a>
+                <a className="button btn-secondary" href="#">
+                    Delete
+                </a>
+                <a className="button btn-secondary" href="#">
+                    Load Goods
+                </a>
+            </div>
+            : ''
+
     return (
         <article className={styles['product-description']}>
             <h4>Product Description</h4>
@@ -32,6 +52,9 @@ export default function ProductDescription({ description, pending }) {
                             <span>Add to Cart</span>
                         </button>
                     </form>
+
+                    {controlButtons}
+
                 </>
             }
 
