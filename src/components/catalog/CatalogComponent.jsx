@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 
 import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
 import useFetch from "../../hooks/useFetch";
+import './CatalogComponent.css';
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
@@ -56,6 +57,7 @@ export default function CatalogComponent() {
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
             <CatalogNav />
+            <Link to={`/products/create/${subcategoryId}`} className="button btn-secondary add-new">Add New Product</Link>
             <ProductsList title={subcategoryName} products={products} isLoading={pendingProducts} />
             <Paginator
                 isLoading={pendingPagesCount}
