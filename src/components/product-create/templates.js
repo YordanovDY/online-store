@@ -32,7 +32,8 @@ const smartphoneOrTablet = (values) => [
     { name: 'Front Camera Resolution', label: 'Front Camera Resolution', type: 'text', placeholder: 'eg. 60 MP', value: values?.['Front Camera Resolution'] || '' },
     { name: 'Rear Camera Resolution', label: 'Rear Camera Resolution', type: 'text', placeholder: 'eg. 50+8 MP', value: values?.['Rear Camera Resolution'] || '' },
     { name: 'Battery', label: 'Battery', type: 'text', placeholder: 'eg. 5000 mAh', value: values?.['Battery'] || '' },
-    { name: 'Fingerprint', label: 'Fingerprint', type: 'checkbox', checked: values?.['Smart TV'] || false },
+    { name: 'Fingerprint', label: 'Fingerprint', type: 'checkbox', checked: values?.['Fingerprint'] || false },
+    { name: '5G', label: '5G', type: 'checkbox', checked: values?.['5G'] || false },
 ]
 
 // TODO: Refrigerators and Freezers, Ovens, Washing Machines
