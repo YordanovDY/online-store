@@ -13,7 +13,6 @@ export default function ProductCreate() {
     const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
     const [pending, subcategory, error] = useFetch(SUBCATEGORY_URL, {});
     const [subcategoryName, setSubcategoryName] = useState('');
-    const [charInputs, setCharInputs] = useState([]);
     const navigate = useNavigate();
 
     const { mutate } = useMutate('/products/catalog', 'POST');
@@ -26,7 +25,10 @@ export default function ProductCreate() {
         { name: 'price', label: 'Price', type: 'text', placeholder: 'eg. 1500.89$', value: '' },
         { name: 'description', label: 'Description', type: 'textarea', placeholder: 'The Lenovo Legion 5 Pro is a gaming laptop designed for high performance...', value: '' },
     ]
-    const { values, changeHandler, addFields } = useForm(inputs);
+
+    const charInputs = charTemplates[subcategoryId]();
+
+    const { values, changeHandler } = useForm([...inputs, ...charInputs]);
 
     useEffect(() => {
         if (error) {
@@ -43,18 +45,8 @@ export default function ProductCreate() {
             return;
         }
 
-        setCharInputs(charTemplates[subcategory._id]());
         setSubcategoryName(subcategory.name);
     }, [subcategory])
-
-    // TODO: Fix controlled form 
-    useEffect(() => {
-        if (!charInputs) {
-            return;
-        }
-
-        addFields(charInputs);
-    }, [charInputs]);
 
 
     const submitHandler = async (e) => {
