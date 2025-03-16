@@ -1,0 +1,10 @@
+.boolean-value {
+    font-size: 26px;
+}
+.b-true{
+    color: #008800;
+}
+
+.b-false{
+    color: #a60000;
+}

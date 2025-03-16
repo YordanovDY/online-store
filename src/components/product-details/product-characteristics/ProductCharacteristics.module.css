@@ -19,6 +19,7 @@
 .price-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 1px solid #afdbff;
     width: 100%;
 }
@@ -26,10 +27,5 @@
 .price-item-key {
     background-color: #E8F4FD;
     padding: 10px 0 10px 20px;
-    flex: 0 0 50%;
-}
-
-.price-item-value {
-    padding: 10px;
     flex: 0 0 50%;
 }
