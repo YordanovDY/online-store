@@ -1,11 +1,23 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
 import { UserContext } from '../../../contexts/UserContext';
 import { auth } from '../../../constants/roles';
+import { Link } from 'react-router';
+import OverlayModal from '../../shared/overlay/OverlayModal';
 
 export default function ProductDescription({ description, creator, pending }) {
     const { user } = useContext(UserContext);
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const setOpenDeleteModal = (status) => {
+        setIsDeleteModalOpen(status)
+    }
+
+    const openDeleteModal = () => {
+        setIsDeleteModalOpen(true);
+    }
 
     const controlButtons =
         auth.isOwner(user?.id, creator) || auth.isAdmin(user?.role)
@@ -13,9 +25,9 @@ export default function ProductDescription({ description, creator, pending }) {
                 <a className="button btn-secondary" href="#">
                     Update
                 </a>
-                <a className="button btn-secondary" href="#">
+                <button className="button btn-secondary" onClick={openDeleteModal}>
                     Delete
-                </a>
+                </button>
                 <a className="button btn-secondary" href="#">
                     Load Goods
                 </a>
@@ -57,7 +69,14 @@ export default function ProductDescription({ description, creator, pending }) {
 
                 </>
             }
-
+            <OverlayModal
+                open={isDeleteModalOpen}
+                setOpen={setOpenDeleteModal}
+                title="Delete Product"
+                message="Are you sure you want to delete this product from the catalog?"
+                actionButtonName="Delete"
+                handler={() => console.log('On delete')}
+            />
         </article>
     );
 }
