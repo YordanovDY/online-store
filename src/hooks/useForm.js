@@ -1,28 +1,21 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function useForm(initialValuesArr) {
-    const [values, setValues] = useState({});
 
-    const addFields = (fieldsArr) => {
-        const newValues = {};
+    const processedValues = {};
 
-        for (const field of fieldsArr) {
-            const isCheckable = field.type === 'checkbox' || field.type === 'radio';
+    for (const field of initialValuesArr) {
+        const isCheckable = field.type === 'checkbox' || field.type === 'radio';
 
-            if (isCheckable) {
-                newValues[field.name] = field.checked;
+        if (isCheckable) {
+            processedValues[field.name] = field.checked;
 
-            } else {
-                newValues[field.name] = field.value;
-            }
+        } else {
+            processedValues[field.name] = field.value;
         }
-
-        setValues(state => ({ ...state, ...newValues }));
     }
 
-    useEffect(() => {
-        addFields(initialValuesArr);
-    }, []);
+    const [values, setValues] = useState(processedValues);
 
     const changeHandler = (e) => {
         const target = e.target;
@@ -39,6 +32,5 @@ export default function useForm(initialValuesArr) {
     return {
         values,
         changeHandler,
-        addFields
     }
 }

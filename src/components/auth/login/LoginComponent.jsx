@@ -5,22 +5,26 @@ import BasicForm from '../../shared/basic-form/BasicForm';
 import useMutate from '../../../hooks/useMutate';
 import { getCurrentUser } from '../../../services/commonServices';
 import { UserContext } from '../../../contexts/UserContext';
+import useForm from '../../../hooks/useForm';
 
 export default function LoginComponent() {
-    const { responseData, mutate, pending, error } = useMutate('/auth/login', 'POST');
+    const { mutate } = useMutate('/auth/login', 'POST');
     const { onSuccessLogin } = useContext(UserContext);
     const navigate = useNavigate();
 
     const inputs = [
-        { name: 'email', label: 'Email', type: 'text', placeholder: 'john.doe@gmail.com' },
-        { name: 'password', label: 'Password', type: 'password', placeholder: '***********' }
+        { name: 'email', label: 'Email', type: 'text', placeholder: 'john.doe@gmail.com', value: '' },
+        { name: 'password', label: 'Password', type: 'password', placeholder: '***********', value: '' }
     ]
+
+    const { values, changeHandler } = useForm(inputs);
+
     const navToRegisterPageEl = <p>Don't have an account? <Link className="hyperlink" to="/register">Register here.</Link></p>
 
     //! DUMMY LOGIN (DELETE AFTER TESTING)
     const loginHandler = async (e) => {
         e.preventDefault();
-        
+
         // Customer
         // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
 
@@ -31,7 +35,7 @@ export default function LoginComponent() {
         // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
 
         await mutate(inputData);
-        const user = await getCurrentUser();
+        // const user = await getCurrentUser();
         onSuccessLogin();
         navigate('/');
     }
@@ -45,6 +49,8 @@ export default function LoginComponent() {
                 additionalElement={navToRegisterPageEl}
                 buttonText="Login"
                 submitHandler={loginHandler}
+                changeHandler={changeHandler}
+                values={values}
             />
         </section>
     );
