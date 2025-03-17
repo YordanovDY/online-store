@@ -4,11 +4,17 @@ import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../contexts/UserContext";
-import { ROLES } from "../../../constants/roles";
+import { auth, ROLES } from "../../../constants/roles";
 
 export default function Header() {
     const { user } = useContext(UserContext);
     const [emailLabelStyle, setEmailLabelStyle] = useState(styles['email-label']);
+    const [navmenu, setNavMenu] = useState(<li>
+        <Link className="nav-btn" to="/login">
+            <i className="fa-solid fa-right-to-bracket"></i>
+            <span>Login</span>
+        </Link>
+    </li>);
 
     useEffect(() => {
         if (!user) {
@@ -16,6 +22,22 @@ export default function Header() {
         }
 
         setEmailLabelStyle(state => state + ' ' + styles[ROLES[user.role].toLowerCase()]);
+
+        if (auth.isCustomer(user.role)) {
+            setNavMenu(<li>
+                <Link className="cart-btn" to="/my-cart">
+                    <i className="fa-solid fa-cart-shopping" />
+                </Link>
+            </li>)
+        }
+
+        if (auth.isStoreManager(user.role) || auth.isSupplier(user.role) || auth.isAdmin(user.role)) {
+            setNavMenu(<li>
+                <Link className="dash-btn" to="/dashboard">
+                    <i className="fa-solid fa-table-cells-large" />
+                </Link>
+            </li>)
+        }
     }, [user]);
 
     return (
@@ -40,20 +62,7 @@ export default function Header() {
                         </a>
                     </li>
 
-                    {user
-                        ? <li>
-                            <Link className="cart-btn" to="/my-cart">
-                                <i className="fa-solid fa-cart-shopping" />
-                            </Link>
-                        </li>
-
-                        : <li>
-                            <Link className="nav-btn" to="/login">
-                                <i className="fa-solid fa-right-to-bracket"></i>
-                                <span>Login</span>
-                            </Link>
-                        </li>
-                    }
+                    {navmenu}
 
                 </ul>
             </nav>

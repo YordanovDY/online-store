@@ -71,7 +71,8 @@
     align-items: baseline;
 }
 
-.cart-btn {
+.cart-btn,
+.dash-btn {
     padding: 20px;
     color: #0039b5;
     background-color: #E8F4FD;
@@ -84,7 +85,8 @@
     cursor: pointer;
 }
 
-.cart-btn:hover {
+.cart-btn:hover,
+.dash-btn:hover {
     color: #ffcc00;
     background-color: white;
 }
