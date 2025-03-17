@@ -61,7 +61,7 @@ export default function Input({ input }) {
                 className="fancy-input-dark"
             >
                 <option value="">Choose {input.label}</option>
-                {input.options.map(option => <option value={option.value}>{option.text}</option>)}
+                {input.options.map(option => <option key={option} value={option}>{option}</option>)}
             </select>
 
         case 'checkbox':

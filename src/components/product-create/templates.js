@@ -36,8 +36,36 @@ const smartphoneOrTablet = (values) => [
     { name: '5G', label: '5G', type: 'checkbox', checked: values?.['5G'] || false },
 ]
 
-// TODO: Refrigerators and Freezers, Ovens, Washing Machines
+const refrigeratorOrFreezer = (values) => [
+    { name: 'Energy Class', label: 'Energy Class', type: 'select', value: values?.['Energy Class'] || '', options: ['A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'] },
+    { name: 'Type', label: 'Type', type: 'select', value: values?.['Type'] || '', options: ['Refrigerator with bottom frizer', 'Refrigerator upper freezer', 'Freezer'] },
+    { name: 'Height', label: 'Height', type: 'text', placeholder: 'eg. 170 cm', value: values?.['Height'] || '' },
+    { name: 'Width', label: 'Width', type: 'text', placeholder: 'eg. 54 cm', value: values?.['Width'] || '' },
+    { name: 'Depth', label: 'Depth', type: 'text', placeholder: 'eg. 59.5 cm', value: values?.['Depth'] || '' },
+    { name: 'Net Volume', label: 'Net Volume', type: 'text', placeholder: 'eg. 268 L', value: values?.['Net Volume'] || '' },
+    { name: 'Color', label: 'Color', type: 'text', placeholder: 'eg. White', value: values?.['Color'] || '' },
+]
 
+const ovens = (values) => [
+    { name: 'Energy Class', label: 'Energy Class', type: 'select', value: values?.['Energy Class'] || '', options: ['A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'] },
+    { name: 'Cooking Functions', label: 'Cooking Functions', type: 'text', placeholder: 'eg. 8', value: values?.['Cooking Functions'] || '' },
+    { name: 'Cavity Volume', label: 'Cavity Volume', type: 'text', placeholder: 'eg. 65 L', value: values?.['Cavity Volume'] || '' },
+    { name: 'Fan', label: 'Fan', type: 'checkbox', checked: values?.['Fan'] || false },
+    { name: 'Timer', label: 'Timer', type: 'checkbox', checked: values?.['Timer'] || false },
+    { name: 'Telescopic Shelves', label: 'Telescopic Shelves', type: 'checkbox', checked: values?.['Telescopic Shelves'] || false },
+]
+
+const washingMachine = (values) => [
+    { name: 'Energy Class', label: 'Energy Class', type: 'select', value: values?.['Energy Class'] || '', options: ['A+++', 'A++', 'A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'] },
+    { name: 'Washing capacity', label: 'Washing capacity', type: 'text', placeholder: 'eg. 7 kg', value: values?.['Washing capacity'] || '' },
+    { name: 'Height', label: 'Height', type: 'text', placeholder: 'eg. 85 cm', value: values?.['Height'] || '' },
+    { name: 'Width', label: 'Width', type: 'text', placeholder: 'eg. 60 cm', value: values?.['Width'] || '' },
+    { name: 'Depth', label: 'Depth', type: 'text', placeholder: 'eg. 40 cm', value: values?.['Depth'] || '' },
+    { name: 'Spin-RPM', label: 'Spin-RPM', type: 'text', placeholder: 'eg. 1200 RPM', value: values?.['Spin-RPM'] || '' },
+    { name: 'Inverter Motor', label: 'Inverter Motor', type: 'checkbox', checked: values?.['Inverter Motor'] || false },
+    { name: 'Steam Program', label: 'Steam Program', type: 'checkbox', checked: values?.['Steam Program'] || false },
+    { name: 'Sound Power Level', label: 'Sound Power Level', type: 'text', placeholder: 'eg. 74 dB', value: values?.['Sound Power Level'] || '' },
+]
 
 const charTemplates = {
     '67ab4d938bca21a3b8a19e06': laptop,
@@ -45,7 +73,9 @@ const charTemplates = {
     '67d18c858883858d3a40554a': tv,
     '67d18c998883858d3a40554d': smartphoneOrTablet,
     '67d18ca68883858d3a405550': smartphoneOrTablet,
-    // TODO: Add Refrigerators and Freezers, Ovens, Washing Machines
+    '67b5c77f4ddf35084847d45c': refrigeratorOrFreezer,
+    '67d18cc18883858d3a405553': ovens,
+    '67d18ccd8883858d3a405556': washingMachine
 }
 
 export default charTemplates;
