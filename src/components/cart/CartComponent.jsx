@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 import useNotification from '../../hooks/useNotification';
 import LoadingSpinner from '../shared/loading-spinner/LoadingSpinner';

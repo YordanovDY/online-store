@@ -16,6 +16,7 @@ export default function CartItem({ name, imageUrl, price, quantity, productId, r
                 <span>{name}</span>
                 <span>{price}$</span>
                 <button
+                    disabled={pending}
                     onClick={async () => {
                         try {
                             await removeHandler();

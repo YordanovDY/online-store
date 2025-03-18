@@ -52,7 +52,7 @@ export function useCart() {
 }
 
 export function useRemoveItem(productId) {
-    const [pending, setPending] = useState(true);
+    const [pending, setPending] = useState(false);
 
     const removeHandler = async () => {
         setPending(true);
