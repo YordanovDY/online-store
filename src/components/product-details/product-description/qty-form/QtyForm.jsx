@@ -1,9 +1,11 @@
 import { useRef } from "react";
+import useMutate from "../../../../hooks/useMutate";
 import useNotification from "../../../../hooks/useNotification";
 
 export default function QtyForm({ productId }) {
     const qtyRef = useRef();
     const { notify, notificationAlert } = useNotification();
+    const { mutate, pending } = useMutate('/user/cart', 'POST');
 
     const incrementQuantityHandler = () => {
         const currentValue = Number(qtyRef.current.value);
@@ -24,9 +26,17 @@ export default function QtyForm({ productId }) {
 
     const submitHandler = async (formData) => {
         const quantity = formData.get('quantity');
-        const payload = { product: productId, quantity: Number(quantity) };
-        console.log(payload);
-        notify(`${quantity}x product has been added to cart`, 'success');
+        const payload = { item: productId, quantity: Number(quantity) };
+
+        try {
+            const result = await mutate(payload);
+            console.log(result);
+            
+            notify(`${quantity}x product has been added to cart`, 'success');
+
+        } catch (err) {
+            notify(err.message, 'error');
+        }
     }
 
     return (
@@ -47,7 +57,7 @@ export default function QtyForm({ productId }) {
                         </svg>
                     </button>
                 </div>
-                <button className="button btn-primary">
+                <button disabled={pending} className="button btn-primary">
                     <i className="fa-solid fa-cart-shopping" />
                     <span>Add to Cart</span>
                 </button>

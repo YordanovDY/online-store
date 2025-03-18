@@ -32,13 +32,15 @@ export default function useMutate(url, method, additionalHeaders = {}) {
 
             result = await response.json();
             setResponseData(result);
+            return result;
+            
         } catch (err) {
             result = err;
             setError(err);
+            throw new Error(err);
 
         } finally {
             setPending(false);
-            return result;
         }
     }
 
