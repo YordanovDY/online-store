@@ -1,7 +1,9 @@
 import { useRef } from "react";
+import useNotification from "../../../../hooks/useNotification";
 
 export default function QtyForm({ productId }) {
     const qtyRef = useRef();
+    const { notify, notificationAlert } = useNotification();
 
     const incrementQuantityHandler = () => {
         const currentValue = Number(qtyRef.current.value);
@@ -24,6 +26,7 @@ export default function QtyForm({ productId }) {
         const quantity = formData.get('quantity');
         const payload = { product: productId, quantity: Number(quantity) };
         console.log(payload);
+        notify(`${quantity}x product has been added to cart`, 'success');
     }
 
     return (
@@ -49,6 +52,7 @@ export default function QtyForm({ productId }) {
                     <span>Add to Cart</span>
                 </button>
             </form>
+            {notificationAlert}
         </>
     );
 }
