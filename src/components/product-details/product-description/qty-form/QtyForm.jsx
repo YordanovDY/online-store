@@ -29,9 +29,7 @@ export default function QtyForm({ productId }) {
         const payload = { item: productId, quantity: Number(quantity) };
 
         try {
-            const result = await mutate(payload);
-            console.log(result);
-            
+            await mutate(payload);
             notify(`${quantity}x product has been added to cart`, 'success');
 
         } catch (err) {

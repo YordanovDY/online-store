@@ -23,20 +23,20 @@
     align-items: center;
 }
 
-.item:nth-child(odd) {
+.item {
     display: flex;
-    gap: 10px;
     align-items: center;
-    background-color: #E8F4FD;
+    justify-content: space-between;
     padding: 20px;
+    width: 440px
+}
+
+.item:nth-child(odd) {
+    background-color: #E8F4FD;
 }
 
 .item:nth-child(even) {
-    display: flex;
-    gap: 10px;
-    align-items: center;
     background-color: #FFFFFF;
-    padding: 20px;
 }
 
 .item-image {
@@ -79,12 +79,17 @@
 }
 
 @media screen and (max-width:820px) {
-    .main{
+    .main {
         flex-direction: column;
         gap: 20px;
     }
 
-    .items-list{
+    .items-list {
         padding: 15px;
+    }
+
+    .item {
+        width: unset;
+        gap: 10px;
     }
 }

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router";
 
+const baseUrl = '/user/cart'
+
 export function useCart() {
     const [items, setItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -14,7 +16,7 @@ export function useCart() {
 
         setPending(true);
 
-        api.get('/user/cart', signal)
+        api.get(baseUrl, signal)
             .then(items => {
                 setItems(items);
                 return items;
@@ -29,8 +31,7 @@ export function useCart() {
                 if (err.name === 'AbortError') {
                     return;
                 }
-                console.log(err);
-                
+
                 navigate('/404');
             })
 
@@ -48,6 +49,27 @@ export function useCart() {
         totalPrice,
         pending,
     }
+}
+
+export function useRemoveItem(productId) {
+    const [pending, setPending] = useState(true);
+
+    const removeHandler = async () => {
+        setPending(true);
+
+        try {
+            const result = await api.del(baseUrl + `/${productId}`);
+            return result.message;
+
+        } catch (err) {
+            throw new Error(err.message);
+
+        } finally {
+            setPending(false);
+        }
+    }
+
+    return { removeHandler, pending };
 }
 
 function calculateTotalPrice(items) {
