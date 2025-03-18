@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import styles from './LoginComponent.module.css';
 import BasicForm from '../../shared/basic-form/BasicForm';
 import useMutate from '../../../hooks/useMutate';
-import { getCurrentUser } from '../../../services/commonServices';
 import { UserContext } from '../../../contexts/UserContext';
 import useForm from '../../../hooks/useForm';
 
@@ -35,7 +34,6 @@ export default function LoginComponent() {
         // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
 
         await mutate(inputData);
-        // const user = await getCurrentUser();
         onSuccessLogin();
         navigate('/');
     }
