@@ -6,7 +6,7 @@ import { CartContext } from '../../../../contexts/CartContext';
 
 export default function CartItem({ name, imageUrl, price, quantity, productId, removeItemFromArray }) {
     const { pending, removeHandler } = useRemoveItem(productId);
-    const { notifySuccess, notifyFail } = useContext(CartContext);
+    const { notifySuccess, notifyFail, priceRecalc } = useContext(CartContext);
 
     return (
         <>
@@ -21,6 +21,7 @@ export default function CartItem({ name, imageUrl, price, quantity, productId, r
                         try {
                             await removeHandler();
                             notifySuccess();
+                            priceRecalc(price * quantity);
                             removeItemFromArray();
                         } catch (err) {
                             notifyFail();

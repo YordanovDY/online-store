@@ -10,6 +10,10 @@ export function useCart() {
     const [pending, setPending] = useState(true);
     const navigate = useNavigate();
 
+    const recalcTotalPrice = (subtrahend) => {
+        setTotalPrice(state => state - subtrahend);
+    }
+
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
@@ -48,6 +52,7 @@ export function useCart() {
         items,
         totalPrice,
         pending,
+        recalcTotalPrice
     }
 }
 

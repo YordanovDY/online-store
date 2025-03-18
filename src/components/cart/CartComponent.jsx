@@ -7,7 +7,7 @@ import ItemsList from './items-list/ItemsList';
 import Summary from './summary/Summary';
 
 export default function CartComponent() {
-    const { pending, items, totalPrice } = useCart();
+    const { pending, items, totalPrice, recalcTotalPrice } = useCart();
     const { notificationAlert, notify } = useNotification();
 
     const onRemoveSuccess = () => {
@@ -18,8 +18,12 @@ export default function CartComponent() {
         notify('Something went wrong. Please, try again later!', 'error');
     }
 
+    const priceRecalc = (subtrahend) => {
+        recalcTotalPrice(subtrahend);
+    }
+
     return (
-        <CartContext.Provider value={{ notifySuccess: onRemoveSuccess, notifyFail: onRemoveFail }}>
+        <CartContext.Provider value={{ notifySuccess: onRemoveSuccess, notifyFail: onRemoveFail, priceRecalc }}>
             {
                 pending
                     ? <LoadingSpinner />
