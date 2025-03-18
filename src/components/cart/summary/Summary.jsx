@@ -7,7 +7,7 @@ export default function Summary({ totalPrice }) {
             <ul className={styles['items-list']}>
                 <li className={styles['price-item']}>
                     <div className={styles['price-item-key-bold']}>Total Price</div>
-                    <div className={styles['price-item-value-bold']}>{totalPrice}$</div>
+                    <div className={styles['price-item-value-bold']}>{totalPrice.toFixed(2)}$</div>
                 </li>
                 <li><Link to="/purchase-confirmation" className="button btn-primary">Purchase</Link></li>
             </ul>

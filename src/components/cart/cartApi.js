@@ -76,7 +76,7 @@ function calculateTotalPrice(items) {
     let total = 0;
 
     for (const item of items) {
-        total += item.product.price;
+        total += item.product.price * item.quantity;
     }
 
     return total;
