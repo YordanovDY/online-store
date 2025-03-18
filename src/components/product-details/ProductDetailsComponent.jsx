@@ -13,18 +13,6 @@ export default function ProductDetailsComponent() {
     const PRODUCT_URL = `/products/catalog/${productId}`
     const [pending, product, error] = useFetch(PRODUCT_URL, {});
 
-    // TODO: Fix qty input
-
-    // const [quantity, setQuantity] = useState(1);
-
-    // const incrementQuantityHandler = () => {
-    //     setQuantity(state => state + 1);
-    // }
-
-    // const decrementQuantityHandler = () => {
-    //     setQuantity(state => state - 1);
-    // }
-
     useEffect(() => {
         if (error) {
             navigate('/404');
