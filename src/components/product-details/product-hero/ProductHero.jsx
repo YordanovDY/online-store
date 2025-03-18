@@ -1,12 +1,9 @@
+import { onImageErrorHandler } from '../../../utils/onErrorUtil';
 import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
 import Price from '../../shared/price/Price';
 import './ProductHero.css';
 
 export default function ProductHero({ brand, name, imageUrl, quantity, price, pending }) {
-
-    const onErrorHandler = (e) => {
-        e.currentTarget.src = '/images/no-image.png'
-    }
 
     return (
         <aside className="product-hero d-flex f-direction-column gap-20 ai-center">
@@ -14,7 +11,7 @@ export default function ProductHero({ brand, name, imageUrl, quantity, price, pe
                 ? <LoadingSpinner />
                 : <>
                     <picture>
-                        <img src={imageUrl} alt={name} onError={onErrorHandler} />
+                        <img src={imageUrl} alt={name} onError={onImageErrorHandler} />
                         <figcaption>{brand}</figcaption>
                     </picture>
                     <h2>{name}</h2>
