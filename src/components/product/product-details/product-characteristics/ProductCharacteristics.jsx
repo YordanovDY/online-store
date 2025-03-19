@@ -1,4 +1,4 @@
-import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
+import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
 import PriceItemValue from './price-item-value/PriceItemValue';
 import styles from './ProductCharacteristics.module.css';
 

@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import BasicForm from "../shared/basic-form/BasicForm";
-import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
-import charTemplates from "./templates";
-import useForm from "../../hooks/useForm";
-import useMutate from "../../hooks/useMutate";
+import useFetch from "../../../hooks/useFetch";
+import BasicForm from "../../shared/basic-form/BasicForm";
+import LoadingSpinner from "../../shared/loading-spinner/LoadingSpinner";
+import { charTemplates, baseProductTemplate } from "../templates";
+import useForm from "../../../hooks/useForm";
+import useMutate from "../../../hooks/useMutate";
 
 export default function ProductCreate() {
     const { subcategoryId } = useParams();
@@ -17,14 +17,7 @@ export default function ProductCreate() {
 
     const { mutate } = useMutate('/products/catalog', 'POST');
 
-    const inputs = [
-        { name: 'brand', label: 'Brand', type: 'text', placeholder: 'eg. Lenovo', value: '' },
-        { name: 'name', label: 'Name', type: 'text', placeholder: 'eg. Lenovo Legion 5 Pro', value: '' },
-        { name: 'imageUrl', label: 'Image URL', type: 'text', placeholder: 'https://...', value: '' },
-        { name: 'quantity', label: 'Initial Quantity', type: 'text', placeholder: 'eg. 50', value: '' },
-        { name: 'price', label: 'Price', type: 'text', placeholder: 'eg. 1500.89$', value: '' },
-        { name: 'description', label: 'Description', type: 'textarea', placeholder: 'The Lenovo Legion 5 Pro is a gaming laptop designed for high performance...', value: '' },
-    ]
+    const inputs = baseProductTemplate();
 
     const charInputs = charTemplates[subcategoryId]();
 

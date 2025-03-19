@@ -8,11 +8,12 @@ import NotFoundComponent from "./components/not-found/NotFoundComponent";
 import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";
-import ProductDetailsComponent from "./components/product-details/ProductDetailsComponent";
-import ProductCreate from "./components/product-create/ProductCreate";
+import ProductDetailsComponent from "./components/product/product-details/ProductDetailsComponent";
+import ProductCreate from "./components/product/product-create/ProductCreate";
 import { UserContext } from "./contexts/UserContext";
 import LoadingSpinner from "./components/shared/loading-spinner/LoadingSpinner";
 import useFetch from "./hooks/useFetch";
+import ProductUpdate from "./components/product/product-update/ProductUpdate";
 
 function App() {
 
@@ -22,10 +23,10 @@ function App() {
     // TODO: Get user data on each re-render;
 
     useEffect(() => {
-        if(pending){
+        if (pending) {
             return;
         }
-        
+
         setRequireRender(false);
     }, [pending])
 
@@ -51,6 +52,7 @@ function App() {
                             <Route path="/my-cart" element={<CartComponent />} />
                             <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
                             <Route path="/products/create/:subcategoryId" element={<ProductCreate />} />
+                            <Route path="/products/:productId/edit" element={<ProductUpdate />} />
                             <Route path="*" element={<NotFoundComponent />} />
                         </Routes>
 

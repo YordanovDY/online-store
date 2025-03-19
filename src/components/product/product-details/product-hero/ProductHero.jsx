@@ -1,6 +1,6 @@
-import { onImageErrorHandler } from '../../../utils/onErrorUtil';
-import LoadingSpinner from '../../shared/loading-spinner/LoadingSpinner';
-import Price from '../../shared/price/Price';
+import { onImageErrorHandler } from '../../../../utils/onErrorUtil';
+import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
+import Price from '../../../shared/price/Price';
 import './ProductHero.css';
 
 export default function ProductHero({ brand, name, imageUrl, quantity, price, pending }) {

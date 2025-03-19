@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './ProductDetailsComponent.css';
 import { useNavigate, useParams } from 'react-router';
 import ProductHero from './product-hero/ProductHero';
 import ProductDescription from './product-description/ProductDescription';
 import ProductCharacteristics from './product-characteristics/ProductCharacteristics';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch';
 
 export default function ProductDetailsComponent() {
     const { productId } = useParams();

@@ -67,7 +67,7 @@ const washingMachine = (values) => [
     { name: 'Sound Power Level', label: 'Sound Power Level', type: 'text', placeholder: 'eg. 74 dB', value: values?.['Sound Power Level'] || '' },
 ]
 
-const charTemplates = {
+export const charTemplates = {
     '67ab4d938bca21a3b8a19e06': laptop,
     '67a35499351f45a8c7773944': pc,
     '67d18c858883858d3a40554a': tv,
@@ -78,4 +78,11 @@ const charTemplates = {
     '67d18ccd8883858d3a405556': washingMachine
 }
 
-export default charTemplates;
+export const baseProductTemplate = (values) => [
+    { name: 'brand', label: 'Brand', type: 'text', placeholder: 'eg. Lenovo', value: values?.['brand'] || '' },
+    { name: 'name', label: 'Name', type: 'text', placeholder: 'eg. Lenovo Legion 5 Pro', value: values?.['name'] || '' },
+    { name: 'imageUrl', label: 'Image URL', type: 'text', placeholder: 'https://...', value: values?.['imageUrl'] || '' },
+    { name: 'quantity', label: 'Initial Quantity', type: 'text', placeholder: 'eg. 50', value: values?.['quantity'] || '' },
+    { name: 'price', label: 'Price', type: 'text', placeholder: 'eg. 1500.89$', value: values?.['price'] || '' },
+    { name: 'description', label: 'Description', type: 'textarea', placeholder: 'The Lenovo Legion 5 Pro is a gaming laptop designed for high performance...', value: values?.['description'] || '' },
+]

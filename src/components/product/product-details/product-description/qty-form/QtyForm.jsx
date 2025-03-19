@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import useMutate from "../../../../hooks/useMutate";
-import useNotification from "../../../../hooks/useNotification";
+import useMutate from "../../../../../hooks/useMutate";
+import useNotification from "../../../../../hooks/useNotification";
 
 export default function QtyForm({ productId }) {
     const qtyRef = useRef();
