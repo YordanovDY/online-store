@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import useFetch from "../../../hooks/useFetch";
-import BasicForm from "../../shared/basic-form/BasicForm";
+import ControlledForm from "../../shared/controlled-form/ControlledForm";
 import LoadingSpinner from "../../shared/loading-spinner/LoadingSpinner";
 import { charTemplates, baseProductTemplate } from "../templates";
 import useForm from "../../../hooks/useForm";
@@ -66,7 +66,7 @@ export default function ProductCreate() {
         <section>
             {pending
                 ? <LoadingSpinner />
-                : <BasicForm
+                : <ControlledForm
                     title={`Add New Product to ${subcategoryName}`}
                     inputsArray={inputs}
                     buttonText="Add Product"

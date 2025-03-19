@@ -1,8 +1,8 @@
 import { InputContext } from '../../../contexts/InputContext';
-import styles from './BasicForm.module.css';
+import styles from './ControlledForm.module.css';
 import FormInput from './form-input/FormInput';
 
-export default function BasicForm({
+export default function ControlledForm({
     title,
     inputsArray,
     additionalElement,

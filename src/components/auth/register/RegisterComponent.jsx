@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import BasicForm from '../../shared/basic-form/BasicForm';
+import ControlledForm from '../../shared/controlled-form/ControlledForm';
 import styles from './RegisterComponent.module.css';
 
 export default function RegisterComponent() {
@@ -13,7 +13,7 @@ export default function RegisterComponent() {
    const navToLoginPageEl = <p>Already have an account? <Link className="hyperlink" to="/login">Login here.</Link></p>
    return (
       <section className={styles['register-section']}>
-         <BasicForm
+         <ControlledForm
             title="Register"
             inputsArray={inputs}
             additionalElement={navToLoginPageEl}

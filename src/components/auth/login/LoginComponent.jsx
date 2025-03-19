@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router';
 import { useContext } from 'react';
 import styles from './LoginComponent.module.css';
-import BasicForm from '../../shared/basic-form/BasicForm';
+import ControlledForm from '../../shared/controlled-form/ControlledForm';
 import useMutate from '../../../hooks/useMutate';
 import { UserContext } from '../../../contexts/UserContext';
 import useForm from '../../../hooks/useForm';
@@ -25,10 +25,10 @@ export default function LoginComponent() {
         e.preventDefault();
 
         // Customer
-        const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
+        // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
 
         // Store Manager
-        // const inputData = { email: 'chocho@abv.bg', password: '1234' }
+        const inputData = { email: 'chocho@abv.bg', password: '1234' }
 
         // Admin
         // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
@@ -41,7 +41,7 @@ export default function LoginComponent() {
 
     return (
         <section className={styles['login-section']}>
-            <BasicForm
+            <ControlledForm
                 title="Login"
                 inputsArray={inputs}
                 additionalElement={navToRegisterPageEl}
