@@ -1,0 +1,18 @@
+.field-border {
+    display: flex;
+    border: 1px solid #afdbff;
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 400px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.label{
+    color: #0039b5;
+}
