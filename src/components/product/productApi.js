@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import api from "../../services/api";
 import { baseProductTemplate, charTemplates } from "./templates";
 import { getFormData } from "../../utils/formUtil";
+import useNotification from "../../hooks/useNotification";
 
 const baseUrl = '/products/catalog';
 
@@ -11,6 +12,7 @@ export function useUpdateProduct(productId) {
     const [inputs, setInputs] = useState([]);
     const [charInputs, setCharInputs] = useState([]);
     const [productName, setProductName] = useState('');
+    const {notify, notificationAlert} = useNotification();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -59,8 +61,7 @@ export function useUpdateProduct(productId) {
 
 
         } catch (err) {
-            console.error(err);
-
+            notify(err.message, 'error');
         }
     }
 
@@ -69,6 +70,7 @@ export function useUpdateProduct(productId) {
         inputs,
         charInputs,
         productName,
+        notificationAlert,
         submitHandler
     }
 }

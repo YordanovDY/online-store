@@ -5,7 +5,7 @@ import BasicForm from "../../shared/basic-form/BasicForm";
 
 export default function ProductUpdate() {
     const { productId } = useParams();
-    const { pending, inputs, charInputs, productName, submitHandler} = useUpdateProduct(productId);
+    const { pending, inputs, charInputs, productName, notificationAlert, submitHandler} = useUpdateProduct(productId);
 
     return (
         <section>
@@ -20,6 +20,7 @@ export default function ProductUpdate() {
                     submitHandler={submitHandler}
                 />
             }
+            {notificationAlert}
         </section>
     );
 }
