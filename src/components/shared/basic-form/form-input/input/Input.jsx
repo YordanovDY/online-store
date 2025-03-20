@@ -48,14 +48,11 @@ export default function Input({ input }) {
             return <select
                 id={input.name}
                 name={input.name}
+                defaultValue={input.value}
                 className="fancy-input-dark"
             >
                 <option value="">Choose {input.label}</option>
-                {input.options.map(option => {
-                    return input.value === option
-                        ? <option key={option} value={option} selected>{option}</option>
-                        : <option key={option} value={option}>{option}</option>
-                })}
+                {input.options.map(option => <option key={option} value={option}>{option}</option>)}
             </select>
 
         case 'checkbox':
