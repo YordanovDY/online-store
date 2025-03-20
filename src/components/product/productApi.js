@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
 import api from "../../services/api";
 import { baseProductTemplate, charTemplates } from "./templates";
+import { getFormData } from "../../utils/formUtil";
 
 const baseUrl = '/products/catalog';
 
@@ -43,9 +44,24 @@ export function useUpdateProduct(productId) {
         }
     }, [productId]);
 
-    const submitHandler = (formData) => {
-        const data = Object.fromEntries(formData);
-        console.log(data);
+    const submitHandler = async (formData) => {
+        const data = getFormData(formData);
+
+        const { brand, name, imageUrl, quantity, price, description, ...chars } = data;
+
+        const characteristics = transformCharacteristics(chars);
+
+        const payload = { brand, name, imageUrl, quantity: Number(quantity), price: Number(price), description, characteristics };
+
+        try {
+            await api.put(`${baseUrl}/${productId}`, payload);
+            navigate(`/products/${productId}/details`);
+
+
+        } catch (err) {
+            console.error(err);
+
+        }
     }
 
     return {
@@ -90,4 +106,15 @@ function getCharInputsArr(product) {
     }
 
     return charTemplates[subcategory](values);
+}
+
+function transformCharacteristics(chars) {
+    let characteristics = [];
+    const characteristicsArr = Object.entries(chars);
+
+    for (const [char, value] of characteristicsArr) {
+        characteristics.push({ char, value });
+    }
+
+    return characteristics;
 }
