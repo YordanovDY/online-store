@@ -3,7 +3,8 @@ import userTemplate from "../constants/userTemplate";
 
 export const UserContext = createContext({
     user: userTemplate,
-    setUserData: () => null
+    setUserData: () => null,
+    clearUserData: () => null
 });
 
 

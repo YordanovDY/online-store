@@ -40,9 +40,14 @@ export function useAuth() {
         setUser(state => ({ ...state, id: userData.id, email: userData.email, role: userData.role }));
     }
 
+    const clearUserData = () => {
+        setUser(Object.assign({}, userTemplate));
+    }
+
     return {
         pending,
         user,
-        setUserData
+        setUserData,
+        clearUserData
     }
 }

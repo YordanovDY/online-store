@@ -3,7 +3,7 @@ import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
 import { useAuth } from "./authApi";
 
 export function UserProvider({ children }) {
-    const {pending, user, setUserData} = useAuth();
+    const {pending, user, setUserData, clearUserData} = useAuth();
 
     return (
         <>
@@ -14,7 +14,7 @@ export function UserProvider({ children }) {
                 </div>
 
                 :
-                <UserContext.Provider value={{ user, setUserData }}>
+                <UserContext.Provider value={{ user, setUserData, clearUserData }}>
                     {children}
                 </UserContext.Provider>
             }
