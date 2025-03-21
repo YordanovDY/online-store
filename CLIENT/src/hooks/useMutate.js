@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const hostname = 'http://localhost:3030';
 
 export default function useMutate(url, method, additionalHeaders = {}) {
+    const abortRef = useRef();
+
     const [pending, setPending] = useState(false);
     const [responseData, setResponseData] = useState({});
     const [error, setError] = useState(null);
@@ -12,6 +14,7 @@ export default function useMutate(url, method, additionalHeaders = {}) {
             method,
             headers: { ...additionalHeaders },
             credentials: 'include',
+            signal: abortRef.current.signal
         };
 
         if (data) {
@@ -33,7 +36,7 @@ export default function useMutate(url, method, additionalHeaders = {}) {
             result = await response.json();
             setResponseData(result);
             return result;
-            
+
         } catch (err) {
             result = err;
             setError(err);
@@ -43,6 +46,15 @@ export default function useMutate(url, method, additionalHeaders = {}) {
             setPending(false);
         }
     }
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        abortRef.current = abortController;
+
+        return () => {
+            abortController.abort();
+        }
+    }, []);
 
     return {
         responseData,
