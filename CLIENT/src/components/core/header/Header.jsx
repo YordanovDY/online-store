@@ -2,12 +2,12 @@ import { Link } from "react-router";
 import Categories from "./categories/Categories";
 import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../contexts/UserContext";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../../../contexts/UserContext";
 import { auth, ROLES } from "../../../constants/roles";
 
 export default function Header() {
-    const { user } = useContext(UserContext);
+    const { user } = useUserContext();
     const [emailLabelStyle, setEmailLabelStyle] = useState(styles['email-label']);
     const [navmenu, setNavMenu] = useState(<li>
         <Link className="nav-btn" to="/login">
@@ -17,7 +17,7 @@ export default function Header() {
     </li>);
 
     useEffect(() => {
-        if (!user) {
+        if (!user.isAuthenticated()) {
             return;
         }
 

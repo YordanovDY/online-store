@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import { auth } from "../../constants/roles";
 import ProductsList from "../shared/products-list/ProductsList";
@@ -6,13 +6,13 @@ import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
 import useFetch from "../../hooks/useFetch";
 import './CatalogComponent.css';
-import { UserContext } from "../../contexts/UserContext";
+import { useUserContext } from "../../contexts/UserContext";
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
     const [page, setPage] = useState(1);
-    const { user } = useContext(UserContext);
+    const { user } = useUserContext();
 
     const PRODUCTS_URL = `/products/catalog/${subcategoryId}/products?page=${page}`;
     const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, []);

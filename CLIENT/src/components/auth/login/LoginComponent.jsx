@@ -1,14 +1,11 @@
 import { Link, useNavigate } from 'react-router';
-import { useContext } from 'react';
 import styles from './LoginComponent.module.css';
 import ControlledForm from '../../shared/controlled-form/ControlledForm';
 import useMutate from '../../../hooks/useMutate';
-import { UserContext } from '../../../contexts/UserContext';
 import useForm from '../../../hooks/useForm';
 
 export default function LoginComponent() {
     const { mutate } = useMutate('/auth/login', 'POST');
-    const { onSuccessLogin } = useContext(UserContext);
     const navigate = useNavigate();
 
     const inputs = [
@@ -34,7 +31,6 @@ export default function LoginComponent() {
         // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
 
         await mutate(inputData);
-        onSuccessLogin();
         navigate('/');
     }
     //! -----------DUMMY LOGIN------------

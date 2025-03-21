@@ -6,3 +6,9 @@ export const UserContext = createContext({
     setUserData: () => null
 });
 
+
+export function useUserContext() {
+    const data = useContext(UserContext);
+
+    return data;
+}

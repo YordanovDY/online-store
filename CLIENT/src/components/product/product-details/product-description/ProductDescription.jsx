@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
-import { UserContext } from '../../../../contexts/UserContext';
+import { useUserContext } from '../../../../contexts/UserContext';
 import { auth } from '../../../../constants/roles';
 import { Link, useNavigate } from 'react-router';
 import OverlayModal from '../../../shared/overlay/OverlayModal';
@@ -9,7 +9,7 @@ import useMutate from '../../../../hooks/useMutate';
 import QtyForm from './qty-form/QtyForm';
 
 export default function ProductDescription({ description, creator, pending, productId }) {
-    const { user } = useContext(UserContext);
+    const { user } = useUserContext();
     const { mutate } = useMutate(`/products/catalog/${productId}`, 'DELETE');
     const navigate = useNavigate();
 
