@@ -14,6 +14,10 @@ export function useAuth() {
 
         api.get('/auth/user', signal)
             .then(result => {
+                if (!result) {
+                    return setUser(userTemplate);
+                }
+
                 setUser(state => ({ ...state, id: result.id, email: result.email, role: result.role }));
             })
             .catch(err => {
