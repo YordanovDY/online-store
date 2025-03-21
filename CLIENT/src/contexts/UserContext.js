@@ -1,3 +1,8 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
+import userTemplate from "../constants/userTemplate";
 
-export const UserContext = createContext();
+export const UserContext = createContext({
+    user: userTemplate,
+    setUserData: () => null
+});
+
