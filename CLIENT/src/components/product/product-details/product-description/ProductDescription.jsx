@@ -2,7 +2,6 @@ import { useState } from 'react';
 import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
 import { useUserContext } from '../../../../contexts/UserContext';
-import { auth } from '../../../../constants/roles';
 import { Link, useNavigate } from 'react-router';
 import OverlayModal from '../../../shared/overlay/OverlayModal';
 import useMutate from '../../../../hooks/useMutate';
@@ -29,7 +28,7 @@ export default function ProductDescription({ description, creator, pending, prod
     }
 
     const controlButtons =
-        auth.isOwner(user?.id, creator) || auth.isAdmin(user?.role)
+        user.isOwner(creator) || user.isAdmin()
             ? <div className="d-flex gap-20">
                 <Link className="button btn-secondary" to={`/products/${productId}/edit`}>
                     Update

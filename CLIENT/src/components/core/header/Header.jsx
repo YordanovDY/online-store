@@ -4,7 +4,7 @@ import SearchForm from "./search-form/SearchForm";
 import styles from './Header.module.css';
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
-import { auth, ROLES } from "../../../constants/roles";
+import { ROLES } from "../../../constants/roles";
 
 export default function Header() {
     const { user } = useUserContext();
@@ -23,7 +23,7 @@ export default function Header() {
 
         setEmailLabelStyle(state => state + ' ' + styles[ROLES[user.role].toLowerCase()]);
 
-        if (auth.isCustomer(user.role)) {
+        if (user.isCustomer()) {
             setNavMenu(<li>
                 <Link className="cart-btn" to="/my-cart">
                     <i className="fa-solid fa-cart-shopping" />
@@ -31,7 +31,7 @@ export default function Header() {
             </li>)
         }
 
-        if (auth.isStoreManager(user.role) || auth.isSupplier(user.role) || auth.isAdmin(user.role)) {
+        if (user.isStoreManager() || user.isSupplier() || user.isAdmin()) {
             setNavMenu(<li>
                 <Link className="dash-btn" to="/dashboard">
                     <i className="fa-solid fa-table-cells-large" />

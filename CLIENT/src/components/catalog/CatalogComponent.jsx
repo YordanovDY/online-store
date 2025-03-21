@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
-import { auth } from "../../constants/roles";
 import ProductsList from "../shared/products-list/ProductsList";
 import CatalogNav from "./catalog-nav/CatalogNav";
 import Paginator from "../shared/paginator/Paginator";
@@ -26,7 +25,7 @@ export default function CatalogComponent() {
 
     const [pendingPagesCount, pagesCount, pagesCountError] = useFetch(PAGES_URL, 1);
 
-    const createBtn = auth.isStoreManager(user?.role) || auth.isAdmin(user?.role)
+    const createBtn = user.isStoreManager() || user.isAdmin()
         ? <Link to={`/products/create/${subcategoryId}`} className="button btn-secondary add-new">Add New Product</Link>
         : ''
 
