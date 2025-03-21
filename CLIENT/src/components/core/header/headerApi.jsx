@@ -12,14 +12,23 @@ export function useHeaderNav() {
     const [emailLabel, setEmailLabel] = useState('');
     const navigate = useNavigate();
 
-    const [navmenu, setNavMenu] = useState(
+    const guestNav = <>
         <li>
-            <Link className="nav-btn" to="/login">
-                <i className="fa-solid fa-right-to-bracket"></i>
-                <span>Login</span>
-            </Link>
+            <div className={styles['sign-in-btn']}>
+                <Link className="nav-btn" to="/login">
+                    <i className="fa-solid fa-right-to-bracket"></i>
+                    <span>Login</span>
+                </Link>
+
+                <Link className="nav-btn" to="/register">
+                    <i className="fa-solid fa-right-to-bracket"></i>
+                    <span>Register</span>
+                </Link>
+            </div>
         </li>
-    );
+    </>
+
+    const [navmenu, setNavMenu] = useState(guestNav);
 
     const logoutHandler = async () => {
         try {
@@ -32,6 +41,37 @@ export function useHeaderNav() {
         }
     }
 
+    const customerNav =
+        <>
+            <li className="relative">
+                <button className={styles['logout-btn']} onClick={logoutHandler}>
+                    <i className="fa-solid fa-right-from-bracket" />
+                    <span>
+                        Logout
+                    </span>
+                </button>
+
+                <Link className="cart-btn" to="/my-cart">
+                    <i className="fa-solid fa-cart-shopping" />
+                </Link>
+            </li>
+        </>
+
+    const employeeNav = <>
+        <li className="relative">
+            <button className={styles['logout-btn']} onClick={logoutHandler}>
+                <i className="fa-solid fa-right-from-bracket" />
+                <span>
+                    Logout
+                </span>
+            </button>
+
+            <Link className="dash-btn" to="/dashboard">
+                <i className="fa-solid fa-table-cells-large" />
+            </Link>
+        </li>
+    </>
+
     useEffect(() => {
         if (user.isAuthenticated()) {
             const emailLabelStyle = [styles['email-label'], styles[ROLES[user.role].toLowerCase()]];
@@ -39,50 +79,17 @@ export function useHeaderNav() {
         }
 
         if (!user.isAuthenticated()) {
-            setNavMenu(
-                <li>
-                    <Link className="nav-btn" to="/login">
-                        <i className="fa-solid fa-right-to-bracket"></i>
-                        <span>Login</span>
-                    </Link>
-                </li>
-            );
+            setNavMenu(guestNav);
 
             setEmailLabel('');
         }
 
         if (user.isCustomer()) {
-            setNavMenu(
-                <>
-                    <li>
-                        <Link className="cart-btn" to="/my-cart">
-                            <i className="fa-solid fa-cart-shopping" />
-                        </Link>
-                    </li>
-                    <li>
-                        <button className="nav-btn" onClick={logoutHandler}>
-                            Logout
-                        </button>
-                    </li>
-                </>
-            )
+            setNavMenu(customerNav);
         }
 
         if (user.isStoreManager() || user.isSupplier() || user.isAdmin()) {
-            setNavMenu(
-                <>
-                    <li>
-                        <Link className="dash-btn" to="/dashboard">
-                            <i className="fa-solid fa-table-cells-large" />
-                        </Link>
-                    </li>
-                    <li>
-                        <button className="nav-btn" onClick={logoutHandler}>
-                            Logout
-                        </button>
-                    </li>
-                </>
-            )
+            setNavMenu(employeeNav);
         }
     }, [user]);
 

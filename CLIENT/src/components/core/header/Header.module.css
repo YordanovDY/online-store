@@ -15,24 +15,48 @@
     padding: 4px 18px;
 }
 
-.customer{
+.customer {
     color: #0039b5;
     border: 1px solid #0039b5;
 }
 
-.store_manager{
+.store_manager {
     background-color: #0039b5;
     color: #E8F4FD;
 }
 
-.supplier{
+.supplier {
     background-color: #00680a;
     color: #E8F4FD;
 }
 
-.admin{
+.admin {
     background-color: #830000;
     color: #E8F4FD;
+}
+
+.sign-in-btn {
+    padding: 6px 10px;
+    background: linear-gradient(90deg, #9999ff7f 0%, #9999ff7f 45%, #60baff5c 55%, #60baff5c 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    width: 240px;
+}
+
+.logout-btn {
+    position: absolute;
+    background-color: #bc000066;
+    border-radius: 80px 80px 10px 10px;
+    width: 100px;
+    bottom: -30px;
+    right: -91px;
+    cursor: pointer;
+}
+
+.logout-btn:hover{
+    color: #ffb700;
 }
 
 @media screen and (max-width: 610px) {
