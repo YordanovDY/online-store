@@ -3,9 +3,13 @@ import styles from './LoginComponent.module.css';
 import ControlledForm from '../../shared/controlled-form/ControlledForm';
 import useMutate from '../../../hooks/useMutate';
 import useForm from '../../../hooks/useForm';
+import { useUserContext } from '../../../contexts/UserContext';
+import useNotification from '../../../hooks/useNotification';
 
 export default function LoginComponent() {
     const { mutate } = useMutate('/auth/login', 'POST');
+    const { setUserData } = useUserContext();
+    const { notificationAlert, notify } = useNotification();
     const navigate = useNavigate();
 
     const inputs = [
@@ -17,23 +21,19 @@ export default function LoginComponent() {
 
     const navToRegisterPageEl = <p>Don't have an account? <Link className="hyperlink" to="/register">Register here.</Link></p>
 
-    //! DUMMY LOGIN (DELETE AFTER TESTING)
     const loginHandler = async (e) => {
         e.preventDefault();
 
-        // Customer
-        // const inputData = { email: 'john.doe@gmail.com', password: 'qwerty' }
+        try {
+            const result = await mutate(values);
+            const userData = result.result.user;
+            setUserData(userData);
+            navigate('/');
 
-        // Store Manager
-        const inputData = { email: 'chocho@abv.bg', password: '1234' }
-
-        // Admin
-        // const inputData = { email: 'administrator@techstore.com', password: 'qwerty' }
-
-        await mutate(inputData);
-        navigate('/');
+        } catch (err) {
+            notify(err.message, 'error');
+        }
     }
-    //! -----------DUMMY LOGIN------------
 
     return (
         <section className={styles['login-section']}>
@@ -46,6 +46,7 @@ export default function LoginComponent() {
                 changeHandler={changeHandler}
                 values={values}
             />
+            {notificationAlert}
         </section>
     );
 }
