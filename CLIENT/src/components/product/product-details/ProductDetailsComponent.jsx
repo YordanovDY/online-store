@@ -28,6 +28,7 @@ export default function ProductDetailsComponent() {
                     imageUrl={product.imageUrl}
                     price={product.price}
                     quantity={product.quantity}
+                    creator={product.creator}
                     pending={pending}
                 />
 
