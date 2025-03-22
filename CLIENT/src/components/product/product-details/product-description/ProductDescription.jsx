@@ -51,7 +51,7 @@ export default function ProductDescription({ description, creator, pending, prod
 
                 : <>
                     <p>{description}</p>
-                    <QtyForm productId={productId} />
+                    {user.isCustomer() && <QtyForm productId={productId} />}
 
                     {controlButtons}
 
