@@ -6,13 +6,19 @@ import { Link, useNavigate } from 'react-router';
 import OverlayModal from '../../../shared/overlay/OverlayModal';
 import useMutate from '../../../../hooks/useMutate';
 import QtyForm from './qty-form/QtyForm';
+import useNotification from '../../../../hooks/useNotification';
 
-export default function ProductDescription({ description, creator, pending, productId }) {
+export default function ProductDescription({ description, creator, pending, productId, quantity, onQuantityUpdate }) {
+    const baseUrl = `/products/catalog/${productId}`;
+
     const { user } = useUserContext();
-    const { mutate } = useMutate(`/products/catalog/${productId}`, 'DELETE');
+    const { mutate: onDelete } = useMutate(baseUrl, 'DELETE');
+    const { mutate: onLoadGoods } = useMutate(baseUrl, 'PUT');
+    const { notify, notificationAlert } = useNotification();
     const navigate = useNavigate();
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isLoadGoodsModalOpen, setIsLoadGoodsModalOpen] = useState(false);
 
     const setOpenDeleteModal = (status) => {
         setIsDeleteModalOpen(status)
@@ -22,9 +28,46 @@ export default function ProductDescription({ description, creator, pending, prod
         setIsDeleteModalOpen(true);
     }
 
+    const setLoadGoodsModal = (status) => {
+        setIsLoadGoodsModalOpen(status)
+    }
+
+    const openLoadGoodsModal = () => {
+        setIsLoadGoodsModalOpen(true);
+    }
+
     const deleteHandler = async () => {
-        await mutate();
+        await onDelete();
         navigate('/');
+    }
+
+    const loadGoodsHandler = async (formData) => {
+        const addedQty = Number(formData.get('quantity'));
+
+        if (isNaN(addedQty)) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+
+        if (addedQty < 1) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+        if (!Number.isInteger(addedQty)) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+        const newQuantity = quantity + addedQty;
+        const payload = { quantity: newQuantity };
+
+        try {
+            await onLoadGoods(payload);
+            onQuantityUpdate(newQuantity);
+            setIsLoadGoodsModalOpen(false);
+
+        } catch (err) {
+            notify(err.message, 'error');
+        }
     }
 
     const controlButtons =
@@ -36,9 +79,9 @@ export default function ProductDescription({ description, creator, pending, prod
                 <button className="button btn-secondary" onClick={openDeleteModal}>
                     Delete
                 </button>
-                <a className="button btn-secondary" href="#">
+                <button className="button btn-secondary" onClick={openLoadGoodsModal}>
                     Load Goods
-                </a>
+                </button>
             </div>
             : ''
 
@@ -65,6 +108,17 @@ export default function ProductDescription({ description, creator, pending, prod
                 actionButtonName="Delete"
                 handler={deleteHandler}
             />
+
+            <OverlayModal
+                open={isLoadGoodsModalOpen}
+                setOpen={setLoadGoodsModal}
+                title="Load Goods"
+                message="Increase stock quantity"
+                actionButtonName="Submit"
+                handler={loadGoodsHandler}
+                inputs={[{ name: 'quantity', label: 'Quantity you want to add:', type: 'text', placeholder: '', value: '' }]}
+            />
+            {notificationAlert}
         </article>
     );
 }

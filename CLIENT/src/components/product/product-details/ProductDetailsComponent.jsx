@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './ProductDetailsComponent.css';
 import { useNavigate, useParams } from 'react-router';
 import ProductHero from './product-hero/ProductHero';
@@ -12,12 +12,25 @@ export default function ProductDetailsComponent() {
 
     const PRODUCT_URL = `/products/catalog/${productId}`
     const [pending, product, error] = useFetch(PRODUCT_URL, {});
+    const [quantity, setQuantity] = useState(0);
 
     useEffect(() => {
         if (error) {
             navigate('/404');
         }
     }, [error]);
+
+    useEffect(() => {
+        if (pending) {
+            return;
+        }
+
+        setQuantity(product.quantity)
+    }, [product]);
+
+    const quantityUpdater = (updatedQuantity) => {
+        setQuantity(updatedQuantity);
+    }
 
     return (
         <section>
@@ -27,7 +40,7 @@ export default function ProductDetailsComponent() {
                     name={product.name}
                     imageUrl={product.imageUrl}
                     price={product.price}
-                    quantity={product.quantity}
+                    quantity={quantity}
                     creator={product.creator}
                     pending={pending}
                 />
@@ -37,6 +50,8 @@ export default function ProductDetailsComponent() {
                     creator={product.creator}
                     pending={pending}
                     productId={product._id}
+                    quantity={quantity}
+                    onQuantityUpdate={quantityUpdater}
                 />
 
             </div>
