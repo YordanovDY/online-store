@@ -1,74 +1,19 @@
-import { useState } from 'react';
 import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
 import styles from './ProductDescription.module.css';
 import { useUserContext } from '../../../../contexts/UserContext';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import OverlayModal from '../../../shared/overlay/OverlayModal';
-import useMutate from '../../../../hooks/useMutate';
 import QtyForm from './qty-form/QtyForm';
-import useNotification from '../../../../hooks/useNotification';
+import { useInteractions } from '../../productApi';
 
 export default function ProductDescription({ description, creator, pending, productId, quantity, onQuantityUpdate }) {
-    const baseUrl = `/products/catalog/${productId}`;
-
     const { user } = useUserContext();
-    const { mutate: onDelete } = useMutate(baseUrl, 'DELETE');
-    const { mutate: onLoadGoods } = useMutate(baseUrl, 'PUT');
-    const { notify, notificationAlert } = useNotification();
-    const navigate = useNavigate();
-
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [isLoadGoodsModalOpen, setIsLoadGoodsModalOpen] = useState(false);
-
-    const setOpenDeleteModal = (status) => {
-        setIsDeleteModalOpen(status)
-    }
-
-    const openDeleteModal = () => {
-        setIsDeleteModalOpen(true);
-    }
-
-    const setLoadGoodsModal = (status) => {
-        setIsLoadGoodsModalOpen(status)
-    }
-
-    const openLoadGoodsModal = () => {
-        setIsLoadGoodsModalOpen(true);
-    }
-
-    const deleteHandler = async () => {
-        await onDelete();
-        navigate('/');
-    }
-
-    const loadGoodsHandler = async (formData) => {
-        const addedQty = Number(formData.get('quantity'));
-
-        if (isNaN(addedQty)) {
-            return notify('Quantity must be a positive integer!', 'error');
-        }
-
-
-        if (addedQty < 1) {
-            return notify('Quantity must be a positive integer!', 'error');
-        }
-
-        if (!Number.isInteger(addedQty)) {
-            return notify('Quantity must be a positive integer!', 'error');
-        }
-
-        const newQuantity = quantity + addedQty;
-        const payload = { quantity: newQuantity };
-
-        try {
-            await onLoadGoods(payload);
-            onQuantityUpdate(newQuantity);
-            setIsLoadGoodsModalOpen(false);
-
-        } catch (err) {
-            notify(err.message, 'error');
-        }
-    }
+    
+    const {
+        notificationAlert, isDeleteModalOpen, isLoadGoodsModalOpen,
+        openDeleteModal, openLoadGoodsModal, setLoadGoodsModal, setOpenDeleteModal,
+        deleteHandler, loadGoodsHandler
+    } = useInteractions(productId, quantity, onQuantityUpdate);
 
     const controlButtons =
         user.isOwner(creator) || user.isAdmin()
@@ -80,7 +25,7 @@ export default function ProductDescription({ description, creator, pending, prod
                     Delete
                 </button>
                 <button className="button btn-secondary" onClick={openLoadGoodsModal}>
-                    Load Goods
+                    Increase Quantity
                 </button>
             </div>
             : ''
@@ -112,7 +57,7 @@ export default function ProductDescription({ description, creator, pending, prod
             <OverlayModal
                 open={isLoadGoodsModalOpen}
                 setOpen={setLoadGoodsModal}
-                title="Load Goods"
+                title="Increase Quantity"
                 message="Increase stock quantity"
                 actionButtonName="Submit"
                 handler={loadGoodsHandler}

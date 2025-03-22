@@ -6,6 +6,7 @@ import { getFormData } from "../../utils/formUtil";
 import useNotification from "../../hooks/useNotification";
 import useFetch from "../../hooks/useFetch";
 import useForm from "../../hooks/useForm";
+import useMutate from "../../hooks/useMutate";
 
 const baseUrl = '/products/catalog';
 
@@ -133,6 +134,82 @@ export function useCreateProduct(subcategoryId) {
         values,
         changeHandler,
         submitHandler,
+    }
+}
+
+export function useInteractions(productId, quantity, onQuantityUpdate) {
+    const baseUrl = `/products/catalog/${productId}`;
+
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isLoadGoodsModalOpen, setIsLoadGoodsModalOpen] = useState(false);
+
+    const { mutate: onDelete } = useMutate(baseUrl, 'DELETE');
+    const { mutate: onLoadGoods } = useMutate(baseUrl, 'PUT');
+    const { notify, notificationAlert } = useNotification();
+    const navigate = useNavigate();
+
+    const setOpenDeleteModal = (status) => {
+        setIsDeleteModalOpen(status)
+    }
+
+    const openDeleteModal = () => {
+        setIsDeleteModalOpen(true);
+    }
+
+    const setLoadGoodsModal = (status) => {
+        setIsLoadGoodsModalOpen(status)
+    }
+
+    const openLoadGoodsModal = () => {
+        setIsLoadGoodsModalOpen(true);
+    }
+
+    const deleteHandler = async () => {
+        await onDelete();
+        navigate('/');
+    }
+
+    const loadGoodsHandler = async (formData) => {
+        const addedQty = Number(formData.get('quantity'));
+
+        if (isNaN(addedQty)) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+
+        if (addedQty < 1) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+        if (!Number.isInteger(addedQty)) {
+            return notify('Quantity must be a positive integer!', 'error');
+        }
+
+        const newQuantity = quantity + addedQty;
+        const payload = { quantity: newQuantity };
+
+        try {
+            await onLoadGoods(payload);
+            onQuantityUpdate(newQuantity);
+            setIsLoadGoodsModalOpen(false);
+
+        } catch (err) {
+            notify(err.message, 'error');
+        }
+    }
+
+    return {
+        notificationAlert,
+        isDeleteModalOpen,
+        isLoadGoodsModalOpen,
+        openDeleteModal,
+        openLoadGoodsModal,
+
+        setOpenDeleteModal,
+        setLoadGoodsModal,
+
+        deleteHandler,
+        loadGoodsHandler,
     }
 }
 
