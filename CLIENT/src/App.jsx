@@ -11,6 +11,7 @@ import ProductDetailsComponent from "./components/product/product-details/Produc
 import ProductCreate from "./components/product/product-create/ProductCreate";
 import ProductUpdate from "./components/product/product-update/ProductUpdate";
 import { UserProvider } from "./components/providers/UserProvider";
+import SuccessfulRegister from "./components/successful-register/SuccessfulRegister";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                         <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
                         <Route path="/products/create/:subcategoryId" element={<ProductCreate />} />
                         <Route path="/products/:productId/edit" element={<ProductUpdate />} />
+                        <Route path="/register-confirmation/:email" element={<SuccessfulRegister />} />
                         <Route path="*" element={<NotFoundComponent />} />
                     </Routes>
 
