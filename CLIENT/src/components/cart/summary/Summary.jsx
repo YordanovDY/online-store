@@ -9,7 +9,7 @@ export default function Summary({ totalPrice }) {
                     <div className={styles['price-item-key-bold']}>Total Price</div>
                     <div className={styles['price-item-value-bold']}>{totalPrice.toFixed(2)}$</div>
                 </li>
-                <li><Link to="/purchase-confirmation" className="button btn-primary">Purchase</Link></li>
+                <li><Link to="/place-order" className="button btn-primary">Purchase</Link></li>
             </ul>
         </aside>
     );

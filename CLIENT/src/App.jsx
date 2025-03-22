@@ -12,6 +12,7 @@ import ProductCreate from "./components/product/product-create/ProductCreate";
 import ProductUpdate from "./components/product/product-update/ProductUpdate";
 import { UserProvider } from "./components/providers/UserProvider";
 import SuccessfulRegister from "./components/successful-register/SuccessfulRegister";
+import OrderComponent from "./components/order/OrderComponent";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/login" element={<LoginComponent />} />
                         <Route path="/register" element={<RegisterComponent />} />
                         <Route path="/my-cart" element={<CartComponent />} />
+                        <Route path="/place-order" element={<OrderComponent />} />
                         <Route path="/products/:productId/details" element={<ProductDetailsComponent />} />
                         <Route path="/products/create/:subcategoryId" element={<ProductCreate />} />
                         <Route path="/products/:productId/edit" element={<ProductUpdate />} />
