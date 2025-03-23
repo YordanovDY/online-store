@@ -1,4 +1,5 @@
 import Checkbox from "./checkbox/Checkbox";
+import Radio from "./radio/Radio";
 
 export default function Input({ input }) {
 
@@ -59,6 +60,13 @@ export default function Input({ input }) {
             const isChecked = input.checked === 'false' ? false : true;
 
             return <Checkbox
+                name={input.name}
+                label={input.label}
+                checked={isChecked}
+            />
+
+        case 'radio':
+            return <Radio
                 name={input.name}
                 label={input.label}
                 checked={isChecked}
