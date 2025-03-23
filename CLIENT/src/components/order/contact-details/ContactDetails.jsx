@@ -5,7 +5,7 @@ export default function ContactDetails({ contacts }) {
     if (!contacts.email || !contacts.fullName || !contacts.phoneNumber || !contacts.address) {
         return (
             <div className={styles['no-data']}>
-                <Link to="/user/add-contact-info" className="button btn-primary">Fill Contact Information</Link>
+                <Link to="/profile/add-contact-info" className="button btn-primary">Fill Contact Information</Link>
             </div>
         )
     }

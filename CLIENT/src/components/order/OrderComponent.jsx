@@ -39,7 +39,7 @@ export default function OrderComponent() {
         }
 
         if (items.length === 0) {
-            navigate('/my-cart');
+            navigate('/profile/my-cart');
         }
 
     }, [cartPending]);

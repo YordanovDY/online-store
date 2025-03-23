@@ -15,12 +15,12 @@ export function useHeaderNav() {
     const guestNav = <>
         <li>
             <div className={styles['sign-in-btn']}>
-                <Link className="nav-btn" to="/login">
+                <Link className="nav-btn" to="/auth/login">
                     <i className="fa-solid fa-right-to-bracket"></i>
                     <span>Login</span>
                 </Link>
 
-                <Link className="nav-btn" to="/register">
+                <Link className="nav-btn" to="/auth/register">
                     <i className="fa-solid fa-right-to-bracket"></i>
                     <span>Register</span>
                 </Link>
@@ -51,7 +51,7 @@ export function useHeaderNav() {
                     </span>
                 </button>
 
-                <Link className="cart-btn" to="/my-cart">
+                <Link className="cart-btn" to="/profile/my-cart">
                     <i className="fa-solid fa-cart-shopping" />
                 </Link>
             </li>

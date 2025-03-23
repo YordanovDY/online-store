@@ -19,7 +19,7 @@ export default function LoginComponent() {
 
     const { values, changeHandler } = useForm(inputs);
 
-    const navToRegisterPageEl = <p>Don't have an account? <Link className="hyperlink" to="/register">Register here.</Link></p>
+    const navToRegisterPageEl = <p>Don't have an account? <Link className="hyperlink" to="/auth/register">Register here.</Link></p>
 
     const loginHandler = async (e) => {
         e.preventDefault();

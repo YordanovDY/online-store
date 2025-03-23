@@ -18,7 +18,7 @@ export default function RegisterComponent() {
 
    const { values, changeHandler } = useForm(inputs);
 
-   const navToLoginPageEl = <p>Already have an account? <Link className="hyperlink" to="/login">Login here.</Link></p>
+   const navToLoginPageEl = <p>Already have an account? <Link className="hyperlink" to="/auth/login">Login here.</Link></p>
 
    const registerHandler = async (e) => {
       e.preventDefault();
@@ -33,7 +33,7 @@ export default function RegisterComponent() {
          const result = await mutate({ email: values.email, password: values.password });
          const email = result.user.email;
 
-         navigate(`/register-confirmation/${email}`);
+         navigate(`/auth/register-confirmation/${email}`);
 
       } catch (err) {
          values.password = '';

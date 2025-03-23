@@ -11,7 +11,7 @@ export default function SuccessfulRegister() {
             <h3 className="sub-header">Your profile has been successfully created and is ready to use.</h3>
             <h4>Welcome to our store, your go-to destination for the latest tech and home appliances!</h4>
             <p>Before you start exploring, please confirm your registration by logging into your account.</p>
-            <Link className="button btn-primary" to="/login">Confirm your account</Link>
+            <Link className="button btn-primary" to="/auth/login">Confirm your account</Link>
         </section>
     );
 }
