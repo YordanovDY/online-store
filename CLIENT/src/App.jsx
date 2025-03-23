@@ -13,6 +13,7 @@ import ProductUpdate from "./components/product/product-update/ProductUpdate";
 import { UserProvider } from "./components/providers/UserProvider";
 import SuccessfulRegister from "./components/successful-register/SuccessfulRegister";
 import OrderComponent from "./components/order/OrderComponent";
+import ContactDetailsForm from "./components/contact-details/ContactDetailsForm";
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
 
                         <Route path="/profile">
                             <Route path="my-cart" element={<CartComponent />} />
-                            {/* <Route path="add-contact-info" element={} /> */}
+                            <Route path="add-contact-info" element={<ContactDetailsForm />} />
                         </Route>
 
                         <Route path="/products">
