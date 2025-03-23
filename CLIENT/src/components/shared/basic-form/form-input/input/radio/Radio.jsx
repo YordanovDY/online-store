@@ -1,10 +1,10 @@
 import './Radio.css';
 
-export default function Radio({ name, label, checked }) {
+export default function Radio({ name, label, value, checked }) {
     return (
-        <div class="radio-wrapper-9">
-            <input id={name + '_' + label} type="radio" name={name} defaultChecked={checked} />
-            <label for={name + '_' + label}>{label}</label>
+        <div className="radio-wrapper-9">
+            <input id={name + '_' + label} type="radio" name={name} defaultChecked={checked} value={value} />
+            <label htmlFor={name + '_' + label}>{label}</label>
         </div>
     );
 }

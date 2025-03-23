@@ -34,3 +34,7 @@
   .radio-wrapper-9 input[type=radio] + label:empty:before {
     margin-right: 0;
   }
+  
+  label {
+    color: #0039b5;
+  }

@@ -66,10 +66,12 @@ export default function Input({ input }) {
             />
 
         case 'radio':
+            const isMarked = input.checked === 'false' ? false : true;
             return <Radio
                 name={input.name}
                 label={input.label}
-                checked={isChecked}
+                value={input.value}
+                checked={isMarked}
             />
     }
 }
