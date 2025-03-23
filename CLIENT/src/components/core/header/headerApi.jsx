@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../../contexts/UserContext";
-import useFetchEvent from "../../../hooks/useFetchEvent";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import styles from './Header.module.css';
 import { ROLES } from "../../../constants/roles";
+import LogoutButton from "../../shared/logout-button/LogoutButton";
 
 export function useHeaderNav() {
     const { user } = useUserContext();
-    const { execute } = useFetchEvent('/auth/logout', {});
-    const { clearUserData } = useUserContext();
     const [emailLabel, setEmailLabel] = useState('');
-    const navigate = useNavigate();
 
     const guestNav = <>
         <li>
@@ -30,26 +27,10 @@ export function useHeaderNav() {
 
     const [navmenu, setNavMenu] = useState(guestNav);
 
-    const logoutHandler = async () => {
-        try {
-            await execute();
-            clearUserData();
-            navigate('/');
-
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
     const customerNav =
         <>
             <li className="relative">
-                <button className={styles['logout-btn']} onClick={logoutHandler}>
-                    <i className="fa-solid fa-right-from-bracket" />
-                    <span>
-                        Logout
-                    </span>
-                </button>
+                <LogoutButton classProp={styles['logout-btn']} />
 
                 <Link className="cart-btn" to="/profile/my-cart">
                     <i className="fa-solid fa-cart-shopping" />
@@ -59,12 +40,7 @@ export function useHeaderNav() {
 
     const employeeNav = <>
         <li className="relative">
-            <button className={styles['logout-btn']} onClick={logoutHandler}>
-                <i className="fa-solid fa-right-from-bracket" />
-                <span>
-                    Logout
-                </span>
-            </button>
+            <LogoutButton classProp={styles['logout-btn']} />
 
             <Link className="dash-btn" to="/dashboard">
                 <i className="fa-solid fa-table-cells-large" />
