@@ -9,7 +9,7 @@ export default function SimpleCartItem({ name, imageUrl, price, quantity }) {
                 <span>{quantity}x</span>
                 <img className={styles['item-image']} src={imageUrl} alt={name} onError={onImageErrorHandler} />
                 <span>{name}</span>
-                <span>{price}$</span>
+                <span>{Number(price).toFixed(2)}$</span>
             </li>
         </>
     );

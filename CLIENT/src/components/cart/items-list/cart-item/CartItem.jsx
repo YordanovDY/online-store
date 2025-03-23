@@ -14,7 +14,7 @@ export default function CartItem({ name, imageUrl, price, quantity, productId, r
                 <span>{quantity}x</span>
                 <img className={styles['item-image']} src={imageUrl} alt={name} onError={onImageErrorHandler} />
                 <span>{name}</span>
-                <span>{price}$</span>
+                <span>{Number(price).toFixed(2)}$</span>
                 <button
                     disabled={pending}
                     onClick={async () => {
