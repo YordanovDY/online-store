@@ -37,6 +37,7 @@ export default function useFetch(url, defaultState = {}, additionalHeaders = {})
             })
             .then(result => {
                 setState(result);
+                setPending(false);
             })
             .catch(err => {
                 if (err.name === 'AbortError') {
@@ -44,8 +45,6 @@ export default function useFetch(url, defaultState = {}, additionalHeaders = {})
                 }
 
                 setError(err);
-            })
-            .finally(() => {
                 setPending(false);
             })
 
