@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
 import { useEffect } from "react";
 import LogoutButton from "../shared/logout-button/LogoutButton";
+import styles from "./Profile.module.css";
 
 export default function Profile() {
     const [pending, contactDetails, userError] = useFetch('/user/data', {});
@@ -19,7 +20,7 @@ export default function Profile() {
 
 
     return (
-        <section className="d-flex jc-center gap-20">
+        <section className={styles['profile-section']}>
             {pending
                 ? <LoadingSpinner />
 
@@ -28,7 +29,7 @@ export default function Profile() {
                 />
             }
 
-            <nav className="padding-20 d-flex f-direction-column gap-20 ">
+            <nav className="d-flex f-direction-column gap-20 padding-20">
                 <Link className="button btn-secondary" to="/profile/add-contact-info">Add / Edit Contact Details</Link>
                 <LogoutButton classProp={"button btn-secondary"} />
             </nav>
