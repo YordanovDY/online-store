@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import useFetch from "../../hooks/useFetch";
 import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
 import SimpleItemList from "./simple-item-list/SimpleItemList";
-import ContactDetails from "./contact-details/ContactDetails";
+import ContactDetails from "../shared/contact-details/ContactDetails";
 import styles from './OrderComponent.module.css';
 import BasicForm from "../shared/basic-form/BasicForm";
 import useMutate from "../../hooks/useMutate";
