@@ -6,10 +6,12 @@ import SimpleItemList from "./simple-item-list/SimpleItemList";
 import ContactDetails from "./contact-details/ContactDetails";
 import styles from './OrderComponent.module.css';
 import BasicForm from "../shared/basic-form/BasicForm";
+import useMutate from "../../hooks/useMutate";
 
 export default function OrderComponent() {
     const [cartPending, items, cartError] = useFetch('/user/cart', []);
     const [userPending, contactDetails, userError] = useFetch('/user/data', {});
+    const { mutate } = useMutate('/orders', 'POST');
     const navigate = useNavigate();
 
     const inputs = [
@@ -43,8 +45,18 @@ export default function OrderComponent() {
     }, [cartPending]);
 
 
-    const placeOrderHandler = (formData) => {
-        console.log(formData.get('paymentMethod'));
+    const placeOrderHandler = async (formData) => {
+        const payload = Object.fromEntries(formData);
+
+        try {
+            await mutate(payload);
+            navigate('/');
+            
+            // TODO: Navigate to order details
+        } catch (err) {
+            console.error(err.message);
+            
+        }
     }
 
     return (
