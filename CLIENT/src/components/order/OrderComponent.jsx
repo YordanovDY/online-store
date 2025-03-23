@@ -25,6 +25,19 @@ export default function OrderComponent() {
 
     }, [userError]);
 
+    useEffect(() => {
+        if (cartPending) {
+            return;
+        }
+
+        if (items.length === 0) {
+            navigate('/my-cart');
+        }
+        
+    }, [cartPending]);
+
+    console.log(typeof cartPending);
+
     return (
         <section className={styles['order-section']}>
             {cartPending || userPending
