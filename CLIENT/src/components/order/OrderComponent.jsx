@@ -51,12 +51,23 @@ export default function OrderComponent() {
         try {
             await mutate(payload);
             navigate('/');
-            
+
             // TODO: Navigate to order details
         } catch (err) {
             console.error(err.message);
-            
+
         }
+    }
+
+    let form = <BasicForm
+        title="Payment Method"
+        inputsArray={inputs}
+        buttonText="Place an order"
+        submitHandler={placeOrderHandler}
+    />
+
+    if (!contactDetails.email || !contactDetails.fullName || !contactDetails.phoneNumber || !contactDetails.address) {
+        form = '';
     }
 
     return (
@@ -66,12 +77,7 @@ export default function OrderComponent() {
                 : <>
                     <SimpleItemList itemsArrProp={items} />
                     <ContactDetails contacts={contactDetails} />
-                    <BasicForm
-                        title="Payment Method"
-                        inputsArray={inputs}
-                        buttonText="Place an order"
-                        submitHandler={placeOrderHandler}
-                    />
+                    {form}
                 </>
             }
         </section>
