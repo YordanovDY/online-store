@@ -1,0 +1,23 @@
+.processing{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #e49000;
+    color: white;
+    font-weight: 600;
+}
+
+.shipped{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #0b00d5;
+    color: white;
+    font-weight: 600;
+}
+
+.delivered{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #0f6810;
+    color: white;
+    font-weight: 600;
+}
