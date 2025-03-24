@@ -30,7 +30,8 @@ export default function Profile() {
             }
 
             <nav className="d-flex f-direction-column gap-20 padding-20">
-                <Link className="button btn-secondary" to="/profile/add-contact-info">Add / Edit Contact Details</Link>
+                <Link className="button btn-secondary align-center" to="/profile/my-orders">My Orders</Link>
+                <Link className="button btn-secondary align-center" to="/profile/add-contact-info">Add / Edit Contact Details</Link>
                 <LogoutButton classProp={"button btn-secondary"} />
             </nav>
         </section>
