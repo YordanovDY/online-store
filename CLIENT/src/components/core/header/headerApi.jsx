@@ -51,7 +51,7 @@ export function useHeaderNav() {
     useEffect(() => {
         if (user.isAuthenticated()) {
             const emailLabelStyle = [styles['email-label'], styles[ROLES[user.role].toLowerCase()]];
-            setEmailLabel(<span className={emailLabelStyle.join(' ')}>{user.email}</span>);
+            setEmailLabel(<Link to="/profile" className={emailLabelStyle.join(' ')}>{user.email}</Link>);
         }
 
         if (!user.isAuthenticated()) {

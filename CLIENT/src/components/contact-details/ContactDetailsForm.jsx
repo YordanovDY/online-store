@@ -4,6 +4,7 @@ import useMutate from "../../hooks/useMutate";
 import useNotification from "../../hooks/useNotification";
 import BasicForm from "../shared/basic-form/BasicForm";
 import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
+import styles from './ContactDetailsForm.module.css';
 
 export default function ContactDetailsForm() {
     const [pending, userData, error] = useFetch('/user/data');
@@ -24,14 +25,14 @@ export default function ContactDetailsForm() {
             await mutate(data);
             navigate('/');
             // TODO: Navigate to profile page
-            
+
         } catch (err) {
             notify(err.message, 'error');
         }
     }
 
     return (
-        <section>
+        <section className={styles['contact-details-section']}>
             {pending
                 ? <LoadingSpinner />
                 : <BasicForm
