@@ -15,6 +15,7 @@ import SuccessfulRegister from "./components/successful-register/SuccessfulRegis
 import OrderComponent from "./components/order/OrderComponent";
 import ContactDetailsForm from "./components/contact-details/ContactDetailsForm";
 import Profile from "./components/profile/Profile";
+import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                             <Route index element={<Profile />} />
                             <Route path="my-cart" element={<CartComponent />} />
                             <Route path="add-contact-info" element={<ContactDetailsForm />} />
+                            <Route path="my-orders" element={<MyOrdersList />} />
                         </Route>
 
                         <Route path="/products">

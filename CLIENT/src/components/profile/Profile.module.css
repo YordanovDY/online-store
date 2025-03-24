@@ -3,7 +3,7 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    height: 73.8vh;
+    min-height: 73.8vh;
 }
 
 @media screen and (max-width: 800px) {
