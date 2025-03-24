@@ -1,13 +1,14 @@
 import { Link } from 'react-router';
 import styles from '../MyOrdersList.module.css';
 import { getProductsCount } from './OrderRowUtil';
+import { shortDateFormat } from '../../../utils/dateUtil';
 
 export default function OrderRow(data) {
     const { _id, orderedAt, totalPrice, products, status } = data.data;
 
     return (
         <tr className={styles['tr']}>
-            <td className={styles['td']}>{orderedAt}</td>
+            <td className={styles['td']}>{shortDateFormat(orderedAt)}</td>
             <td className={styles['td']}>{getProductsCount(products)}</td>
             <td className={styles['td']}>{status}</td>
             <td className={styles['td']}>{Number(totalPrice).toFixed(2)}$</td>
