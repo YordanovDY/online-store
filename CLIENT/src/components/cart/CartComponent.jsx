@@ -24,19 +24,22 @@ export default function CartComponent() {
 
     return (
         <CartContext.Provider value={{ notifySuccess: onRemoveSuccess, notifyFail: onRemoveFail, priceRecalc }}>
-            {
-                pending
-                    ? <LoadingSpinner />
-                    : < section className={styles['cart-section']} >
-                        <h2>My Cart</h2>
-                        <main className={styles['main']}>
-                            <ItemsList itemsArrProp={items} />
-                            <Summary totalPrice={totalPrice} />
-                        </main>
+            <section className="d-flex f-direction-column gap-30 padding-20">
+                <h2 className="fancy-header">My Cart</h2>
+                {
+                    pending
+                        ? <LoadingSpinner />
+                        : < section className={styles['cart-section']} >
 
-                        {notificationAlert}
-                    </section >
-            }
+                            <main className={styles['main']}>
+                                <ItemsList itemsArrProp={items} />
+                                <Summary totalPrice={totalPrice} />
+                            </main>
+
+                            {notificationAlert}
+                        </section >
+                }
+            </section>
         </CartContext.Provider>
     );
 }

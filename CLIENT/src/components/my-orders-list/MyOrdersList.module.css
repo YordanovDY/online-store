@@ -1,6 +1,9 @@
 .my-orders-section {
   padding: 20px;
-  min-height: 74vh;
+  min-height: 73vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .table {

@@ -26,7 +26,7 @@ export default function MyOrdersList() {
 
     return (
         <section className={styles['my-orders-section']}>
-            <h2>My orders</h2>
+            <h2 className="fancy-header">My orders</h2>
 
             {pending
                 ? <LoadingSpinner />

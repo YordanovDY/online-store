@@ -1,9 +1,15 @@
 .profile-section {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 30px;
     padding: 20px;
     min-height: 73.8vh;
+}
+
+.sub-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 @media screen and (max-width: 800px) {
