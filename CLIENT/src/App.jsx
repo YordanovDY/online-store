@@ -16,6 +16,7 @@ import OrderComponent from "./components/order/OrderComponent";
 import ContactDetailsForm from "./components/contact-details/ContactDetailsForm";
 import Profile from "./components/profile/Profile";
 import MyOrdersList from "./components/my-orders-list/MyOrdersList";
+import OrderDetails from "./components/order-details/OrderDetails";
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
 
                         <Route path="/orders">
                             <Route path="place-order" element={<OrderComponent />} />
+                            <Route path=":orderId/details" element={<OrderDetails />} />
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />
