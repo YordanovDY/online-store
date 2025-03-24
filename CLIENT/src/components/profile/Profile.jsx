@@ -5,10 +5,12 @@ import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
 import { useEffect } from "react";
 import LogoutButton from "../shared/logout-button/LogoutButton";
 import styles from "./Profile.module.css";
+import { useUserContext } from "../../contexts/UserContext";
 
 export default function Profile() {
     const [pending, contactDetails, userError] = useFetch('/user/data', {});
     const navigate = useNavigate();
+    const { user } = useUserContext();
 
     useEffect(() => {
         if (userError) {
@@ -21,19 +23,23 @@ export default function Profile() {
 
     return (
         <section className={styles['profile-section']}>
-            {pending
-                ? <LoadingSpinner />
+            <h2 className="fancy-header">My Profile</h2>
+            <div className={styles['sub-section']}>
 
-                : <ContactDetails
-                    contacts={contactDetails}
-                />
-            }
+                {pending
+                    ? <LoadingSpinner />
 
-            <nav className="d-flex f-direction-column gap-20 padding-20">
-                <Link className="button btn-secondary align-center" to="/profile/my-orders">My Orders</Link>
-                <Link className="button btn-secondary align-center" to="/profile/add-contact-info">Add / Edit Contact Details</Link>
-                <LogoutButton classProp={"button btn-secondary"} />
-            </nav>
+                    : <ContactDetails
+                        contacts={contactDetails}
+                    />
+                }
+
+                <nav className="d-flex f-direction-column gap-20 padding-20">
+                    {user.isCustomer() && <Link className="button btn-secondary align-center" to="/profile/my-orders">My Orders</Link>}
+                    <Link className="button btn-secondary align-center" to="/profile/add-contact-info">Add / Edit Contact Details</Link>
+                    <LogoutButton classProp={"button btn-secondary"} />
+                </nav>
+            </div>
         </section>
     );
 }
