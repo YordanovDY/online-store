@@ -7,6 +7,7 @@ import asyncJWT from '../utils/jwt-util.js';
 const authService = {
     register,
     login,
+    createUser,
     checkForPermissions,
 };
 
@@ -26,6 +27,28 @@ async function register(email, password) {
 
     try {
         return User.create({ email, password, role: ROLES.Customer });
+
+    } catch (err) {
+        throw new Error(getErrorMessage(err));
+    }
+}
+
+async function createUser(email, password, role) {
+    let foundUser = null;
+
+    try {
+        foundUser = await findUser(email);
+
+    } catch (err) {
+        throw new Error(getErrorMessage(err));
+    }
+
+    if (foundUser) {
+        throw new Error('User already exists');
+    }
+
+    try {
+        return User.create({ email, password, role });
 
     } catch (err) {
         throw new Error(getErrorMessage(err));

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import authService from "../services/auth-service.js";
 import clearSessionData from "../utils/clear-session-util.js";
-import { AUTH_COOKIE_NAME } from "../config/constants.js";
+import { AUTH_COOKIE_NAME, ROLES } from "../config/constants.js";
 import { getDaysInMilliseconds } from '../utils/time-in-ms.js';
 import { requireToken } from "../middlewares/auth-middleware.js";
 
@@ -85,6 +85,46 @@ authController.get('/logout', requireToken, async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: err.message, status: 500 });
+    }
+});
+
+authController.post('/create', requireToken, async (req, res) => {
+    const user = req.user;
+    const authRoles = [ROLES.Admin];
+
+    const { email, password, role } = req.body;
+
+    try {
+        authService.checkForPermissions(user, authRoles)
+
+    } catch (err) {
+        return res.status(403).json({ message: err.message, status: 403 });
+    }
+
+    try {
+        const user = await authService.createUser(email, password, role);
+        res.status(201).json({ message: 'User created', status: 201, user: { id: user._id, email: user.email, role: user.role } });
+
+    } catch (err) {
+        
+        if (err.message.includes('range')) {
+            return res.status(400).json({ message: err.message, status: 400 });
+        }
+
+        if (err.message.includes('required')) {
+            return res.status(400).json({ message: err.message, status: 400 });
+        }
+
+        if (err.message.includes('Invalid')) {
+            return res.status(400).json({ message: err.message, status: 400 });
+        }
+
+        if (err.message === 'User already exists') {
+            return res.status(409).json({ message: err.message, status: 409 });
+        }
+
+        console.error("Server error:", err.message);
+        res.status(500).json({ message: 'Internal server error', status: 500 });
     }
 });
 
