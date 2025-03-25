@@ -18,6 +18,7 @@ import Profile from "./components/profile/Profile";
 import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 import OrderDetails from "./components/order-details/OrderDetails";
 import Dashboard from "./components/employee/dashboard/Dashboard";
+import ProfileCreate from "./components/employee/dash-profile-create/ProfileCreate";
 
 function App() {
 
@@ -59,7 +60,7 @@ function App() {
 
                         <Route path="/dashboard">
                             <Route index element={<Dashboard />} />
-                            {/* <Route path="create-profile" element={} /> */}
+                            <Route path="create-profile" element={<ProfileCreate />} />
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />
