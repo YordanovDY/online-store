@@ -1,0 +1,23 @@
+.my-products-section {
+    padding: 20px;
+    min-height: 73vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .td {
+    border: 1px solid #E8F4FD;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .tr:nth-child(even) {
+    background-color: #E8F4FD;
+  }

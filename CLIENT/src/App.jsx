@@ -20,6 +20,7 @@ import OrderDetails from "./components/order-details/OrderDetails";
 import Dashboard from "./components/employee/dashboard/Dashboard";
 import ProfileCreate from "./components/employee/dash-profile-create/ProfileCreate";
 import DashProductCreate from "./components/employee/dash-product-create/DashProductCreate";
+import MyProducts from "./components/employee/dash-my-products/MyProducts";
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
                             <Route index element={<Dashboard />} />
                             <Route path="create-profile" element={<ProfileCreate />} />
                             <Route path="create-product" element={<DashProductCreate />} />
+                            <Route path="product-managment" element={<MyProducts />} />
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />

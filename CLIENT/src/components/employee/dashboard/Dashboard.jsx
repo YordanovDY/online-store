@@ -13,7 +13,7 @@ export default function Dashboard() {
                         <h4 className="header-saparator">STORE MANAGER</h4>
                         <div className="d-flex gap-20 f-wrap">
                             <Link to="/dashboard/create-product" className="tile-button">Create Product</Link>
-                            <Link className="tile-button">Product Managment</Link>
+                            <Link to="/dashboard/product-managment" className="tile-button">Product Managment</Link>
                             <Link className="tile-button tile-disabled" title="This feature is not yet available">Orders Processing</Link>
                         </div>
                     </article>
