@@ -23,8 +23,7 @@ export default function ContactDetailsForm() {
 
         try {
             await mutate(data);
-            navigate('/');
-            // TODO: Navigate to profile page
+            navigate('/profile');
 
         } catch (err) {
             notify(err.message, 'error');
