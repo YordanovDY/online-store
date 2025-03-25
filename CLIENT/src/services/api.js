@@ -16,8 +16,6 @@ async function requester(method, endpoint, signal, customHeaders, data) {
         option.body = JSON.stringify(data);
     }
 
-    // TODO: Append user token
-
     try {
         const response = await fetch(hostname + endpoint, option);
 
