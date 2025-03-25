@@ -19,6 +19,7 @@ import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 import OrderDetails from "./components/order-details/OrderDetails";
 import Dashboard from "./components/employee/dashboard/Dashboard";
 import ProfileCreate from "./components/employee/dash-profile-create/ProfileCreate";
+import DashProductCreate from "./components/employee/dash-product-create/DashProductCreate";
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
                         <Route path="/dashboard">
                             <Route index element={<Dashboard />} />
                             <Route path="create-profile" element={<ProfileCreate />} />
+                            <Route path="create-product" element={<DashProductCreate />} />
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />

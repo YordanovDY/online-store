@@ -11,8 +11,8 @@ export default function Dashboard() {
                 {(user.isStoreManager() || user.isAdmin()) &&
                     <article className="d-flex f-direction-column gap-10">
                         <h4 className="header-saparator">STORE MANAGER</h4>
-                        <div className="d-flex gap-20">
-                            <Link className="tile-button">Create Product</Link>
+                        <div className="d-flex gap-20 f-wrap">
+                            <Link to="/dashboard/create-product" className="tile-button">Create Product</Link>
                             <Link className="tile-button">Product Managment</Link>
                             <Link className="tile-button">Orders Processing</Link>
                         </div>
