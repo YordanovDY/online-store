@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router";
 import { ROLE_IDs } from "../../../constants/roles";
+import useMutate from "../../../hooks/useMutate";
 import BasicForm from "../../shared/basic-form/BasicForm";
+import useNotification from "../../../hooks/useNotification";
 
 export default function ProfileCreate() {
+    const navigate = useNavigate();
+    const { mutate } = useMutate('/auth/create', 'POST');
+    const { notificationAlert, notify } = useNotification();
+
     const inputs = [
         { name: 'role', label: 'Role', type: 'select', value: '', options: ['Customer', 'Store Manager', 'Supplier', 'Admin'] },
         { name: 'email', label: 'Email', type: 'text', placeholder: 'john.doe@gmail.com', value: '' },
@@ -9,14 +16,25 @@ export default function ProfileCreate() {
         { name: 'repassword', label: 'Repeat Password', type: 'password', placeholder: '***********', value: '' }
     ]
 
-    const submitHandler = (formData) => {
+    const submitHandler = async (formData) => {
         const data = Object.fromEntries(formData);
 
         const roleId = ROLE_IDs[data.role];
 
         const payload = { ...data, role: roleId };
-        
-        console.log(payload);
+
+        if (payload.password !== payload.repassword) {
+            return notify('Passwords mismatch!', 'error');
+        }
+
+        try {
+            const result = await mutate({ email: payload.email, password: payload.password, role: payload.role });
+            const email = result.user.email;
+            navigate(`/auth/register-confirmation/${email}`);
+
+        } catch (err) {
+            notify(err.message, 'error');
+        }
     }
 
     return (
@@ -27,6 +45,7 @@ export default function ProfileCreate() {
                 buttonText="Create"
                 submitHandler={submitHandler}
             />
+            {notificationAlert}
         </section>
     );
 }
