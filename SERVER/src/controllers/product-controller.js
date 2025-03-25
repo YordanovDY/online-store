@@ -180,4 +180,18 @@ productController.delete('/catalog/:productId', requireToken, async (req, res) =
     }
 });
 
+productController.get('/my', requireToken, async (req, res) => {
+    const user = req.user;
+
+    try {
+        const result = await productService.getMyProducts(user);
+
+        res.json(result);
+
+    } catch (err) {
+        console.error(errorMsg);
+        res.status(500).json({ message: 'Internal server error', status: 500 });
+    }
+});
+
 export default productController;

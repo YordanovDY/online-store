@@ -10,6 +10,7 @@ const productService = {
     checkForAvailabilityAndCorrect,
     updateProduct,
     deleteProduct,
+    getMyProducts,
     getPages
 }
 
@@ -127,6 +128,12 @@ async function addProduct(newProduct) {
     } catch (err) {
         throw new Error(getErrorMessage(err));
     }
+}
+
+async function getMyProducts(user) {
+    const userId = user.id;
+
+    return Product.find({ creator: userId });
 }
 
 async function updateProduct(productId, productData) {
