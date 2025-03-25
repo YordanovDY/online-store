@@ -1,10 +1,11 @@
 import { Link } from 'react-router';
 import { useUserContext } from '../../../contexts/UserContext';
+import styles from './Dashboard.module.css';
 
 export default function Dashboard() {
     const { user } = useUserContext();
     return (
-        <section className="padding-20 d-flex f-direction-column gap-30">
+        <section className={styles['dashboard-section']}>
             <h2 className="fancy-header">Dashboard</h2>
             <div className="d-flex f-direction-column gap-20">
 
