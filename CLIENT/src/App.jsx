@@ -17,6 +17,7 @@ import ContactDetailsForm from "./components/contact-details/ContactDetailsForm"
 import Profile from "./components/profile/Profile";
 import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 import OrderDetails from "./components/order-details/OrderDetails";
+import Dashboard from "./components/employee/dashboard/Dashboard";
 
 function App() {
 
@@ -52,6 +53,13 @@ function App() {
                         <Route path="/orders">
                             <Route path="place-order" element={<OrderComponent />} />
                             <Route path=":orderId/details" element={<OrderDetails />} />
+                        </Route>
+
+                        {/* //TODO: Make dashboard lazy loading */}
+
+                        <Route path="/dashboard">
+                            <Route index element={<Dashboard />} />
+                            {/* <Route path="create-profile" element={} /> */}
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />
