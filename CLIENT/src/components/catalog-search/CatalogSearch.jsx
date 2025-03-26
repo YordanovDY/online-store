@@ -3,6 +3,7 @@ import useNotification from "../../hooks/useNotification";
 import ProductsList from "../shared/products-list/ProductsList";
 import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
+import style from './CatalogSearch.module.css';
 
 export default function CatalogSearch() {
     const [searchParams] = useSearchParams();
@@ -19,8 +20,8 @@ export default function CatalogSearch() {
     }, [error, notify]);
 
     return (
-        <section className="d-flex f-direction-column gap-20 padding-20">
-            <ProductsList title={query} products={products} isLoading={pending} />
+        <section className={style['search-section']}>
+            <ProductsList title={`Search: ${query}`} products={products} isLoading={pending} />
 
             {/* // TODO: Implement pagination */}
             {/* <Paginator
