@@ -21,6 +21,7 @@ import Dashboard from "./components/employee/dashboard/Dashboard";
 import ProfileCreate from "./components/employee/dash-profile-create/ProfileCreate";
 import DashProductCreate from "./components/employee/dash-product-create/DashProductCreate";
 import MyProducts from "./components/employee/dash-my-products/MyProducts";
+import CatalogSearch from "./components/catalog-search/CatalogSearch";
 
 function App() {
 
@@ -32,7 +33,10 @@ function App() {
 
                     <Routes>
                         <Route index element={<HomeComponent />} />
-                        <Route path="/catalog/:subcategoryId/subcategory" element={<CatalogComponent />} />
+                        <Route path="/catalog">
+                            <Route path=":subcategoryId/subcategory" element={<CatalogComponent />} />
+                            <Route path="search" element={<CatalogSearch />} />
+                        </Route>
 
                         <Route path="/auth">
                             <Route path="login" element={<LoginComponent />} />
