@@ -27,6 +27,10 @@ productController.get('/catalog/:subcategoryId/products', async (req, res) => {
 productController.get('/catalog', async (req, res) => {
     const { search } = req.query;
 
+    if(search === ''){
+        return res.json([]);
+    }
+
     try {
         const result = await productService.getProductsByName(search);
         res.json(result);
