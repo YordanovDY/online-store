@@ -6,7 +6,8 @@ export default function Paginator({
     isLoading,
     pagesCount,
     currentPage,
-    subcategoryId
+    subcategoryId,
+    sortingQuery = '',
 }) {
     const getPages = () => {
         return new Array(pagesCount).fill(0).map((_, index) => index + 1);
@@ -20,7 +21,7 @@ export default function Paginator({
                     {
                         currentPage > 1 && <li>
 
-                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}/subcategory?page=${currentPage - 1}`}>
+                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}/subcategory?page=${currentPage - 1}&${sortingQuery}`}>
                                 <i className="fa-solid fa-circle-chevron-left" />
                             </Link>
                         </li>
@@ -30,7 +31,7 @@ export default function Paginator({
                     {getPages().map(page =>
                         <li key={page}>
                             <Link
-                                to={`/catalog/${subcategoryId}/subcategory?page=${page}`}
+                                to={`/catalog/${subcategoryId}/subcategory?page=${page}&${sortingQuery}`}
                                 className={page === currentPage
                                     ? styles['paginator-ul-li-link-current']
                                     : styles['paginator-ul-li-link']}
@@ -44,7 +45,7 @@ export default function Paginator({
                     {
                         pagesCount > currentPage && <li>
 
-                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}/subcategory?page=${currentPage + 1}`}>
+                            <Link className={styles['paginator-ul-li-link']} to={`/catalog/${subcategoryId}/subcategory?page=${currentPage + 1}&${sortingQuery}`}>
                                 <i className="fa-solid fa-circle-chevron-right" />
                             </Link>
                         </li>

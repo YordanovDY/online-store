@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import useNotification from "../../hooks/useNotification";
+import { buildOptions } from "../../utils/optionsUtil";
 
 export function useCatalog(subcategoryId, searchParams) {
     const [subcategoryName, setSubcategoryName] = useState('');
@@ -12,8 +13,42 @@ export function useCatalog(subcategoryId, searchParams) {
     const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
     const PAGES_URL = `/products/catalog/${subcategoryId}/pages`;
 
+    const sortParam = searchParams.get('sort');
 
-    const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, []);
+    let sortOptions = null;
+    let sortingQuery = '';
+
+    if (sortParam) {
+        switch (sortParam) {
+            case 'price_asc':
+                sortOptions = { price: 'asc' }
+                sortingQuery = 'sort=price_asc'
+                break;
+
+            case 'price_desc':
+                sortOptions = { price: 'desc' }
+                sortingQuery = 'sort=price_desc'
+                break;
+
+            case 'alphabetical_asc':
+                sortOptions = { name: 'asc' }
+                sortingQuery = 'sort=alphabetical_asc'
+                break;
+
+            case 'alphabetical_desc':
+                sortOptions = { name: 'desc' }
+                sortingQuery = 'sort=alphabetical_desc'
+                break;
+        }
+    }
+
+    let options = {};
+
+    if (sortOptions) {
+        options = buildOptions({ sort: sortOptions });
+    }
+
+    const [pendingProducts, products, productsError] = useFetch(PRODUCTS_URL, [], options);
 
     const [_, subcategory, subcategoryError] = useFetch(SUBCATEGORY_URL, {});
 
@@ -55,6 +90,7 @@ export function useCatalog(subcategoryId, searchParams) {
         pendingPagesCount,
         pagesCount,
         page,
+        sortingQuery,
         notificationAlert
     }
 }

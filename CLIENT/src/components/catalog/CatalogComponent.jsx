@@ -8,7 +8,7 @@ import './CatalogComponent.css';
 
 export default function CatalogComponent() {
     const { subcategoryId } = useParams();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const { user } = useUserContext();
 
 
@@ -18,9 +18,9 @@ export default function CatalogComponent() {
         pendingPagesCount,
         pagesCount,
         page,
+        sortingQuery,
         notificationAlert
     } = useCatalog(subcategoryId, searchParams);
-
 
     const createBtn = user.isStoreManager() || user.isAdmin()
         ? <Link to={`/products/create/${subcategoryId}`} className="button btn-secondary add-new">Add New Product</Link>
@@ -37,6 +37,7 @@ export default function CatalogComponent() {
                 currentPage={page}
                 pagesCount={pagesCount}
                 subcategoryId={subcategoryId}
+                sortingQuery={sortingQuery}
             />
             {notificationAlert}
         </section>
