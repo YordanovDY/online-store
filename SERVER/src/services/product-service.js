@@ -11,6 +11,7 @@ const productService = {
     updateProduct,
     deleteProduct,
     getMyProducts,
+    getProductsByName,
     getPages
 }
 
@@ -87,6 +88,15 @@ function getLatestProducts(limit = 5) {
 
 function getSingleProduct(productId) {
     return Product.findById(productId);
+}
+
+function getProductsByName(search) {
+    return Product.find({
+        name: {
+            $regex: search,
+            $options: 'i'
+        }
+    });
 }
 
 async function addProduct(newProduct) {

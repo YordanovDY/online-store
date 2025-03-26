@@ -24,6 +24,19 @@ productController.get('/catalog/:subcategoryId/products', async (req, res) => {
     }
 });
 
+productController.get('/catalog', async (req, res) => {
+    const { search } = req.query;
+
+    try {
+        const result = await productService.getProductsByName(search);
+        res.json(result);
+
+    } catch (err) {
+        console.error("Server error:", err.message);
+        res.status(500).json({ message: 'Internal server error', status: 500 });
+    }
+});
+
 productController.get('/catalog/:subcategoryId/pages', async (req, res) => {
     const { subcategoryId } = req.params;
     const options = req.options || {};
