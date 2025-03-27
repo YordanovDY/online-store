@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 export default function CatalogNav({ subcategoryId }) {
     const selectRef = useRef();
     const navigate = useNavigate();
+    const [order, setOrder] = useState('asc');
 
     const [arrowsStyles, setArrowStyles] = useState([
         [styles['arrow'], styles['arrow-selected']],
@@ -13,27 +14,36 @@ export default function CatalogNav({ subcategoryId }) {
 
 
     const ascendingHandler = () => {
-        if (arrowsStyles[0].length === 2) {
-            return;
+        if (arrowsStyles[0].length !== 2) {
+            setArrowStyles(arrowsStyles.reverse().slice());
         }
 
-        setArrowStyles(arrowsStyles.reverse().slice());
+        setOrder('asc');
 
         const criteria = selectRef.current.value;
         const url = `/catalog/${subcategoryId}/subcategory?page=1&sort=${criteria}_asc`;
-        
+
         navigate(url);
     }
 
     const descendingHandler = () => {
-        if (arrowsStyles[1].length === 2) {
-            return;
+        if (arrowsStyles[1].length !== 2) {
+            setArrowStyles(arrowsStyles.reverse().slice());
         }
 
-        setArrowStyles(arrowsStyles.reverse().slice());
+        setOrder('desc');
 
         const criteria = selectRef.current.value;
         const url = `/catalog/${subcategoryId}/subcategory?page=1&sort=${criteria}_desc`;
+
+        navigate(url);
+    }
+
+    const selectChangeHandler = (e) => {
+        const target = e.currentTarget;
+        const sorting = `${target.value}_${order}`;
+
+        const url = `/catalog/${subcategoryId}/subcategory?page=1&sort=${sorting}`;
 
         navigate(url);
     }
@@ -43,7 +53,7 @@ export default function CatalogNav({ subcategoryId }) {
             <div className="button btn-secondary">Filters</div>
             <div className={styles['products-nav-sorting']}>
                 <label htmlFor="sortBy">Sort By</label>
-                <select ref={selectRef} id="sortBy" className="fancy-input-dark">
+                <select onChange={selectChangeHandler} ref={selectRef} id="sortBy" className="fancy-input-dark">
                     <option value="price">Price</option>
                     <option value="alphabetical">Alphabetical</option>
                 </select>
