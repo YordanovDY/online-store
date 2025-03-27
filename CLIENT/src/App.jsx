@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router";
 import CatalogComponent from "./components/catalog/CatalogComponent";
 import Footer from "./components/core/footer/Footer";
@@ -8,8 +9,6 @@ import LoginComponent from "./components/auth/login/LoginComponent";
 import RegisterComponent from "./components/auth/register/RegisterComponent";
 import CartComponent from "./components/cart/CartComponent";
 import ProductDetailsComponent from "./components/product/product-details/ProductDetailsComponent";
-import ProductCreate from "./components/product/product-create/ProductCreate";
-import ProductUpdate from "./components/product/product-update/ProductUpdate";
 import { UserProvider } from "./components/providers/UserProvider";
 import SuccessfulRegister from "./components/successful-register/SuccessfulRegister";
 import OrderComponent from "./components/order/OrderComponent";
@@ -17,11 +16,15 @@ import ContactDetailsForm from "./components/contact-details/ContactDetailsForm"
 import Profile from "./components/profile/Profile";
 import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 import OrderDetails from "./components/order-details/OrderDetails";
-import Dashboard from "./components/employee/dashboard/Dashboard";
-import ProfileCreate from "./components/employee/dash-profile-create/ProfileCreate";
-import DashProductCreate from "./components/employee/dash-product-create/DashProductCreate";
-import MyProducts from "./components/employee/dash-my-products/MyProducts";
 import CatalogSearch from "./components/catalog-search/CatalogSearch";
+import LoadingSpinner from "./components/shared/loading-spinner/LoadingSpinner";
+
+const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
+const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
+const DashProductCreate = lazy(() => import('./components/employee/dash-product-create/DashProductCreate'));
+const MyProducts = lazy(() => import('./components/employee/dash-my-products/MyProducts'));
+const ProductCreate = lazy(() => import('./components/product/product-create/ProductCreate'));
+const ProductUpdate = lazy(() => import('./components/product/product-update/ProductUpdate'));
 
 function App() {
 
@@ -53,8 +56,18 @@ function App() {
 
                         <Route path="/products">
                             <Route path=":productId/details" element={<ProductDetailsComponent />} />
-                            <Route path="create/:subcategoryId" element={<ProductCreate />} />
-                            <Route path=":productId/edit" element={<ProductUpdate />} />
+
+                            <Route path="create/:subcategoryId" element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <ProductCreate />
+                                </Suspense>
+                            )} />
+
+                            <Route path=":productId/edit" element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <ProductUpdate />
+                                </Suspense>
+                            )} />
                         </Route>
 
                         <Route path="/orders">
@@ -62,13 +75,31 @@ function App() {
                             <Route path=":orderId/details" element={<OrderDetails />} />
                         </Route>
 
-                        {/* //TODO: Make dashboard lazy loading */}
-
                         <Route path="/dashboard">
-                            <Route index element={<Dashboard />} />
-                            <Route path="create-profile" element={<ProfileCreate />} />
-                            <Route path="create-product" element={<DashProductCreate />} />
-                            <Route path="product-managment" element={<MyProducts />} />
+                            <Route index element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <Dashboard />
+                                </Suspense>
+                            )} />
+
+                            <Route path="create-profile" element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <ProfileCreate />
+                                </Suspense>
+                            )} />
+
+                            <Route path="create-product" element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <DashProductCreate />
+                                </Suspense>
+                            )} />
+
+
+                            <Route path="product-managment" element={(
+                                <Suspense fallback={<LoadingSpinner />}>
+                                    <MyProducts />
+                                </Suspense>
+                            )} />
                         </Route>
 
                         <Route path="*" element={<NotFoundComponent />} />
