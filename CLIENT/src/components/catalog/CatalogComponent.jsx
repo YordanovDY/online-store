@@ -29,7 +29,7 @@ export default function CatalogComponent() {
 
     return (
         <section className="d-flex f-direction-column gap-20 padding-20">
-            <CatalogNav />
+            <CatalogNav subcategoryId={subcategoryId} />
             {createBtn}
             <ProductsList title={subcategoryName} products={products} isLoading={pendingProducts} />
             <Paginator

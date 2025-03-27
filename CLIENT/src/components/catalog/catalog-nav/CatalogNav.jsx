@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './CatalogNav.module.css';
+import { useNavigate } from 'react-router';
 
-export default function CatalogNav() {
+export default function CatalogNav({ subcategoryId }) {
+    const selectRef = useRef();
+    const navigate = useNavigate();
+
     const [arrowsStyles, setArrowStyles] = useState([
         [styles['arrow'], styles['arrow-selected']],
         [styles['arrow']]
     ]);
+
 
     const ascendingHandler = () => {
         if (arrowsStyles[0].length === 2) {
@@ -13,6 +18,11 @@ export default function CatalogNav() {
         }
 
         setArrowStyles(arrowsStyles.reverse().slice());
+
+        const criteria = selectRef.current.value;
+        const url = `/catalog/${subcategoryId}/subcategory?page=1&sort=${criteria}_asc`;
+        
+        navigate(url);
     }
 
     const descendingHandler = () => {
@@ -21,6 +31,11 @@ export default function CatalogNav() {
         }
 
         setArrowStyles(arrowsStyles.reverse().slice());
+
+        const criteria = selectRef.current.value;
+        const url = `/catalog/${subcategoryId}/subcategory?page=1&sort=${criteria}_desc`;
+
+        navigate(url);
     }
 
     return (
@@ -28,9 +43,9 @@ export default function CatalogNav() {
             <div className="button btn-secondary">Filters</div>
             <div className={styles['products-nav-sorting']}>
                 <label htmlFor="sortBy">Sort By</label>
-                <select id="sortBy" className="fancy-input-dark">
-                    <option>Price</option>
-                    <option>Alphabetical</option>
+                <select ref={selectRef} id="sortBy" className="fancy-input-dark">
+                    <option value="price">Price</option>
+                    <option value="alphabetical">Alphabetical</option>
                 </select>
                 <div className="d-flex gap-20 ai-center">
                     <div onClick={ascendingHandler} className={arrowsStyles.at(0).join(' ')}>
