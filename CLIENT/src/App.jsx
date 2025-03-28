@@ -24,6 +24,7 @@ import CustomerGuard from "./components/guards/CustomerGuard";
 import GuestGuard from "./components/guards/GuestGuard";
 import EmployeeGuard from "./components/guards/EmployeeGuard";
 import ManagerGuard from "./components/guards/ManagerGuard";
+import AdminGuard from "./components/guards/AdminGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -112,13 +113,13 @@ function App() {
                                 )} />
 
 
-                                {/* // TODO: Only for admins */}
-                                <Route path="create-profile" element={(
+                                <Route path="create-profile" element={<AdminGuard />}>
+                                <Route index element={(
                                     <Suspense fallback={<LoadingSpinner />}>
                                         <ProfileCreate />
                                     </Suspense>
                                 )} />
-
+                                </Route>
 
                                 <Route path="create-product" element={<ManagerGuard />}>
                                     <Route index element={(
