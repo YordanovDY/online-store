@@ -21,6 +21,7 @@ import LoadingSpinner from "./components/shared/loading-spinner/LoadingSpinner";
 import AuthGuard from "./components/guards/AuthGuard";
 import NoPermissions from "./components/no-permissions/NoPermissions";
 import CustomerGuard from "./components/guards/CustomerGuard";
+import GuestGuard from "./components/guards/GuestGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -45,8 +46,8 @@ function App() {
                         </Route>
 
 
-                        {/* // TODO: Only for guests */}
-                        <Route path="/auth">
+
+                        <Route path="/auth" element={<GuestGuard />}>
                             <Route path="login" element={<LoginComponent />} />
                             <Route path="register" element={<RegisterComponent />} />
                             <Route path="register-confirmation/:email" element={<SuccessfulRegister />} />
