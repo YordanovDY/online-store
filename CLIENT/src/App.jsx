@@ -25,6 +25,7 @@ import GuestGuard from "./components/guards/GuestGuard";
 import EmployeeGuard from "./components/guards/EmployeeGuard";
 import ManagerGuard from "./components/guards/ManagerGuard";
 import AdminGuard from "./components/guards/AdminGuard";
+import OwnerGuard from "./components/guards/OwnerGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -84,8 +85,7 @@ function App() {
                                 </Route>
 
 
-                                {/* //TODO: Only owner + admins */}
-                                <Route path=":productId/edit" element={<ManagerGuard />}>
+                                <Route path=":productId/edit" element={<OwnerGuard />}>
                                     <Route index element={(
                                         <Suspense fallback={<LoadingSpinner />}>
                                             <ProductUpdate />
