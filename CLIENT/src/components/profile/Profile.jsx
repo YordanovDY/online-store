@@ -1,25 +1,14 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import ContactDetails from "../shared/contact-details/ContactDetails";
 import useFetch from "../../hooks/useFetch";
 import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
-import { useEffect } from "react";
 import LogoutButton from "../shared/logout-button/LogoutButton";
 import styles from "./Profile.module.css";
 import { useUserContext } from "../../contexts/UserContext";
 
 export default function Profile() {
-    const [pending, contactDetails, userError] = useFetch('/user/data', {});
-    const navigate = useNavigate();
+    const [pending, contactDetails] = useFetch('/user/data', {});
     const { user } = useUserContext();
-
-    useEffect(() => {
-        if (userError) {
-            navigate('/404');
-        }
-
-    }, [userError]);
-
-
 
     return (
         <section className={styles['profile-section']}>

@@ -18,6 +18,9 @@ import MyOrdersList from "./components/my-orders-list/MyOrdersList";
 import OrderDetails from "./components/order-details/OrderDetails";
 import CatalogSearch from "./components/catalog-search/CatalogSearch";
 import LoadingSpinner from "./components/shared/loading-spinner/LoadingSpinner";
+import AuthGuard from "./components/guards/AuthGuard";
+import NoPermissions from "./components/no-permissions/NoPermissions";
+import CustomerGuard from "./components/guards/CustomerGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -41,28 +44,41 @@ function App() {
                             <Route path="search" element={<CatalogSearch />} />
                         </Route>
 
+
+                        {/* // TODO: Only for guests */}
                         <Route path="/auth">
                             <Route path="login" element={<LoginComponent />} />
                             <Route path="register" element={<RegisterComponent />} />
                             <Route path="register-confirmation/:email" element={<SuccessfulRegister />} />
                         </Route>
 
-                        <Route path="/profile">
+
+                        <Route path="/profile" element={<AuthGuard />}>
                             <Route index element={<Profile />} />
-                            <Route path="my-cart" element={<CartComponent />} />
                             <Route path="add-contact-info" element={<ContactDetailsForm />} />
-                            <Route path="my-orders" element={<MyOrdersList />} />
+
+                            <Route path="my-cart" element={<CustomerGuard />}>
+                                <Route index element={<CartComponent />} />
+                            </Route>
+
+                            <Route path="my-orders" element={<CustomerGuard />}>
+                                <Route index element={<MyOrdersList />} />
+                            </Route>
                         </Route>
 
                         <Route path="/products">
                             <Route path=":productId/details" element={<ProductDetailsComponent />} />
 
+
+                            {/* // TODO: Only for store managers + admins */}
                             <Route path="create/:subcategoryId" element={(
                                 <Suspense fallback={<LoadingSpinner />}>
                                     <ProductCreate />
                                 </Suspense>
                             )} />
 
+
+                            {/* // TODO: Only for store managers + admins */}
                             <Route path=":productId/edit" element={(
                                 <Suspense fallback={<LoadingSpinner />}>
                                     <ProductUpdate />
@@ -71,10 +87,14 @@ function App() {
                         </Route>
 
                         <Route path="/orders">
+                            {/* // TODO: Only for customers */}
                             <Route path="place-order" element={<OrderComponent />} />
+
                             <Route path=":orderId/details" element={<OrderDetails />} />
                         </Route>
 
+
+                        {/* // TODO: Only for employees */}
                         <Route path="/dashboard">
                             <Route index element={(
                                 <Suspense fallback={<LoadingSpinner />}>
@@ -82,19 +102,23 @@ function App() {
                                 </Suspense>
                             )} />
 
+
+                            {/* // TODO: Only for admins */}
                             <Route path="create-profile" element={(
                                 <Suspense fallback={<LoadingSpinner />}>
                                     <ProfileCreate />
                                 </Suspense>
                             )} />
 
+
+                            {/* // TODO: Only for store managers + admins */}
                             <Route path="create-product" element={(
                                 <Suspense fallback={<LoadingSpinner />}>
                                     <DashProductCreate />
                                 </Suspense>
                             )} />
 
-
+                            {/* // TODO: Only for store managers + admins */}
                             <Route path="product-managment" element={(
                                 <Suspense fallback={<LoadingSpinner />}>
                                     <MyProducts />
@@ -102,6 +126,7 @@ function App() {
                             )} />
                         </Route>
 
+                        <Route path="/no-permissions" element={<NoPermissions />} />
                         <Route path="*" element={<NotFoundComponent />} />
                     </Routes>
 

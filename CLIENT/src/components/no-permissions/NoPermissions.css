@@ -1,0 +1,25 @@
+.warning-icon {
+    font-size: 160px;
+}
+
+.header-no-permissions {
+    font-size: 60px;
+}
+
+.section-no-permissions{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-width: inherit;
+    min-height: 74.1vh;
+}
+
+@media screen and (max-width: 1500px) {
+    .section-no-permissions {
+        width: fit-content;
+        height: max-content;
+    }
+}
