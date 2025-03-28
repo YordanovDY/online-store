@@ -5,7 +5,7 @@ export default function NoPermissions() {
         <section className="section-no-permissions">
             <h2 className="header-no-permissions">Permission Denied!</h2>
             <i className="fa-solid fa-hand warning-icon"></i>
-            <p>You don't have the necessary permissions to access this page.</p>
+            <p>You are not allowed to access this page.</p>
             <div className="d-flex gap-20">
                 <Link to='/' className="button btn-primary">
                     Home
