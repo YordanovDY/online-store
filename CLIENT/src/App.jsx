@@ -22,6 +22,8 @@ import AuthGuard from "./components/guards/AuthGuard";
 import NoPermissions from "./components/no-permissions/NoPermissions";
 import CustomerGuard from "./components/guards/CustomerGuard";
 import GuestGuard from "./components/guards/GuestGuard";
+import EmployeeGuard from "./components/guards/EmployeeGuard";
+import ManagerGuard from "./components/guards/ManagerGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -71,60 +73,71 @@ function App() {
                             <Route path=":productId/details" element={<ProductDetailsComponent />} />
 
 
-                            {/* // TODO: Only for store managers + admins */}
-                            <Route path="create/:subcategoryId" element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <ProductCreate />
-                                </Suspense>
-                            )} />
+                            <Route element={<AuthGuard />}>
+                                <Route path="create/:subcategoryId" element={<ManagerGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <ProductCreate />
+                                        </Suspense>
+                                    )} />
+                                </Route>
 
 
-                            {/* // TODO: Only for store managers + admins */}
-                            <Route path=":productId/edit" element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <ProductUpdate />
-                                </Suspense>
-                            )} />
+                                {/* //TODO: Only owner + admins */}
+                                <Route path=":productId/edit" element={<ManagerGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <ProductUpdate />
+                                        </Suspense>
+                                    )} />
+                                </Route>
+
+
+                            </Route>
+
                         </Route>
 
                         <Route path="/orders">
-                            {/* // TODO: Only for customers */}
                             <Route path="place-order" element={<OrderComponent />} />
-
                             <Route path=":orderId/details" element={<OrderDetails />} />
                         </Route>
 
 
-                        {/* // TODO: Only for employees */}
-                        <Route path="/dashboard">
-                            <Route index element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <Dashboard />
-                                </Suspense>
-                            )} />
+                        <Route element={<AuthGuard />}>
+                            <Route path="/dashboard" element={<EmployeeGuard />}>
+                                <Route index element={(
+                                    <Suspense fallback={<LoadingSpinner />}>
+                                        <Dashboard />
+                                    </Suspense>
+                                )} />
 
 
-                            {/* // TODO: Only for admins */}
-                            <Route path="create-profile" element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <ProfileCreate />
-                                </Suspense>
-                            )} />
+                                {/* // TODO: Only for admins */}
+                                <Route path="create-profile" element={(
+                                    <Suspense fallback={<LoadingSpinner />}>
+                                        <ProfileCreate />
+                                    </Suspense>
+                                )} />
 
 
-                            {/* // TODO: Only for store managers + admins */}
-                            <Route path="create-product" element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <DashProductCreate />
-                                </Suspense>
-                            )} />
+                                <Route path="create-product" element={<ManagerGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <DashProductCreate />
+                                        </Suspense>
+                                    )} />
+                                </Route>
 
-                            {/* // TODO: Only for store managers + admins */}
-                            <Route path="product-managment" element={(
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <MyProducts />
-                                </Suspense>
-                            )} />
+
+                                <Route path="product-managment" element={<ManagerGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <MyProducts />
+                                        </Suspense>
+                                    )} />
+                                </Route>
+
+                            </Route>
                         </Route>
 
                         <Route path="/no-permissions" element={<NoPermissions />} />
