@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './ProductsList.module.css';
 import ProductsListItem from './products-list-item/ProductsListItem'; 
 import LoadingSpinner from '../loading-spinner/LoadingSpinner';

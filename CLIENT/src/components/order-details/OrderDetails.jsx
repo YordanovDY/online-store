@@ -5,8 +5,6 @@ import SimpleItemList from "../shared/simple-item-list/SimpleItemList";
 import { useEffect } from "react";
 import useNotification from "../../hooks/useNotification";
 import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
-import Status from "../shared/status/Status";
-import { longDateFormat, onlyDateFormat } from "../../utils/dateUtil";
 import OrderOverview from "./order-overview/OrderOverview";
 
 export default function OrderDetails() {

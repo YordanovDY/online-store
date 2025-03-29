@@ -24,6 +24,7 @@ export default function CartItem({ name, imageUrl, price, quantity, productId, r
                             priceRecalc(price * quantity);
                             removeItemFromArray();
                         } catch (err) {
+                            console.error(err);
                             notifyFail();
                         }
                     }}

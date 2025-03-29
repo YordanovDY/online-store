@@ -7,7 +7,7 @@ import LoadingSpinner from "../shared/loading-spinner/LoadingSpinner";
 import styles from './ContactDetailsForm.module.css';
 
 export default function ContactDetailsForm() {
-    const [pending, userData, error] = useFetch('/user/data');
+    const [pending, userData] = useFetch('/user/data');
     const { notificationAlert, notify } = useNotification();
     const { mutate } = useMutate('/user/data', 'PUT');
     const navigate = useNavigate();
