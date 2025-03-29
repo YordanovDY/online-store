@@ -18,7 +18,7 @@ export default function ProductDetailsComponent() {
         if (error) {
             navigate('/404');
         }
-    }, [error]);
+    }, [error, navigate]);
 
     useEffect(() => {
         if (pending) {
@@ -26,7 +26,7 @@ export default function ProductDetailsComponent() {
         }
 
         setQuantity(product.quantity)
-    }, [product]);
+    }, [pending, product]);
 
     const quantityUpdater = (updatedQuantity) => {
         setQuantity(updatedQuantity);
