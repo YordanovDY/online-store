@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const hostname = 'http://localhost:3030';
 
-export default function useFetch(url, defaultState = {}, additionalHeaders = {}) {
+export default function useFetch(url, defaultState = {}, additionalHeaders) {
     const [state, setState] = useState(defaultState);
     const [pending, setPending] = useState(true);
     const [error, setError] = useState(null);
@@ -13,7 +13,7 @@ export default function useFetch(url, defaultState = {}, additionalHeaders = {})
 
         const options = {
             signal,
-            headers: { ...additionalHeaders },
+            headers: additionalHeaders ? { ...additionalHeaders } : {},
             credentials: 'include',
         };
 
@@ -51,7 +51,7 @@ export default function useFetch(url, defaultState = {}, additionalHeaders = {})
         return () => {
             abortController.abort();
         }
-    }, [url])
+    }, [url, additionalHeaders])
 
     return [pending, state, error];
 }

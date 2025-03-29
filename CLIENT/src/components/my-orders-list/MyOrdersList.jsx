@@ -22,7 +22,7 @@ export default function MyOrdersList() {
         if (error) {
             return notify(error, 'error');
         }
-    }, [error]);
+    }, [error, notify]);
 
     return (
         <section className={styles['my-orders-section']}>

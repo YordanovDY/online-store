@@ -47,7 +47,7 @@ export function useUpdateProduct(productId) {
         return () => {
             abortController.abort();
         }
-    }, [productId]);
+    }, [productId, navigate]);
 
     const submitHandler = async (formData) => {
         const data = getFormData(formData);
@@ -97,7 +97,7 @@ export function useCreateProduct(subcategoryId) {
             notify(error.message, 'error');
             return;
         }
-    }, [error]);
+    }, [error, notify]);
 
     useEffect(() => {
         const receivedSubcat = Object.entries(subcategory).length > 0;

@@ -17,7 +17,7 @@ export default function OrderDetails() {
         if (error) {
             return notify(error, 'error');
         }
-    }, [error]);
+    }, [error, notify]);
 
 
     return (

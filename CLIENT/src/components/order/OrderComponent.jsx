@@ -26,14 +26,14 @@ export default function OrderComponent() {
             navigate('/404');
         }
 
-    }, [cartError]);
+    }, [cartError, navigate]);
 
     useEffect(() => {
         if (userError) {
             navigate('/404');
         }
 
-    }, [userError]);
+    }, [userError, navigate]);
 
     useEffect(() => {
         if (cartPending) {
@@ -44,7 +44,7 @@ export default function OrderComponent() {
             navigate('/profile/my-cart');
         }
 
-    }, [cartPending]);
+    }, [cartPending, navigate, items]);
 
 
     const placeOrderHandler = async (formData) => {

@@ -56,13 +56,13 @@ export function useCatalog(subcategoryId, searchParams) {
         }
 
         setSubcategoryName(subcategory.name);
-    }, [subcategory, subcategoryError]);
+    }, [subcategory, subcategoryError, notify]);
 
     useEffect(() => {
         if (pagesCountError) {
             notify(pagesCountError, 'error')
         }
-    }, [pagesCountError]);
+    }, [pagesCountError, notify]);
 
 
     useEffect(() => {
