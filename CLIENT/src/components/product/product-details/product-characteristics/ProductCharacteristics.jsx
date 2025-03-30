@@ -1,5 +1,5 @@
 import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
-import PriceItemValue from './price-item-value/PriceItemValue';
+import CharItemValue from './price-item-value/CharItemValue';
 import styles from './ProductCharacteristics.module.css';
 
 export default function ProductCharacteristics({ characteristicsArr = [], pending }) {
@@ -12,7 +12,7 @@ export default function ProductCharacteristics({ characteristicsArr = [], pendin
                     {characteristicsArr.map(item =>
                         <li key={item.char} className={styles['price-item']}>
                             <div className={styles['price-item-key']}>{item.char}</div>
-                            <PriceItemValue value={item.value} />
+                            <CharItemValue value={item.value} />
                         </li>
                     )}
                 </ul>

@@ -1,8 +1,8 @@
-import styles from './PriceItemValue.module.css';
+import styles from './CharItemValue.module.css';
 import './BooleanValue.css';
 import EnergyClass from './EnergyClass';
 
-export default function PriceItemValue({ value }) {
+export default function CharItemValue({ value }) {
     let valueLabel = '';
 
     switch (value) {
