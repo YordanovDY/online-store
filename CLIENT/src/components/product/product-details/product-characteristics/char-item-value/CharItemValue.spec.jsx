@@ -110,10 +110,20 @@ describe('Boolean values', () => {
     });
 })
 
-it('Should be image', () => {
-    render(<CharItemValue value="A" />);
+describe('Energy Classes', () => {
+    it('Should be an image', () => {
+        render(<CharItemValue value="A" />);
 
-    const item = screen.getByRole('img');
+        const item = screen.getByRole('img');
 
-    expect(item).toBeInTheDocument();
-});
+        expect(item).toBeInTheDocument();
+    });
+
+    it('Should be an image of energy class A', () => {
+        render(<CharItemValue value="A" />);
+
+        const item = screen.getByRole('img');
+
+        expect(item).toHaveAttribute('src', '/labels/A.png');
+    });
+})

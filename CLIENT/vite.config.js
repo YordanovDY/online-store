@@ -7,5 +7,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     port: 5100,
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.js']
   }
 })
