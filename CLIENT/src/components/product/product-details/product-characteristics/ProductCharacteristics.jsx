@@ -1,5 +1,5 @@
 import LoadingSpinner from '../../../shared/loading-spinner/LoadingSpinner';
-import CharItemValue from './price-item-value/CharItemValue';
+import CharItemValue from './char-item-value/CharItemValue';
 import styles from './ProductCharacteristics.module.css';
 
 export default function ProductCharacteristics({ characteristicsArr = [], pending }) {

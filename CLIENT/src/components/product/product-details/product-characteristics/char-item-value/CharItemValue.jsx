@@ -1,17 +1,19 @@
 import styles from './CharItemValue.module.css';
 import './BooleanValue.css';
-import EnergyClass from './EnergyClass';
+import EnergyClass from './energy-class/EnergyClass';
 
 export default function CharItemValue({ value }) {
     let valueLabel = '';
 
     switch (value) {
         case 'true':
-            valueLabel = <i className="fa-solid fa-circle-check boolean-value b-true" />
+        case true:
+            valueLabel = <i className="fa-solid fa-circle-check boolean-value b-true" role="presentation" />
             break;
 
         case 'false':
-            valueLabel = <i className="fa-solid fa-circle-xmark boolean-value b-false" />
+        case false:
+            valueLabel = <i className="fa-solid fa-circle-xmark boolean-value b-false" role="presentation" />
             break;
 
         case 'A+++':
@@ -24,11 +26,11 @@ export default function CharItemValue({ value }) {
         case 'E':
         case 'F':
         case 'G':
-            valueLabel = <EnergyClass value={value} />
+            valueLabel = <EnergyClass value={value}  role="img"/>
             break;
 
         default:
-            valueLabel = value;
+            valueLabel = value ? <p role="paragraph">{value}</p> : <p role="paragraph"></p>;
             break;
     }
 
