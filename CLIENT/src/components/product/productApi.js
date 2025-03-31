@@ -62,7 +62,6 @@ export function useUpdateProduct(productId) {
             await api.put(`${baseUrl}/${productId}`, payload);
             navigate(`/products/${productId}/details`);
 
-
         } catch (err) {
             notify(err.message, 'error');
         }
@@ -74,7 +73,7 @@ export function useUpdateProduct(productId) {
         charInputs,
         productName,
         notificationAlert,
-        submitHandler
+        submitHandler,
     }
 }
 
@@ -82,6 +81,7 @@ export function useUpdateProduct(productId) {
 export function useCreateProduct(subcategoryId) {
     const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
     const [pending, subcategory, error] = useFetch(SUBCATEGORY_URL, {});
+    const [submitPending, setSubmitPending] = useState(false);
     const [subcategoryName, setSubcategoryName] = useState('');
     const { notify, notificationAlert } = useNotification();
     const navigate = useNavigate();
@@ -117,11 +117,16 @@ export function useCreateProduct(subcategoryId) {
         const payload = { brand, name: `${brand} ${name}`, imageUrl, quantity: Number(quantity), price: Number(price), description, characteristics, subcategory: subcategoryId };
 
         try {
+            setSubmitPending(true);
+
             await api.post(baseUrl, payload);
-            navigate(`/catalog/${subcategoryId}/subcategory?page=1`)
+            navigate(`/catalog/${subcategoryId}/subcategory?page=1`);
 
         } catch (err) {
             notify(err.message, 'error');
+
+        } finally {
+            setSubmitPending(false);
         }
     }
 
@@ -134,6 +139,7 @@ export function useCreateProduct(subcategoryId) {
         values,
         changeHandler,
         submitHandler,
+        submitPending
     }
 }
 

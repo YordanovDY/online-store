@@ -14,6 +14,7 @@ export default function ProductCreate() {
         values,
         changeHandler,
         submitHandler,
+        submitPending
     } = useCreateProduct(subcategoryId);
 
     return (
@@ -29,6 +30,7 @@ export default function ProductCreate() {
                     values={values}
                     changeHandler={changeHandler}
                     submitHandler={submitHandler}
+                    pending={submitPending}
                 />
             }
             {notificationAlert}
