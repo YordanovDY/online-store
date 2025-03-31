@@ -1,8 +1,18 @@
 # Online Store
 
-React-based e-commerce platform
+React-based e-commerce SPA application
 
 ## Features
+
+### Public Part & Authentication
+- Guests can browse the catalog, view product details, and register as customers.
+- Registered users gain access to additional functionalities based on their roles.
+
+### User Roles & Permissions
+- Customers: Add products to the cart, place orders, and view order history.
+- Store Managers: Manage products by creating, updating, deleting, and adjusting stock levels.
+- Admins: Full access, including complete CRUD operations on products and employee account management.
+- Suppliers: (Functionality to be implemented in future updates).
 
 ## Technologies Used
 - Frontend: React 19
