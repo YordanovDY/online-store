@@ -5,9 +5,10 @@ import useMutate from '../../../hooks/useMutate';
 import useForm from '../../../hooks/useForm';
 import { useUserContext } from '../../../contexts/UserContext';
 import useNotification from '../../../hooks/useNotification';
+import { validateAuth } from '../validatorUtil';
 
 export default function LoginComponent() {
-    const { mutate } = useMutate('/auth/login', 'POST');
+    const { mutate, pending } = useMutate('/auth/login', 'POST');
     const { setUserData } = useUserContext();
     const { notificationAlert, notify } = useNotification();
     const navigate = useNavigate();
@@ -23,6 +24,12 @@ export default function LoginComponent() {
 
     const loginHandler = async (e) => {
         e.preventDefault();
+        try {
+            validateAuth(values.email, values.password);
+
+        } catch (err) {
+            return notify(err.message, 'error');
+        }
 
         try {
             const result = await mutate(values);
@@ -31,7 +38,8 @@ export default function LoginComponent() {
             navigate('/');
 
         } catch (err) {
-            notify(err.message, 'error');
+            values.password = '';
+            return notify(err.message, 'error');
         }
     }
 
@@ -45,6 +53,7 @@ export default function LoginComponent() {
                 submitHandler={loginHandler}
                 changeHandler={changeHandler}
                 values={values}
+                pending={pending}
             />
             {notificationAlert}
         </section>

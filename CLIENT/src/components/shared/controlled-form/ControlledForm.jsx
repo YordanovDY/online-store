@@ -11,7 +11,8 @@ export default function ControlledForm({
     submitHandler,
     changeHandler,
     additionalFieldset,
-    hasMainFieldset = false
+    hasMainFieldset = false,
+    pending
 }) {
     const mainInputs = inputsArray.map(input => <FormInput key={input.name} input={input} />)
 
@@ -38,7 +39,7 @@ export default function ControlledForm({
 
 
                     {additionalElement ? additionalElement : ''}
-                    <button className="button btn-primary">{buttonText || 'Submit'}</button>
+                    <button disabled={pending} className="button btn-primary">{buttonText || 'Submit'}</button>
                 </form>
             </div>
         </InputContext.Provider>

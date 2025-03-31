@@ -4,9 +4,10 @@ import styles from './RegisterComponent.module.css';
 import useForm from '../../../hooks/useForm';
 import useNotification from '../../../hooks/useNotification';
 import useMutate from '../../../hooks/useMutate';
+import { validateAuth } from '../validatorUtil';
 
 export default function RegisterComponent() {
-   const { mutate } = useMutate('/auth/register', 'POST');
+   const { mutate, pending } = useMutate('/auth/register', 'POST');
    const { notificationAlert, notify } = useNotification();
    const navigate = useNavigate();
 
@@ -24,10 +25,13 @@ export default function RegisterComponent() {
       e.preventDefault();
 
       try {
-         if (values.password !== values.repassword) {
+         try {
+            validateAuth(values.email, values.password, values.repassword);
+
+         } catch (err) {
             values.password = '';
             values.repassword = '';
-            return notify('Passwords mismatch!', 'error');
+            return notify(err.message, 'error');
          }
 
          const result = await mutate({ email: values.email, password: values.password });
@@ -38,7 +42,7 @@ export default function RegisterComponent() {
       } catch (err) {
          values.password = '';
          values.repassword = '';
-         notify(err.message, 'error');
+         return notify(err.message, 'error');
       }
    }
 
@@ -52,6 +56,7 @@ export default function RegisterComponent() {
             values={values}
             changeHandler={changeHandler}
             submitHandler={registerHandler}
+            pending={pending}
          />
          {notificationAlert}
       </section>
