@@ -1,11 +1,12 @@
 import { useRef } from "react";
+import { useFormStatus } from "react-dom";
 import useMutate from "../../../../../hooks/useMutate";
 import useNotification from "../../../../../hooks/useNotification";
 
 export default function QtyForm({ productId }) {
     const qtyRef = useRef();
     const { notify, notificationAlert } = useNotification();
-    const { mutate, pending } = useMutate('/user/cart', 'POST');
+    const { mutate } = useMutate('/user/cart', 'POST');
 
     const incrementQuantityHandler = () => {
         const currentValue = Number(qtyRef.current.value);
@@ -55,12 +56,19 @@ export default function QtyForm({ productId }) {
                         </svg>
                     </button>
                 </div>
-                <button disabled={pending} className="button btn-primary">
-                    <i className="fa-solid fa-cart-shopping" />
-                    <span>Add to Cart</span>
-                </button>
+                <Submit />
             </form>
             {notificationAlert}
         </>
     );
+}
+
+function Submit() {
+    const { pending } = useFormStatus();
+    return (
+        <button disabled={pending} className="button btn-primary">
+            <i className="fa-solid fa-cart-shopping" />
+            <span>Add to Cart</span>
+        </button>
+    )
 }
