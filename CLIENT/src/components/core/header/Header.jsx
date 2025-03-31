@@ -24,7 +24,7 @@ export default function Header() {
                     <SearchForm />
 
                     <li>
-                        <a className="nav-btn" href="#">
+                        <a className="nav-btn inactive-nav-btn">
                             <i className="fa-regular fa-address-card"></i>
                             <span>Contacts</span>
                         </a>

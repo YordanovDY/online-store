@@ -99,6 +99,12 @@
     align-items: baseline;
 }
 
+.inactive-nav-btn,
+.inactive-nav-btn:hover{
+    cursor: not-allowed !important;
+    color: #a3a3a3 !important;
+}
+
 .tile-button {
     border: 10px double #0039b5;
     color: #0039b5;
