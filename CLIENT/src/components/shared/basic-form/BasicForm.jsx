@@ -1,5 +1,6 @@
-import styles from './BasicForm.module.css';
+import { useFormStatus } from 'react-dom';
 import FormInput from './form-input/FormInput';
+import styles from './BasicForm.module.css';
 
 export default function BasicForm({
     title,
@@ -40,8 +41,13 @@ export default function BasicForm({
 
 
                 {additionalElement ? additionalElement : ''}
-                <button className="button btn-primary">{buttonText || 'Submit'}</button>
+                <Submit buttonText={buttonText} />
             </form>
         </div>
     );
+}
+
+function Submit({ buttonText }) {
+    const { pending } = useFormStatus();
+    return <button disabled={pending} className="button btn-primary">{buttonText || 'Submit'}</button>
 }
