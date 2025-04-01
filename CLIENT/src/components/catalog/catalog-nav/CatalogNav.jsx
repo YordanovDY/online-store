@@ -50,7 +50,7 @@ export default function CatalogNav({ subcategoryId }) {
 
     return (
         <nav className={styles['products-nav']}>
-            <div className="button btn-secondary">Filters</div>
+            {/* <div className="button btn-secondary">Filters</div> */}
             <div className={styles['products-nav-sorting']}>
                 <label htmlFor="sortBy">Sort By</label>
                 <select onChange={selectChangeHandler} ref={selectRef} id="sortBy" className="fancy-input-dark">
