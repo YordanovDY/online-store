@@ -45,3 +45,10 @@ React-based e-commerce SPA application
 1. Install client dependencies `npm install`
 2. Run the client `npm run dev`
 3. Navigate to http://localhost:5100/ in your browser
+
+## Test all functionalities
+### Admin account
+- email: administrator@techstore.com
+- password: qwerty
+
+Use this profile to create profiles with different roles.
