@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import useFetch from "../../hooks/useFetch";
 import useNotification from "../../hooks/useNotification";
 import { buildOptions } from "../../utils/optionsUtil";
 import api from "../../services/api";
 
 export function useCatalog(subcategoryId, searchParams) {
+    const navigate = useNavigate();
     const [subcategoryName, setSubcategoryName] = useState('');
     const [page, setPage] = useState(1);
     const { notificationAlert, notify } = useNotification();
@@ -26,7 +28,7 @@ export function useCatalog(subcategoryId, searchParams) {
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
-        const options = buildOptions({sort: sortOptions});
+        const options = buildOptions({ sort: sortOptions });
 
         setPendingProducts(true);
 
@@ -35,8 +37,8 @@ export function useCatalog(subcategoryId, searchParams) {
                 setProducts(result);
                 setPendingProducts(false);
             })
-            .catch(err =>{
-                if(err.name === 'AbortError'){
+            .catch(err => {
+                if (err.name === 'AbortError') {
                     return;
                 }
 
@@ -51,12 +53,11 @@ export function useCatalog(subcategoryId, searchParams) {
 
     useEffect(() => {
         if (subcategoryError) {
-            notify(subcategoryError, 'error')
-            return;
+            return navigate('/404')
         }
 
         setSubcategoryName(subcategory.name);
-    }, [subcategory, subcategoryError, notify]);
+    }, [subcategory, subcategoryError, navigate]);
 
     useEffect(() => {
         if (pagesCountError) {
