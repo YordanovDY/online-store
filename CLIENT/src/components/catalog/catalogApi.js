@@ -7,21 +7,24 @@ import api from "../../services/api";
 
 export function useCatalog(subcategoryId, searchParams) {
     const navigate = useNavigate();
+    const { notificationAlert, notify } = useNotification();
+    
+
     const [subcategoryName, setSubcategoryName] = useState('');
     const [page, setPage] = useState(1);
-    const { notificationAlert, notify } = useNotification();
-    const [sortOptions, setSortOptions] = useState({ price: 'asc' });
-    const [sortingQuery, setSortingQuery] = useState('');
-
     const [products, setProducts] = useState([]);
     const [pendingProducts, setPendingProducts] = useState(true);
 
+
+    const [sortOptions, setSortOptions] = useState({ price: 'asc' });
+    const [sortingQuery, setSortingQuery] = useState('');
+
+
     const SUBCATEGORY_URL = `/subcategories/${subcategoryId}`;
-    const PAGES_URL = `/products/catalog/${subcategoryId}/pages`;
-
-
     const [_, subcategory, subcategoryError] = useFetch(SUBCATEGORY_URL, {});
 
+    
+    const PAGES_URL = `/products/catalog/${subcategoryId}/pages`;
     const [pendingPagesCount, pagesCount, pagesCountError] = useFetch(PAGES_URL, 1);
 
 
