@@ -33,6 +33,7 @@ const DashProductCreate = lazy(() => import('./components/employee/dash-product-
 const MyProducts = lazy(() => import('./components/employee/dash-my-products/MyProducts'));
 const ProductCreate = lazy(() => import('./components/product/product-create/ProductCreate'));
 const ProductUpdate = lazy(() => import('./components/product/product-update/ProductUpdate'));
+const DashOrdersProcess = lazy(() => import('./components/employee/dash-orders-process/DashOrdersProcess'));
 
 function App() {
 
@@ -114,11 +115,11 @@ function App() {
 
 
                                 <Route path="create-profile" element={<AdminGuard />}>
-                                <Route index element={(
-                                    <Suspense fallback={<LoadingSpinner />}>
-                                        <ProfileCreate />
-                                    </Suspense>
-                                )} />
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <ProfileCreate />
+                                        </Suspense>
+                                    )} />
                                 </Route>
 
                                 <Route path="create-product" element={<ManagerGuard />}>
@@ -134,6 +135,14 @@ function App() {
                                     <Route index element={(
                                         <Suspense fallback={<LoadingSpinner />}>
                                             <MyProducts />
+                                        </Suspense>
+                                    )} />
+                                </Route>
+
+                                <Route path="orders-processing" element={<ManagerGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <DashOrdersProcess />
                                         </Suspense>
                                     )} />
                                 </Route>
