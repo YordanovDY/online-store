@@ -14,7 +14,8 @@ export default function DashOrdersDelivery() {
         deliveryModal,
         setOpenDeliveryModal,
         deliveryHandler,
-        chooseOrder } = useOrderDelivery();
+        chooseOrder,
+        onDeliveryOpen } = useOrderDelivery();
 
     let rows = [];
 
@@ -42,7 +43,7 @@ export default function DashOrdersDelivery() {
                             orderedAt={selectedOrder?.orderedAt}
                         />
 
-                        <button onClick={() => setOpenDeliveryModal(true)} className="button btn-primary">Deliver</button>
+                        <button onClick={onDeliveryOpen} className="button btn-primary">Deliver</button>
                     </div>
                 </article>
             }

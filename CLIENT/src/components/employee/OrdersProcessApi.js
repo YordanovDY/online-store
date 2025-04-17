@@ -162,9 +162,35 @@ export function useOrderDelivery() {
             });
     }
 
-    const deliveryHandler = () => {
-        console.log(selectedOrder?._id);
+    const deliveryHandler = async () => {
+        const orderId = selectedOrder?._id;
+
+        const payload = {
+            status: 'Delivered',
+        };
+
+        try {
+            await api.put(`/orders/${orderId}`, payload);
+            setOrdersList(state => state.filter(order => order._id !== orderId));
+            setSelectedOrder(null);
+            notify(`Order ${orderId} has been successfully delivered.`, 'success');
+
+        } catch (err) {
+            notify(err.message, 'error');
+        }
+
+
         setDeliveryModal(false);
+    }
+
+    const onDeliveryOpen = () => {
+        const orderId = selectedOrder?._id;
+
+        if (!orderId) {
+            return notify('Please, select an order!', 'error');
+        }
+
+        setDeliveryModal(true);
     }
 
     return {
@@ -176,6 +202,7 @@ export function useOrderDelivery() {
         deliveryModal,
         chooseOrder,
         deliveryHandler,
-        setOpenDeliveryModal
+        setOpenDeliveryModal,
+        onDeliveryOpen
     }
 }
