@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router";
 import { ROLE_IDs } from "../../../constants/roles";
 import useMutate from "../../../hooks/useMutate";
 import BasicForm from "../../shared/basic-form/BasicForm";
 import useNotification from "../../../hooks/useNotification";
 
 export default function ProfileCreate() {
-    const navigate = useNavigate();
     const { mutate } = useMutate('/auth/create', 'POST');
     const { notificationAlert, notify } = useNotification();
 
@@ -30,7 +28,7 @@ export default function ProfileCreate() {
         try {
             const result = await mutate({ email: payload.email, password: payload.password, role: payload.role });
             const email = result.user.email;
-            navigate(`/auth/register-confirmation/${email}`);
+            notify(`The account of ${email} was created successfully.`, 'success');
 
         } catch (err) {
             notify(err.message, 'error');
