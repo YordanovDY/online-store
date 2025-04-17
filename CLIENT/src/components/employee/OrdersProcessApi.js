@@ -9,13 +9,13 @@ export function useOrderProcessing() {
 
     const chooseOrder = (orderId) => {
         api.get(`/orders/${orderId}`, null)
-        .then(res => {
-            setPendingDetails(true);
+            .then(res => {
+                setPendingDetails(true);
 
-            setSelectedOrder(res);
+                setSelectedOrder(res);
 
-            setPendingDetails(false);
-        });
+                setPendingDetails(false);
+            });
     }
 
     return {

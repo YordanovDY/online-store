@@ -2,11 +2,11 @@ import { longDateFormat } from '../../../utils/dateUtil';
 import Status from '../status/Status';
 import styles from './Table.module.css';
 
-export default function TableRow({ row }) {
+export default function TableRow({ row, onChoose }) {
     const rowAsArray = Object.values(row);
 
     return (
-        <tr className={styles['tr']}>
+        <tr onClick={onChoose} className={styles['tr']}>
             {rowAsArray.map(cell => {
                 const isStatus = cell === 'Processing' || cell === 'Shipped' || cell === 'Delivered';
                 const isDate = cell > 1000000000000;
