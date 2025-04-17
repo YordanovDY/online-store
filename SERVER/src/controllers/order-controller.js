@@ -131,10 +131,10 @@ orderController.put('/:orderId', async (req, res) => {
     }
 
     const { orderId } = req.params;
-    const { status } = req.body;
+    const { status, supplier } = req.body;
 
     try {
-        await orderService.changeStatus(orderId, status);
+        await orderService.changeStatus(orderId, status, supplier);
         res.json({ message: `Status of order ${orderId} has been changed to ${status}`, status: 200 });
 
     } catch (err) {

@@ -5,7 +5,15 @@ import { useOrderProcessing } from "../OrdersProcessApi";
 import styles from './DashOrdersProcess.module.css';
 
 export default function DashOrdersProcess() {
-    const { pendingList, ordersList, pendingDetails, selectedOrder, inputArray, pendingSuppliers, chooseOrder } = useOrderProcessing();
+    const { pendingList,
+        ordersList,
+        pendingDetails,
+        selectedOrder,
+        inputArray,
+        pendingSuppliers,
+        notificationAlert,
+        chooseOrder,
+        submitHandler } = useOrderProcessing();
     let rows = [];
 
     for (const row of ordersList) {
@@ -37,7 +45,7 @@ export default function DashOrdersProcess() {
 
                             :
                             <div className={styles['form-section']}>
-                                <form className={styles['form']}>
+                                <form action={submitHandler} className={styles['form']}>
                                     <h2 className={styles['form-header']}>Distribute to Supplier</h2>
                                     <div className="field">
                                         <label htmlFor="supplier">Supplier</label>
@@ -47,13 +55,14 @@ export default function DashOrdersProcess() {
                                                 <option key={input.id} value={input.id}>{input.email}</option>)}
                                         </select>
                                     </div>
-                                    <button className="button btn-primary">Submit</button>
+                                    <button className="button btn-primary">Distribute</button>
                                 </form>
                             </div>
                         }
                     </div>
                 </article>
             }
+            {notificationAlert}
         </section>
     );
 }

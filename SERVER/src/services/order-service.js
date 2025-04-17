@@ -66,12 +66,12 @@ function placeAnOrder(user, cart, paymentMethod) {
     });
 }
 
-function changeStatus(orderId, status) {
+function changeStatus(orderId, status, supplier) {
     if (!validStatuses.includes(status)) {
         throw new Error('Invalid status value');
     }
 
-    return Order.findByIdAndUpdate(orderId, { status }, { runValidators: true });
+    return Order.findByIdAndUpdate(orderId, { status, supplier }, { runValidators: true });
 }
 
 async function cancelOrder(order) {
