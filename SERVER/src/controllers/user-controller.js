@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userService from '../services/user-service.js';
 import { getErrorMessage } from '../utils/error-util.js'
 import { requireToken } from '../middlewares/auth-middleware.js';
+import { ROLES } from '../config/constants.js';
 
 const userController = Router();
 
@@ -108,6 +109,26 @@ userController.get('/orders', requireToken, async (req, res) => {
     const result = await userService.getOrders(user);
 
     try {
+        res.json(result);
+
+    } catch (err) {
+        const errorMsg = getErrorMessage(err);
+        console.error('Server error:', errorMsg);
+        res.status(500).json({ message: 'Internal server error', status: 500 });
+    }
+});
+
+userController.get('/by-role/:roleName', async (req, res) => {
+    const { roleName } = req.params;
+    const formatedRoleName = roleName
+        .split('-')
+        .map(word => `${word[0].toUpperCase()}${word.slice(1)}`)
+        .join();
+
+    const roleId = ROLES[formatedRoleName];
+
+    try {
+        const result = await userService.getUsersByRole(roleId);
         res.json(result);
 
     } catch (err) {

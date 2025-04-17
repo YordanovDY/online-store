@@ -11,7 +11,8 @@ const userService = {
     replaceCartItem,
     removeCartItem,
     emptyCart,
-    getOrders
+    getOrders,
+    getUsersByRole,
 }
 
 function getUser(user) {
@@ -71,6 +72,14 @@ async function emptyCart(user) {
 
 async function getOrders(user) {
     return Order.find({ recipient: user.id })
+}
+
+async function getUsersByRole(roleId) {
+    return User.find({ role: roleId }, {
+        _id: 1,
+        email: 1,
+        role: 1
+    });
 }
 
 export default userService;
