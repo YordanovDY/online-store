@@ -5,7 +5,6 @@ import { useOrderProcessing } from "../OrdersProcessApi";
 import styles from './DashOrdersProcess.module.css';
 
 export default function DashOrdersProcess() {
-    const { pendingList, ordersList } = useOrderProcessing();
     const { pendingList, ordersList, pendingDetails, selectedOrder, inputArray, pendingSuppliers, chooseOrder } = useOrderProcessing();
     let rows = [];
 
@@ -32,6 +31,26 @@ export default function DashOrdersProcess() {
                             estimatedDelivery={selectedOrder?.estimatedDelivery}
                             orderedAt={selectedOrder?.orderedAt}
                         />
+
+                        {pendingSuppliers
+                            ? <LoadingSpinner />
+
+                            :
+                            <div className={styles['form-section']}>
+                                <form className={styles['form']}>
+                                    <h2 className={styles['form-header']}>Distribute to Supplier</h2>
+                                    <div className="field">
+                                        <label htmlFor="supplier">Supplier</label>
+                                        <select name="supplier" id="supplier" className="fancy-input-dark">
+                                            <option value="">Choose a Supplier</option>
+                                            {inputArray.map(input =>
+                                                <option key={input.id} value={input.id}>{input.email}</option>)}
+                                        </select>
+                                    </div>
+                                    <button className="button btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        }
                     </div>
                 </article>
             }

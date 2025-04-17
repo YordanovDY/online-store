@@ -5,3 +5,32 @@
     flex-direction: column;
     gap: 30px;
   }
+
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid #afdbff;
+    border-radius: 12px;
+    padding: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: linear-gradient(125deg, #E8F4FD 0%, #ffffff 49%, #E8F4FD 100%);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.form-header {
+    padding: 10px 0;
+    border-top: 1px solid #0039b5;
+    border-bottom: 1px solid #0039b5;
+    color: #0039b5;
+}
