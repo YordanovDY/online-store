@@ -14,7 +14,7 @@ export default function Dashboard() {
                         <h4 className="header-saparator">STORE MANAGER</h4>
                         <div className="d-flex gap-20 f-wrap">
                             <Link to="/dashboard/create-product" className="tile-button">Create Product</Link>
-                            <Link to="/dashboard/product-managment" className="tile-button">Product Managment</Link>
+                            <Link to="/dashboard/product-managment" className="tile-button">Product Management</Link>
                             <Link to="/dashboard/orders-processing" className="tile-button">Orders Processing</Link>
                         </div>
                     </article>
@@ -24,7 +24,7 @@ export default function Dashboard() {
                     <article className="d-flex f-direction-column gap-10">
                         <h4 className="header-saparator">SUPPLIER</h4>
                         <div className="d-flex gap-20">
-                            <Link className="tile-button tile-disabled" title="This feature is not yet available">Delivery Managment</Link>
+                            <Link className="tile-button">Delivery Management</Link>
                         </div>
                     </article>
                 }
