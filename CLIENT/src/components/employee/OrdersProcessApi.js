@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch"
 import api from "../../services/api";
 import useNotification from "../../hooks/useNotification";
+import { useUserContext } from "../../contexts/UserContext";
+import { buildOptions } from "../../utils/optionsUtil";
 
 export function useOrderProcessing() {
     const [pendingList, setPendingList] = useState(true);
@@ -100,5 +102,71 @@ export function useOrderProcessing() {
         notificationAlert,
         chooseOrder,
         submitHandler,
+    }
+}
+
+export function useOrderDelivery() {
+    const [pendingList, setPendingList] = useState(true);
+    const [ordersList, setOrdersList] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [pendingDetails, setPendingDetails] = useState(false);
+    const { notificationAlert, notify } = useNotification();
+    const { user } = useUserContext();
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        const options = user.isAdmin()
+            ? { status: 'Shipped' }
+            : {
+                status: 'Shipped',
+                supplier: user.id
+            }
+
+        setPendingList(true);
+        api.get('/orders', signal, buildOptions(options))
+            .then(res => {
+                setOrdersList(res);
+                setPendingList(false);
+            })
+
+            .catch(err => {
+                if (err.name === 'AbortError') {
+                    return;
+                }
+
+                notify(err.message, 'error');
+                setPendingList(false);
+            })
+
+        return () => {
+            abortController.abort();
+        }
+    }, [notify, user]);
+
+    const chooseOrder = (orderId) => {
+        api.get(`/orders/${orderId}`, null)
+            .then(res => {
+                setPendingDetails(true);
+
+                setSelectedOrder(res);
+
+                setPendingDetails(false);
+            });
+    }
+
+    const deliveryHandler = () => {
+        console.log(selectedOrder?._id);
+    }
+
+    return {
+        pendingList,
+        pendingDetails,
+        ordersList,
+        selectedOrder,
+        notificationAlert,
+        chooseOrder,
+        deliveryHandler,
     }
 }

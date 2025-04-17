@@ -1,0 +1,7 @@
+.orders-section {
+    padding: 20px;
+    min-height: 74vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

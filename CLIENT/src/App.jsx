@@ -26,6 +26,7 @@ import EmployeeGuard from "./components/guards/EmployeeGuard";
 import ManagerGuard from "./components/guards/ManagerGuard";
 import AdminGuard from "./components/guards/AdminGuard";
 import OwnerGuard from "./components/guards/OwnerGuard";
+import SupplierGuard from "./components/guards/SupplierGuard";
 
 const Dashboard = lazy(() => import('./components/employee/dashboard/Dashboard'));
 const ProfileCreate = lazy(() => import('./components/employee/dash-profile-create/ProfileCreate'));
@@ -34,6 +35,7 @@ const MyProducts = lazy(() => import('./components/employee/dash-my-products/MyP
 const ProductCreate = lazy(() => import('./components/product/product-create/ProductCreate'));
 const ProductUpdate = lazy(() => import('./components/product/product-update/ProductUpdate'));
 const DashOrdersProcess = lazy(() => import('./components/employee/dash-orders-process/DashOrdersProcess'));
+const DashOrdersDelivery = lazy(() => import('./components/employee/dash-orders-delivery/DashOrdersDelivery'));
 
 function App() {
 
@@ -143,6 +145,14 @@ function App() {
                                     <Route index element={(
                                         <Suspense fallback={<LoadingSpinner />}>
                                             <DashOrdersProcess />
+                                        </Suspense>
+                                    )} />
+                                </Route>
+
+                                <Route path="orders-delivery" element={<SupplierGuard />}>
+                                    <Route index element={(
+                                        <Suspense fallback={<LoadingSpinner />}>
+                                            <DashOrdersDelivery />
                                         </Suspense>
                                     )} />
                                 </Route>

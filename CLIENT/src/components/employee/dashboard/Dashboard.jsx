@@ -24,7 +24,7 @@ export default function Dashboard() {
                     <article className="d-flex f-direction-column gap-10">
                         <h4 className="header-saparator">SUPPLIER</h4>
                         <div className="d-flex gap-20">
-                            <Link className="tile-button">Delivery Management</Link>
+                            <Link to="/dashboard/orders-delivery" className="tile-button">Delivery Management</Link>
                         </div>
                     </article>
                 }

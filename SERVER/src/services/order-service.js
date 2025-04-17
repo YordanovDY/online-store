@@ -18,8 +18,10 @@ function getOrders(filter = { status: 'Processing' }) {
         throw new Error('Invalid filter status');
     }
 
+    const query = { ...filter };
+
     try {
-        return Order.find({ status: filter.status });
+        return Order.find(query);
 
     } catch (err) {
         throw new Error(getErrorMessage(err));

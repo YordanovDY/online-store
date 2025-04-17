@@ -23,6 +23,7 @@ orderController.get('/', async (req, res) => {
     }
 
     const status = req.options?.status;
+    const supplier = req.options?.supplier;
 
     try {
         let result = null;
@@ -30,7 +31,8 @@ orderController.get('/', async (req, res) => {
         if (!status) {
             result = await orderService.getOrders({ status: 'Processing' });
         } else {
-            result = await orderService.getOrders({ status });
+            const filter = supplier ? { status, supplier } : { status };
+            result = await orderService.getOrders(filter);
         }
 
         res.json(result);
@@ -171,9 +173,9 @@ orderController.delete('/:orderId', async (req, res) => {
 
         try {
             authService.checkForPermissions(user, authRoles)
-    
+
         } catch (err) {
-            if(order.recipient.id.toString() === user?.id){
+            if (order.recipient.id.toString() === user?.id) {
                 await orderService.cancelOrder(order);
                 return res.json({ message: `Order ${orderId} has been cancelled`, status: 200 });
             }
