@@ -113,6 +113,12 @@ export function useOrderDelivery() {
     const { notificationAlert, notify } = useNotification();
     const { user } = useUserContext();
 
+    const [deliveryModal, setDeliveryModal] = useState(false);
+
+    const setOpenDeliveryModal = (status) => {
+        setDeliveryModal(status);
+    }
+
     useEffect(() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
@@ -158,6 +164,7 @@ export function useOrderDelivery() {
 
     const deliveryHandler = () => {
         console.log(selectedOrder?._id);
+        setDeliveryModal(false);
     }
 
     return {
@@ -166,7 +173,9 @@ export function useOrderDelivery() {
         ordersList,
         selectedOrder,
         notificationAlert,
+        deliveryModal,
         chooseOrder,
         deliveryHandler,
+        setOpenDeliveryModal
     }
 }

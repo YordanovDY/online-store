@@ -1,11 +1,20 @@
 import LoadingSpinner from "../../shared/loading-spinner/LoadingSpinner";
+import OverlayModal from "../../shared/overlay/OverlayModal";
 import Table from "../../shared/table/Table";
 import OrderOverview from "../order-overview/OrderOverview";
 import { useOrderDelivery } from "../OrdersProcessApi";
 import styles from './DashOrdersDelivery.module.css';
 
 export default function DashOrdersDelivery() {
-    const { ordersList, pendingList, pendingDetails, selectedOrder, notificationAlert, chooseOrder } = useOrderDelivery();
+    const { ordersList,
+        pendingList,
+        pendingDetails,
+        selectedOrder,
+        notificationAlert,
+        deliveryModal,
+        setOpenDeliveryModal,
+        deliveryHandler,
+        chooseOrder } = useOrderDelivery();
 
     let rows = [];
 
@@ -33,11 +42,19 @@ export default function DashOrdersDelivery() {
                             orderedAt={selectedOrder?.orderedAt}
                         />
 
-                        <button className="button btn-primary">Deliver</button>
+                        <button onClick={() => setOpenDeliveryModal(true)} className="button btn-primary">Deliver</button>
                     </div>
                 </article>
             }
             {notificationAlert}
+            <OverlayModal
+                title="Delivery Information"
+                message={`Name: ${selectedOrder?.recipient?.fullName} | Phone Number: ${selectedOrder?.recipient?.phoneNumber} | Address: ${selectedOrder?.recipient?.address}`}
+                open={deliveryModal}
+                setOpen={setOpenDeliveryModal}
+                handler={deliveryHandler}
+                actionButtonName="Confirm Delivery"
+            />
         </section>
     );
 }
